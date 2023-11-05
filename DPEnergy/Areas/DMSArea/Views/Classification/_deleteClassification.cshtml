@@ -1,0 +1,12 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_Classification
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete Classification
+    <span style="font-weight:bold;">
+        @Model.Classification</span>
+            ?
+</div>
+<input type="hidden" asp-for="Id" />

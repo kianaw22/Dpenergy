@@ -1,0 +1,21 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.D_Revision
+@{
+    List<D_Project> ListProject = ViewBag.projectlist;
+    Layout = null;
+}
+
+    <div class="modal-body form-horizontal">
+        please choose a project
+        <select name="ProjectID" asp-items="@(new SelectList(from x in ListProject select new { Value = x.Id ,Text = x.ProjectCode + "-" + x.Title}, "Value","Text"))" class="form-control  custominput"  data-live-search="true">
+            <option value="hi" selected disabled hidden style="direction: ltr">Select project</option>
+        </select>
+        
+    </div>
+
+
+@section DMSScripts{
+    <script>
+
+    </script>
+
+}

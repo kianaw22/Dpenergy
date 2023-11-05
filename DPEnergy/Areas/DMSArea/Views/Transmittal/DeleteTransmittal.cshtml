@@ -1,0 +1,214 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.D_RevisionViewModel
+@using DPEnergy.DataModelLayer.Entities.DMS
+
+@{
+    ViewData["Title"] = "DeleteTransmittal";
+    List<D_Project> ListProject = ViewBag.projectlist;
+    List<D_Revision> ListTrans = ViewBag.translist;
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "Transmittal") ">Transmittal</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Transmittal</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New Transmittal
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:  #dae7f4 ;">
+        <form id="myform" asp-controller="Transmittal" asp-action="DeleteTransmittal" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="panel-group">
+                    <div class="panel panel-default" style="border: 2px solid #ccc; background-color: ;">
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label asp-for="ProjectCode" class="control-label col-md-2 col-xs-12 text-left" style="margin-top:8px"></label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <select id="projectfilter" asp-for="ProjectCode" asp-items="@(new SelectList(from x in ListProject select new { Value = x.ProjectCode ,Text = x.ProjectCode + "-" + x.Title}, "Value","Text"))" id="client-number" class="form-control selectpicker custominput" data-live-search="true">
+                                            <option value="" selected disabled hidden style="direction: ltr">Select ProjectCode</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Outgoing Transmittal Queue</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label asp-for="TransmittalNumber" class="control-label col-md-3 col-xs-12 text-left"></label>
+                                        <div class="col-md-9 col-xs-12">
+                                            <select id="transfilter" asp-for="TransmittalNumber" class="form-control selectpicker custominput" data-live-search="true">
+                                            </select>
+                                            <div>   </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="griddata" id="griddata" />
+                            <div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
+                                <div id="dummyScroll"></div>
+                            </div>
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 form-group" style="margin-top:15px; text-align:right ">
+                <input type="submit" name="buttonId" value="Delete" id="btn1" class="btn btn-primary btn" />
+                <input type="submit" name="buttonId" value="Cancle" id="btn2" class="btn btn-primary btn" />
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section DMSScripts{
+
+    <script>
+       $(document).ready(function () {
+           var myobj = '@Html.Raw(Json.Serialize(Model))';
+           var dpjson = JSON.parse(myobj);
+           console.log('model' , dpjson);
+
+           var grid =  $("#grid").kendoGrid({
+                dataSource: {
+                    data: dpjson,
+                    pageSize: 5
+                },
+
+                height: 550,
+                filterable: true,
+                groupable: true,
+                reorderable: true,
+                columnMenu: true,
+                sortable: true,
+                resizable: true,
+                filterable: true,
+                toolbar: [ "search"],
+                excel: {
+                    allPages: true
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount:5
+                },
+                height: 350,
+                dataBound: function (e) {
+                    var dataElement = $(e.sender.element).find(".k-grid-content");
+                    var fakeScroll = document.getElementById("dummyScroll");
+                    fakeScroll.style.width = dataElement.children(0).width() + "px";
+
+                    dataElement.scroll(function () {
+                        $("#dummyScrollWrapper").scrollLeft(dataElement.scrollLeft());
+                    });
+                    $("#dummyScrollWrapper").scroll(function () {
+                        dataElement.scrollLeft($("#dummyScrollWrapper").scrollLeft());
+                    });
+                },
+                columns: [
+                
+                {
+
+                    field: "clientNumber ",
+                    width: 150,
+                    title: "Client Number "
+                }, {
+                    field: "revision",
+                    width: 150,
+                    title: "Revision"
+                }, {
+                    field: "stageName",
+                    width: 150,
+                    title: "Stage Name"
+                }, {
+                    field: "dpDicipline",
+                    width: 150,
+                    title: "Dp Dicipline"
+
+                }, {
+                     field: "clientDicipline",
+                     width: 150,
+                     title: "Client Dicipline"
+
+                },
+                ]
+
+           }).data("kendoGrid");
+
+          // var panelHeight = $(".panel-body").height();
+          // $("#grid").height(panelHeight);
+            grid.hideColumn("id");
+           grid.hideColumn("order");
+
+
+            //$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+           $("#transfilter").on("change", function () {
+               var transnumber = $("#transfilter").val();
+
+              
+               // Use AJAX to retrieve the filtered data from the controller
+               $.ajax({
+                   url: "/DMSArea/Transmittal/FilterTransGrid",
+                   data: { transnumber: transnumber },
+                   dataType: "json",
+                   success: function (filteredData) {
+
+
+                       grid.dataSource.data(filteredData);
+
+                       // Update the total count of the data source
+                       grid.dataSource.total(filteredData.length);
+
+                       // Refresh the grid to display the first page of data
+                       grid.refresh();
+                   }
+               });
+        
+           });
+        });
+
+
+
+    </script>
+    <script>
+        $("#projectfilter").on("change", function () {
+            var projectcode = $("#projectfilter").val();
+            $.ajax({
+                url: "/DMSArea/Transmittal/GetTransCombo",
+                data: { projectcode: projectcode },
+                success: function (data) {
+                    console.log(data);
+                    $("#transfilter").empty();
+                    $("#transfilter").append("<option value='' selected disabled hidden>Select TransmittalNumber</option>");
+                    $.each(data, function (index, item) {
+                        console.log("item trans ", item.transnumber);
+                        $("#transfilter").append("<option value='" + item.transnumber + "'>" + item.transnumber + "</option>");
+                        console.log($("#transfilter").val());
+                    });
+                    $("#transfilter").selectpicker("refresh");
+                },
+                error: function () {
+                    console.log('Error retrieving data');
+                }
+            })
+        });
+    </script>
+
+}

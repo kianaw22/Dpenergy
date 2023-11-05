@@ -1,0 +1,17 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_Area
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete Area with Name
+    <span style="font-weight:bold;">
+        @Model.Name
+    </span>
+    With Project Code
+    <span style="font-weight:bold;">
+        @Model.ProjectCode
+    </span>
+    ?
+</div>
+<input type="hidden" asp-for="Id" />

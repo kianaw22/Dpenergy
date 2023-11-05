@@ -1,0 +1,14 @@
+﻿@model DPEnergy.DataModelLayer.Entities.P_MahalKhedmat
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف محل خدمت
+    <span style="font-weight:bold;">@Model.MahalKhedmatName</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

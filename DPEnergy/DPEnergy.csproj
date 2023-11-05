@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\reports\NewFolder\**" />
+    <Content Remove="wwwroot\reports\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\reports\NewFolder\**" />
+    <None Remove="wwwroot\reports\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.32" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Stimulsoft.Dashboards.Web.NetCore" Version="2019.2.1" />
+    <PackageReference Include="Stimulsoft.Reports.Web.NetCore" Version="2019.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DPEnergy.CommonLayer\DPEnergy.CommonLayer.csproj" />
+    <ProjectReference Include="..\DPEnergy.DataModelLayer\DPEnergy.DataModelLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\AdminArea\Data\" />
+    <Folder Include="Areas\AdminArea\Models\" />
+    <Folder Include="Areas\DabirArea\Data\" />
+    <Folder Include="Areas\DabirArea\Models\" />
+    <Folder Include="Areas\DMSArea\Data\" />
+    <Folder Include="Areas\DMSArea\Models\" />
+    <Folder Include="Areas\PersonelArea\Data\" />
+    <Folder Include="Areas\PersonelArea\Models\" />
+    <Folder Include="Areas\TimeSheetArea\Data\" />
+    <Folder Include="Areas\TimeSheetArea\Models\" />
+    <Folder Include="Areas\UserArea\Data\" />
+    <Folder Include="Areas\UserArea\Models\" />
+    <Folder Include="wwwroot\lib\bootstrap-select\" />
+    <Folder Include="wwwroot\lib\ckeditor\plugins\automationform\icons\" />
+    <Folder Include="wwwroot\lib\ckeditor\plugins\defaultform\icons\" />
+    <Folder Include="wwwroot\Panel\assets\js\charts\google\bars\" />
+    <Folder Include="wwwroot\Panel\assets\js\charts\google\bubbles\" />
+    <Folder Include="wwwroot\Panel\assets\js\charts\google\lines\" />
+    <Folder Include="wwwroot\Panel\assets\js\charts\google\New folder\" />
+    <Folder Include="wwwroot\Panel\assets\js\charts\google\other\" />
+    <Folder Include="wwwroot\Panel\assets\js\maps\vector\" />
+    <Folder Include="wwwroot\Panel\assets\js\plugins\buttons\" />
+    <Folder Include="wwwroot\upload\atachments\Melliscan\" />
+    <Folder Include="wwwroot\upload\atachments\Shenasname-scan\" />
+    <Folder Include="wwwroot\upload\LetterAttachment\" />
+    <Folder Include="wwwroot\upload\NewFolder\" />
+  </ItemGroup>
+
+</Project>

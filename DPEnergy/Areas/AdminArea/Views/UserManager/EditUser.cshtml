@@ -1,0 +1,88 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.Admin.A_UserManagerViewModel
+@{
+    ViewData["Title"] = "EditUser";
+}
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a asp-controller="UserManager" asp-action="index"><i class="icon-person position-left"></i> لیست کاربران</a></li>
+        <li class="active">ویرایش کردن کاربر</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="icon-accessibility2"></i>
+            فرم ویرایش کاربر
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+        <form asp-controller="UseManager" asp-action="EditUser" method="post">
+            <div class="col-md-6 col-md-offset-3">
+                <!--Personel-->
+                <div>
+                    <label asp-for="Personel" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Personel" type="text" class="form-control custominput" placeholder="پرسنل..." autocomplete="off" />
+                        <span asp-validation-for="Personel" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--UserName-->
+                <div>
+                    <label asp-for="UserName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="UserName" type="text" class="form-control custominput" placeholder="نام کاربری..." autocomplete="off" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--mokhafafDeparmentName-->
+                <div>
+                    <label asp-for="Password" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Password" type="text" class="form-control custominput" placeholder="پسورد..." autocomplete="off" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--ConfirmPass-->
+                <div>
+                    <label asp-for="ConfirmPass" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ConfirmPass" type="text" class="form-control custominput" placeholder="تایید پسورد..." autocomplete="off" />
+                        <span asp-validation-for="ConfirmPass" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--SystemUserName-->
+                <div>
+                    <label asp-for="SystemUserName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="SystemUserName" type="text" class="form-control custominput" placeholder="نام کاربری سیستمی..." autocomplete="off" />
+                        <span asp-validation-for="SystemUserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--SystemPassword-->
+                <div>
+                    <label asp-for="SystemPassword" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="SystemPassword" type="text" class="form-control custominput" placeholder="پسورد سیستمی..." autocomplete="off" />
+                        <span asp-validation-for="SystemPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--IsActive-->
+                <div>
+                    <label asp-for="IsActive" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="IsActive" type="checkbox" name="IsActive" checked="checked" value="true" />
+                    </div>
+                </div>
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="ثبت کاربر" class="btn pull-right" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+

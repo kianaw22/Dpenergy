@@ -1,0 +1,390 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.User.ExternalLettersViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@using DPEnergy.DataModelLayer.Entities.DMS.Stackholders
+
+@{
+    ViewData["Title"] = "AddExternalLetter";
+
+}
+<style>
+    .LabelClass {
+        font-weight: bold;
+    }
+
+    .cke_button__defaultform_icon {
+        display: none !important; /*without icon*/
+    }
+
+    .cke_button__automationform_icon {
+        display: none !important; /*without icon*/
+    }
+
+    .cke_button__automationform_label {
+        display: inline !important; /*show the text label*/
+        border: 1px solid gray;
+        cursor: pointer;
+        border-radius: 2px;
+        width: 100px;
+        height: 23px;
+        font-size: 12px;
+        text-align: center;
+        background-color: #e4dddd;
+        margin-right: 10px;
+    }
+
+    .cke_button__defaultform_label {
+        display: inline !important; /*show the text label*/
+        border: 1px solid gray;
+        cursor: pointer;
+        border-radius: 2px;
+        width: 100px;
+        height: 23px;
+        font-size: 12px;
+        text-align: center;
+        background-color: #e4dddd;
+    }
+</style>
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="UserHome" asp-action="index"><i class="icon-home2 position-left"></i>خانه</a></li>
+        <li><a href="#"><i class="position-left"></i> عملیات</a></li>
+        <li class="active">فرم ایجاد نامه خارجی</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="icon-plus2"></i>
+            ایجاد نامه خارجی
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+        <form asp-controller="ExternalLetter" asp-action="CreateLetter" method="post" enctype="multipart/form-data">
+            <div class="col-md-8 col-xs-12 col-md-offset-2">
+
+                <!--LetterCreateDate-->
+                <div class="row" style="height:50px;">
+                    <label asp-for="LetterCreateDate" class="col-md-3 col-xs-12 LabelClass"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <div style="color:darkgreen;">@ConvertDateTime.ConvertMiladiToShamsi(DateTime.Now, "yyyy/MM/dd")</div>
+                    </div>
+                </div>
+
+
+                <!--LetterSubject-->
+                <div>
+                    <label asp-for="LetterSubject" class="control-label col-md-3 col-xs-12 LabelClass"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="LetterSubject" type="text" class="form-control custominput" placeholder="موضوع نامه ..." />
+                        <span asp-validation-for="LetterSubject" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Company-->
+                <div>
+                    <label asp-for="Company" class="control-label col-md-3 col-xs-12 LabelClass"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <div class="k-d-flex k-justify-content-center" style="padding-bottom: 20px;">
+                            <div class="k-w-500 k-rtl">
+                                <select asp-for="Company" style="width:425px" id="Company">
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Person-->
+                <div>
+                    <label asp-for="Person" class="control-label col-md-3 col-xs-12 LabelClass"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <div class="k-d-flex k-justify-content-center" style="padding-bottom: 20px;">
+                            <div class="k-w-500 k-rtl">
+                                <select asp-for="Person" style="width:425px" id="Person">
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Position-->
+                <div>
+                    <label asp-for="Position" class="control-label col-md-3 col-xs-12 LabelClass"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <div class="k-d-flex k-justify-content-center" style="padding-bottom: 20px;">
+                            <div class="k-w-500 k-rtl">
+                                <select asp-for="Position" style="width:425px" id="Position">
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-12 form-group" style="margin-top:15px;">
+                <input type="Button" style="border:1px solid gray ; background-color: #add8e6 ; border-radius:3px; "
+                       value="اضافه کردن" class="btn text-center" id="Add" />
+            </div>
+
+            <div>
+                <label class="control-label col-md-2 col-xs-12 LabelClass">گیرندگان نامه</label>
+                <div class="col-md-10 col-xs-12">
+                    <select asp-for="Recipent" class="k-rtl" style="width:600px; margin-bottom:20px" id="multiselect" multiple="multiple">
+                    </select>
+
+                </div>
+            </div>
+
+            <!--AttachedFile-->
+            <div>
+                <label class="control-label col-md-3 col-xs-12 LabelClass"> انتخاب فایل الصاقی</label>
+                <div class="col-md-5 col-xs-12">
+                    <div class="col-md-12">
+                        <div class="form-horizontal">
+                            <input class="form-control" asp-for="Attachment" multiple="multiple" type="file" />
+                            <span id="spnmessage" style="color:black; font-size:12px;"></span>
+                            <!--نام جدید فایل-->
+                            <input id="newfilePathName" name="newfilePathName" hidden />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-12" style="text-align:left; color:green;">
+                    <input type="button" value="الصاق کن" id="btnupload" onclick="UploadFile()" class="btn"
+                           style="height:30px; border-radius:3px; border:1px solid gray; background-color:white; width:100px; font-size:11px ;text-align:center" />
+                </div>
+            </div>
+
+
+
+
+
+            <div style="text-align:center; width:100%; background-color:gray; height:1px; margin-bottom:15px; margin-top:15px" class="col-xs-12"></div>
+
+
+            <!--Editor-->
+            <div class="col-md-12 col-xs-12">
+                <div class="col-md-12 col-xs-12">
+                    <textarea asp-for="LetterContent" id="LetterContent" class="form-control">متن نامه ...</textarea>
+                </div>
+
+                <script src="~/lib/ckeditor/ckeditor.js"></script>
+                <script>
+                    CKEDITOR.replace("LetterContent");
+
+                    //وقتی ادیتور کامل لود شد
+                    CKEDITOR.on("instanceReady", function () {
+                        $("#cke_70").removeClass("cke_button");
+                        $("#cke_69").removeClass("cke_button");
+
+                        $("#cke_70").attr('data-toggle', 'modal');
+                        $("#cke_70").attr('data-target', '#modal-action');
+                        $("#cke_69").attr('data-toggle', 'modal');
+                        $("#cke_69").attr('data-target', '#modal-action');
+
+
+                         $("#cke_69").attr('href', '/UserArea/ExternalLetter/DefaultFormList');
+                         $("#cke_70").attr('href', '/UserArea/ExternalLetter/AutomationFormList');
+                    });
+
+                </script>
+            </div>
+
+            <div class="col-xs-12 form-group" style="margin-top:15px;">
+                <input id="submitbtn" type="submit" style="border:1px solid gray; border-radius:3px;"
+                       value="ایجاد نامه" class="btn pull-right" />
+            </div>
+
+        </form>
+    </div>
+</div>
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", Size = BootstrapModel.ModalSize.Large })
+
+@section UserScripts{
+    <script src="~/js/modal/modal.js"></script>
+
+    @* الصاق فایل پیوست *@
+    <script>
+        var UploadFile = function () {
+            var data = new FormData;
+            var files= $("#Attachment").get(0).files;
+            console.log(files);
+
+            //کنترل سایز فایل
+            if (files[0].size >= 10000000) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('حجم فایل بیش از 10 مگا بایت است');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray', files[i]);
+                data.append('filesize', files[i].size);
+            }
+            data.append('path', "upload\\attachfile\\");
+
+            for (const value of data.values()) {
+                console.log(value);
+            }
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("UploadAttachFile","ExternalLetter", new { area = "UserArea"})',
+                data: data,
+                contentType: false,
+                processData: false
+
+            }).done(function (result) {
+                if (result.status == "success") {
+                    $("#spnmessage").text("پیوست انجام شد");
+                    $("#spnmessage").css("color", "green");
+                    $("#spnmessage").removeClass("hidden");
+                    $("#newfilePathName").val(result.imagename);
+                    console.log("pathname");
+
+                }
+
+                else if (result.status == 'badsize') {
+                       $("#spnmessage").removeClass('hidden');
+                       $("#spnmessage").text('مجموع حجم فایل ها بیش از 10  مگا بایت است');
+                       $("#spnmessage").css("color", "red");
+                }
+
+            }).fail(function (result) {
+                   if (result.status != "success") {
+                    $("#spnmessage").css("color", "red");
+                    $("#spnmessage").removeClass("hidden");
+                    $("#spnmessage").text("در حین آپلود اشکالی بوجود آمد.");
+                }
+            });
+
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#multiselect").kendoMultiSelect({
+               }).data("kendoMultiSelect");
+
+
+
+            var companydata =@(Html.Raw(ViewBag.projectcompany));
+            var posdata =@(Html.Raw(ViewBag.projectposition));
+            var persondata =@(Html.Raw(ViewBag.projectmembers));
+
+            function cascade() {
+
+                var c = $("#Company").data('kendoDropDownList').value();
+                var p = $("#Person").data('kendoDropDownList').value();
+                var pos = $("#Position").data('kendoDropDownList');
+                pos.enable(false);
+
+                if (c && p) { //check if parents have value
+                    pos.enable(true); //enable the widget
+                    pos.dataSource.filter([ //filter the dataSource
+                        { field: "Company", operator: "eq", value: c },
+                        { field: "Person", operator: "eq", value: p }
+
+
+                    ]);
+                } else {
+                    pos.value(""); //clear the value
+                    pos.enable(false); //disable the widget
+                }
+                console.log(pos.dataSource);
+            }
+
+
+          var a = $("#Company").kendoDropDownList({
+                //autoBind: false,
+                optionLabel: "شرکت را انتخاب کنید",
+                value: "شرکت را انتخاب کنید",
+                filter: "contains",
+                dataTextField: "Company",
+                dataValueField: "Company",
+                dataSource: companydata,
+
+
+                //dataSource: ListProjectMembers,
+
+            }).data("kendoDropDownList");
+           var b =  $("#Person").kendoDropDownList({
+                // autoBind: false,
+
+                optionLabel: "شخض گیرنده را انتخاب کنید",
+               value: "شخض گیرنده را انتخاب کنید",
+                cascadeFrom: "Company",
+                filter: "contains",
+                dataTextField: "Person",
+                dataValueField: "Person",
+                dataSource: persondata,
+
+
+                //dataSource: ListProjectMembers,
+
+            }).data("kendoDropDownList");
+           var c = $("#Position").kendoDropDownList({
+               autoBind: false,
+               enable: false,
+                optionLabel: "سمت را انتخاب کنید",
+                value: "سمت را انتخاب کنید",
+                filter: "contains",
+                dataTextField: "Position",
+                dataValueField: "Position",
+               dataSource: posdata,
+
+
+
+
+                //dataSource: ListProjectMembers,
+
+            }).data("kendoDropDownList");
+
+
+           a.bind("cascade", cascade);
+           b.bind("cascade", cascade);
+           c.bind("cascade", cascade);
+
+
+
+
+
+
+            $('#Add').click(function () {
+
+                var one = $("#Company").data('kendoDropDownList').value();
+                var two  = $("#Person").data('kendoDropDownList').value();
+                var three = $("#Position").data('kendoDropDownList').value();
+                console.log(one);
+                if (one == '' || two == '' || three == '')
+                {
+                    swal("خطا", "هر سه گزینه باید انتخاب شود", "error", {
+                        buttons: {
+                            ok:"باشه"
+                        }
+                    });
+                    return false;
+                }
+                var selected = $("#multiselect").data('kendoMultiSelect').value();
+                console.log("selected" + selected);
+                var myvalue = one + "-" + two + "-"+ three;
+                // console.log(myvalue);
+
+                  var newdata = $.merge($.merge([], selected), [myvalue]);
+                //console.log("this is newdata" + newdata);
+
+                $("#multiselect").data('kendoMultiSelect').setDataSource(newdata);
+                $("#multiselect").data('kendoMultiSelect').value(newdata);
+                console.log($("#multiselect").data('kendoMultiSelect').value() + " here is value");
+
+
+
+
+            });
+
+
+
+
+        });
+    </script>
+}

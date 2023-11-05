@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_ProjectBudget
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete budget for project
+    <span style="font-weight:bold;">@Model.ProjectCode</span>
+    and deparment
+    <span style="font-weight:bold;">@Model.Department</span>
+    ?
+</div>
+<input type="hidden" asp-for="Id" />

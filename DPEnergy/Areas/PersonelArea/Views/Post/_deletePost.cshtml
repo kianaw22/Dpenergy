@@ -1,0 +1,14 @@
+﻿@model DPEnergy.DataModelLayer.Entities.P_Post
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف سمت
+    <span style="font-weight:bold;">@Model.PostName</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

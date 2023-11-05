@@ -1,0 +1,15 @@
+﻿@model DPEnergy.DataModelLayer.Entities.P_WorkPlace
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف محل کار
+    <span style="font-weight:bold;">@Model.WorkPlaceName</span>
+    مطمئن هستید؟
+</div>
+
+<input type="hidden" asp-for="Id" />

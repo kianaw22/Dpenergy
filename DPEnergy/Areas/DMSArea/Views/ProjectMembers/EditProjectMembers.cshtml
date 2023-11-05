@@ -1,0 +1,96 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.Stackholders.D_ProjectMembersViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@using DPEnergy.DataModelLayer.Entities.DMS.Stackholders
+@{
+    ViewData["Title"] = "EditProjectMembers";
+    List<D_Project> ListProject = ViewBag.projectlist;
+    List<D_Position> ListPosition = ViewBag.positionlist;
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Stackholders</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "ProjectMembers") ">ProjectMembers</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit ProjectMembers</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Edit  ProjectMembers
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="ProjectMembers" asp-action="EditProjectMembers" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-md-offset-3">
+
+                <!--Project-->
+                <div>
+                    <label asp-for="Project" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Project" asp-items="@(new SelectList(from x in ListProject select new { Value = x.ProjectCode ,Text = x.ProjectCode + " " + x.ProjectCode+ " " + x.Title}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Project </option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--Company-->
+                <div>
+                    <label asp-for="Company" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Company" type="text" class="form-control custominput" placeholder="Company ..." autocomplete="off" />
+                        <span asp-validation-for="Company" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Person-->
+                <div>
+                    <label asp-for="Person" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Person" type="text" class="form-control custominput" placeholder="Person ..." autocomplete="off" />
+                        <span asp-validation-for="Person" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Position-->
+                <div>
+                    <label asp-for="Position" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Position" asp-items="@(new SelectList(ListPosition,"Position","Position"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Position </option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--Creation Date -->
+                <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+                <!--Creator-->
+                <input asp-for="Creator" type="hidden" class="form-control custominput" />
+
+                <!--ModificationDate -->
+                <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+                <!--Modifier-->
+                <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
+
+

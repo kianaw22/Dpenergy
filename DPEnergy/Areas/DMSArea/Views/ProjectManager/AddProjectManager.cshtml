@@ -1,0 +1,48 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation.D_ProjectManagerViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "AddProjectManager";
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "ProjectManager") ">Project Manager</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Project Manager</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New Project Manager
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="ProjectManager" asp-action="AddProjectManager" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-md-offset-3">
+                <!--ProjectManager-->
+                <div>
+                    <label asp-for="ProjectManager" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ProjectManager" type="text" class="form-control custominput" placeholder="Project Manager..." autocomplete="off" />
+                        <span asp-validation-for="ProjectManager" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+

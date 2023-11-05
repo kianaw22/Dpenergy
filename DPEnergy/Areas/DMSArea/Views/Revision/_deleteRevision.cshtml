@@ -1,0 +1,15 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.D_Revision
+@{
+    Layout = null;
+}
+
+    <div class="modal-body form-horizontal">
+        Are you sure you want to delete item with Project Code
+        <span style="font-weight:bold;">@Model.ProjectCode</span>
+        with Client Number
+        <span style="font-weight:bold;">@Model.ClientNumber</span>
+        with Revision
+        <span style="font-weight:bold;">@Model.Revision</span>
+        ?
+    </div>
+<input type="hidden" asp-for="Id" />

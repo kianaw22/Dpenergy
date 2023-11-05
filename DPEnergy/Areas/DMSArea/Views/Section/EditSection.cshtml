@@ -1,0 +1,92 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation.D_SectionViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "EditSection";
+    List<D_Project> ListProject = ViewBag.projectlist;
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "Section") ">Section</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Section</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Edit  Section
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="Section" asp-action="EditSection" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-md-offset-3">
+                <!--Name-->
+                <div>
+                    <label asp-for="Name" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Name" type="text" class="form-control custominput" placeholder="Name ..." autocomplete="off" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Project-->
+                <div>
+                    <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ProjectCode" asp-items="@(new SelectList(ListProject,"ProjectCode","ProjectCode"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+
+                <!--Description-->
+                <div>
+                    <label asp-for="Description" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Description" type="text" class="form-control custominput" placeholder="Description ..." autocomplete="off" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <!--Order-->
+                <div>
+                    <label asp-for="Order" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Order" type="text" class="form-control custominput" placeholder="Order ..." autocomplete="off" />
+                        <span asp-validation-for="Order" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Creation Date -->
+                <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+                <!--Creator-->
+                <input asp-for="Creator" type="hidden" class="form-control custominput" />
+
+                <!--ModificationDate -->
+                <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+                <!--Modifier-->
+                <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
+
+
+

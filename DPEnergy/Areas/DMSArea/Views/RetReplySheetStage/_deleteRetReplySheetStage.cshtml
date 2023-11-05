@@ -1,0 +1,17 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_RetReplysheetStage
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete ReplySheet Stage for Project
+    <span style="font-weight:bold;">
+        @Model.ProjectCode
+    </span>
+    With Stage
+    <span style="font-weight:bold;">
+        @Model.Stage
+    </span>
+    ?
+</div>
+<input type="hidden" asp-for="Id" />

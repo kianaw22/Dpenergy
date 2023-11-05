@@ -1,0 +1,17 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Reporrts.Reports
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete Report with Name
+    <span style="font-weight:bold;">
+        @Model.ReportName
+    </span>
+    With Project Code
+    <span style="font-weight:bold;">
+        @Model.ProjectCode
+    </span>
+    ?
+</div>
+<input type="hidden" asp-for="Id" />

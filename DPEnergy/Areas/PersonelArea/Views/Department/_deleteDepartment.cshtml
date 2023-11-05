@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.P_Department
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف شرکت
+    <span style="font-weight:bold;">@Model.DepartmentName</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

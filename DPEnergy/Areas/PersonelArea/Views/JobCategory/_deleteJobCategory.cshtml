@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.P_JobCategory
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    رده شغلی
+    <span style="font-weight:bold;">@Model.JobCategoryName</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

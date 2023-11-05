@@ -1,0 +1,12 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_DocumentType
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete DocumentType
+    <span style="font-weight:bold;">
+        @Model.TypesOfFile</span>
+            ?
+</div>
+<input type="hidden" asp-for="Id" />

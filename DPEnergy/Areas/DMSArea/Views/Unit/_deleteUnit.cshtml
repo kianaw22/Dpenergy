@@ -1,0 +1,12 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_Unit
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete Unit
+    <span style="font-weight:bold;">
+        @Model.Unit<span>
+            ?
+</div>
+<input type="hidden" asp-for="Id" />

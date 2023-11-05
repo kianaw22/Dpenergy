@@ -1,0 +1,99 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation.D_ProjectPartiesViewModel
+@{
+    ViewData["Title"] = "AddProjectParties";
+    List<D_Project> ListProject = ViewBag.projectlist;
+    List<D_Contractor> ListCompanyName = ViewBag.companynamelist;
+}
+
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "ProjectParties") ">ProjectParties</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add ProjectParties</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New ProjectParty
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="ProjectParties" asp-action="AddProjectParties" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-md-offset-3">
+                <!--Title-->
+                <div>
+                    <label asp-for="Title" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Title" type="text" class="form-control custominput" placeholder="Title..." autocomplete="off" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--ProjectCode-->
+                <div>
+                    <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
+
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ProjectCode" asp-items="@(new SelectList(ListProject,"ProjectCode","ProjectCode"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="ProjectCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--CompanyName-->
+                <div>
+                    <label asp-for="CompanyName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="CompanyName" asp-items="@(new SelectList(ListCompanyName,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-CompanyName" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Company Name </option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--RoleInProject-->
+                <div>
+                    <label asp-for="RoleInProject" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="RoleInProject" class="form-control selectpicker custominput" id="select-RoleInProject" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr"> Select Role in project</option>
+                            <option data-tokens="owner"> Owner</option>
+                            <option data-tokens="contractor">  Contractor</option>
+                            <option data-tokens="Subcontractor">  Subcontractor</option>
+                            <option data-tokens="Vendor">  Vendor</option>
+                            <option data-tokens="client">  Client</option>
+                            <option data-tokens="MC">  MC</option>
+                            <option data-tokens="consultant">  consultant</option>
+                            <option data-tokens="package">  Package</option>
+                            <option data-tokens="partner">  Partner</option>
+                            <option data-tokens="package"> Participation</option>
+                            <option data-tokens="package"> Consortium</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+                </div>
+                <!--CounterParty-->
+                <div>
+                    <label asp-for="CounterParty" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CounterParty" type="text" class="form-control custominput" placeholder="CounterParty..." autocomplete="off" />
+                        <span asp-validation-for="CounterParty" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

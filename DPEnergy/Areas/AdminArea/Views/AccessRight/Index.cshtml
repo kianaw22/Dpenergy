@@ -1,0 +1,149 @@
+﻿@model IEnumerable<DPEnergy.DataModelLayer.ViewModels.Admin.NameAndPersonelCodeViewModel>
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">خانه</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">مدیریت دسترسی</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+           مدیریت دسترسی کاربران
+        </span>
+    </div>
+    
+
+    <div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
+        <div id="dummyScroll" style="height: 20px;">
+        </div>
+    </div>
+
+    <div>
+        <!--<div class="table-responsive"></div> -->
+        <div class="k-rtl">
+            <div id="grid"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModaldeletor">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form asp-controller="UserManager" asp-action="DeleteUserPost" method="post">
+                    <div class="modal-header" style="background-color:darkred; color:white; border-radius:5px 5px 0 0;">
+                        <h4 class="modal-title">Delete User</h4>
+                    </div>
+
+                    <div class="modal-body" id="DeleteModalBody">
+
+                    </div>
+
+                    <div dir="rtl" class="modal-footer" style="text-align:left;">
+                        <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">Reject</button>
+                        <button type="submit" class="btn" style="width:80px; color:white; background-color:darkred;">
+                            Accept
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section AdminScripts{
+    <script>
+        $(document).ready(function () {
+           var myobj = '@Html.Raw(Json.Serialize(Model))';
+            var dpjson = JSON.parse(myobj);
+            console.log(dpjson);
+
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: dpjson,
+                    pageSize: 5
+                },
+                height: 550,
+                filterable: true,
+                groupable: true,
+                sortable: true,
+                toolbar: ["pdf", "search"],
+
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns:
+                [
+
+                   {
+                       field: "id",
+                       width: "140px",
+                       title: "User ID"
+                   },{
+                        field: "firstName",
+                        width: "140px",
+                        title: "FirstName"
+                    }, {
+                        field: "lastName",
+                        width: "140px",
+                        title: "LastName"
+                    }, {
+                        field: "personelCode",
+                        width: "140px",
+                        title: "PersonelCode"
+                    }, {
+                        field: "userName",
+                        width: "200px",
+                        title: "UserName"
+                    },
+
+
+                        {
+                        width: "200px",
+                        command:
+                        {
+
+                            name: "Access",
+                          
+                            title: "مدیریت دسترسی",
+                            click: function (e) {
+                                // command button click handler
+                                var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                               
+                                var id = dataItem.id;
+                                var firstname = dataItem.firstName;
+                                var lastname = dataItem.lastName;
+                                window.location.href = "/AdminArea/AccessRight/AddRoleToUser?id=" + id + "&firstname=" + firstname + "&lastname=" + lastname;
+                                
+                            },
+                        },
+                      
+                    },
+                    
+
+                ]
+
+
+
+            });
+            var grid = $("#grid").data("kendoGrid");
+            grid.hideColumn("id");
+
+            //$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+
+        });
+
+
+    </script>
+}
+
+

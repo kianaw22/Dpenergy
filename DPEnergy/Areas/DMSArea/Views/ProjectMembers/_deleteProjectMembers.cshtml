@@ -1,0 +1,21 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.Stackholders.D_ProjectMembers
+@{
+    Layout = null;
+}
+
+    <div class="modal-body form-horizontal">
+        Are you sure you want to delete Member with Name
+        <span style="font-weight:bold;">
+            @Model.Person
+        </span>
+        ,Company
+        <span style="font-weight:bold;">
+            @Model.Company
+        </span>
+        and ProjectCode
+        <span style="font-weight:bold;">
+            @Model.Project
+        </span>
+        ?
+    </div>
+<input type="hidden" asp-for="Id" />

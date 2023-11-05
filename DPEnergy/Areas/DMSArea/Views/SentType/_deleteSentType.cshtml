@@ -1,0 +1,12 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_SentType
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete Phase
+    <span style="font-weight:bold;">
+        @Model.SentType</span>
+            ?
+</div>
+<input type="hidden" asp-for="Id" />

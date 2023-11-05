@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Admin.A_AdministrativeForm
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف  نامه اداری پیشفرض با موضوع
+    <span style="font-weight:bold;">@Model.AdministrativeFormTitle</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="AdministrativeFormID" />

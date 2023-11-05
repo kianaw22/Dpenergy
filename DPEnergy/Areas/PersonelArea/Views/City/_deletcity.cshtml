@@ -1,0 +1,16 @@
+﻿@model DPEnergy.DataModelLayer.Entities.P_City
+@{
+    Layout = null;
+}
+
+
+
+
+    <div class="modal-body form-horizontal" dir="rtl">
+        آیا از حذف شهر
+        <span style="font-weight:bold;">@Model.CityName</span>
+        مطمئن هستید؟
+    </div>
+    <input type="hidden" asp-for="Id" />
+
+    

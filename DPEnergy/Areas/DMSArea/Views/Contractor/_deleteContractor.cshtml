@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_Contractor
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete Contractor
+    <span style="font-weight:bold;">@Model.CompanyName</span>
+    ?
+</div>
+<input type="hidden" asp-for="Id" />

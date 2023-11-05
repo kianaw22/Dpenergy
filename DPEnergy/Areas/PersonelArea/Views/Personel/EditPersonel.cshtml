@@ -1,0 +1,729 @@
+﻿
+@model DPEnergy.DataModelLayer.ViewModels.PersonelViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "EditPersonel";
+    List<P_City> ListCity = ViewBag.citylist;
+    List<P_Department> ListDepartment = ViewBag.departmentlist;
+    List<P_Company> ListCompany = ViewBag.companylist;
+    List<P_JobCategory> ListJobCategory = ViewBag.jobcategorylist;
+    List<P_MahalKhedmat> ListMahalKhedmat = ViewBag.mahalkhedmatlist;
+    List<P_Post> ListPost = ViewBag.postlist;
+    List<P_WorkPlace> ListWorkPlace = ViewBag.workplacelist;
+
+}
+
+
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a href="#"><i class="position-left"></i> مشخصات پرسنل</a></li>
+        <li><a asp-controller="Personel" asp-action="index"><i class="icon-person position-left"></i> لیست پرسنل</a></li>
+        <li class="active">ویرایش پرسنل</li>
+    </ul>
+
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-plus"></i>
+            فرم ویرایش
+        </span>
+    </div>
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#e6e2e2;">
+        <form asp-controller="Personel" asp-action="EditPersonel" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-xs-12">
+
+                <!--personel code-->
+                <div>
+                    <label asp-for="PersonelCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="PersonelCode" type="text" class="form-control custominput" placeholder="کد پرسنلی ..." autocomplete="off" />
+                        <span asp-validation-for="PersonelCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--hesabdari code-->
+                <div>
+                    <label asp-for="HesabDariCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="HesabDariCode" type="text" class="form-control custominput" placeholder="کد پرسنلی حسابداری ..." autocomplete="off" />
+                        <span asp-validation-for="HesabDariCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--firstName-->
+                <div>
+                    <label asp-for="FirstName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="FirstName" type="text" class="form-control custominput" placeholder=" نام..." autocomplete="off" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--lastName-->
+                <div>
+                    <label asp-for="LastName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="LastName" type="text" class="form-control custominput" placeholder="نام خانوادگی ..." autocomplete="off" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--father name-->
+                <div>
+                    <label asp-for="Father" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Father" type="text" class="form-control custominput" placeholder="نام پدر ..." autocomplete="off" />
+                        <span asp-validation-for="Father" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Gender-->
+                <div>
+                    <label asp-for="Gender" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <!--<input asp-for="Gender" type="text" class="form-control custominput" placeholder="جنسیت ..." autocomplete="off" />-->
+                        <select asp-for="Gender" class="form-control selectpicker custominput" id="select-Gender" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     جنسیت را انتخاب کنید</option>
+                            <option data-tokens="زن">  زن</option>
+                            <option data-tokens="مرد">  مرد</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--ShenasnameNumber-->
+                <div>
+                    <label asp-for="ShenasnameNumber" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ShenasnameNumber" type="text" class="form-control custominput" placeholder="شماره شناسنامه ..." autocomplete="off" />
+                        <span asp-validation-for="ShenasnameNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--ShenasnameSerial-->
+                <div>
+                    <label asp-for="ShenasnameSerial" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ShenasnameSerial" type="text" class="form-control custominput" placeholder="شماره سریال شناسنامه ..." autocomplete="off" />
+                        <span asp-validation-for="ShenasnameSerial" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--SodurPlace-->
+                <div>
+                    <label asp-for="SodurPlace" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="SodurPlace"
+                                class="form-control selectpicker custominput" asp-items="@(new SelectList(ListCity,"CityName","CityName"))" id="select-SodurPlace" data-live-search="true"
+                                style="direction: rtl; ">
+                            <option value="" selected disabled hidden style="direction: rtl">     محل صدور را انتخاب کنید</option>
+
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="SodurPlace" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Mellicode-->
+                <div>
+                    <label asp-for="Mellicode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Mellicode" type="text" class="form-control custominput" placeholder="کدملی ..." autocomplete="off" />
+                        <span asp-validation-for="Mellicode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--BirthPlace-->
+                <div>
+                    <label asp-for="BirthPlace" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="BirthPlace" asp-items="@(new SelectList(ListCity,"CityName","CityName"))" class="form-control selectpicker custominput"
+                                id="select-BirthPlace" data-live-search="true" style="direction: rtl ">
+                            <option value="" selected disabled hidden style="direction: rtl">     محل تولد را انتخاب کنید</option>
+
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="BirthPlace" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!--birthdayDate-->
+                <div style="margin-bottom:15px;">
+                    <label asp-for="BirthDate" class="control-label col-md-3 col-xs-12" for="BirthDate"></label>
+                    <div class="input-group col-md-9 col-xs-12" style="padding-left:9px; padding-right:9px;">
+                        <div class="input-group-addon"
+                             style="border:1px solid gray; padding:6px">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        <input asp-for="BirthDate" id="birthdayDateuser" value="@ConvertDateTime.ConvertMiladiToShamsi(@Model.BirthDate,"yyyy/MM/dd")" name="birthdayDateuser" type="text" class="form-control custominput" data-mddatetimepicker="true" data-placement="right" data-mdpersiandatetimepicker="" data-trigger="focus" data-enabletimepicker="false" data-mdpersiandatetimepickerselecteddatetime="{&quot;Year&quot;:1399,&quot;Month&quot;:1,&quot;Day&quot;:13,&quot;Hour&quot;:0,&quot;Minute&quot;:0,&quot;Second&quot;:0}" data-mdpersiandatetimepickershowing="true" aria-describedby="popover265350">
+
+                    </div>
+                    <span asp-validation-for="BirthDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
+                </div>
+                <!--MaritalStatus-->
+                <div>
+                    <label asp-for="MaritalStatus" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="MaritalStatus" class="form-control selectpicker custominput" id="select-MaritalStatus" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     وضعیت تولد را انتخاب کنید</option>
+                            <option data-tokens="زن">  زن</option>
+                            <option data-tokens="مرد">  مرد</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Department-->
+                <div>
+                    <label asp-for="Department" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Department" asp-items="@(new SelectList(ListDepartment,"DepartmentName","DepartmentName"))" class="form-control selectpicker custominput" id="select-Department" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     دپارتمان را انتخاب کنید</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="Department" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--StartWorkDate-->
+                <div style="margin-bottom:15px;">
+                    <label asp-for="StartWorkDate" class="control-label col-md-3 col-xs-12" for="StartWorkDate"></label>
+                    <div class="input-group col-md-9 col-xs-12" style="padding-left:9px; padding-right:9px;">
+                        <div class="input-group-addon"
+                             style="border:1px solid gray; padding:6px">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        <input asp-for="StartWorkDate" id="startofwork" value="@ConvertDateTime.ConvertMiladiToShamsi(@Model.StartWorkDate,"yyyy/MM/dd")" name="startofwork" type="text" class="form-control custominput" data-mddatetimepicker="true" data-placement="right" data-mdpersiandatetimepicker="" data-trigger="focus" data-enabletimepicker="false" data-mdpersiandatetimepickerselecteddatetime="{&quot;Year&quot;:1399,&quot;Month&quot;:1,&quot;Day&quot;:13,&quot;Hour&quot;:0,&quot;Minute&quot;:0,&quot;Second&quot;:0}" data-mdpersiandatetimepickershowing="true" aria-describedby="popover265350">
+
+                    </div>
+                    <span asp-validation-for="StartWorkDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
+                </div>
+                <!--ContractType-->
+                <div>
+                    <label asp-for="ContractType" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ContractType" class="form-control selectpicker custominput" id="select-ContractType" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     نوع قرارداد را انتخاب کنید</option>
+                            <option data-tokens="پاره وقت">  پاره وقت</option>
+                            <option data-tokens="تمام وقت">  تمام وقت</option>
+                            <option data-tokens="کار آموز"> کار آموز</option>
+                            <option data-tokens="پکیج"> پکیج</option>
+                            <option data-tokens="سایت پروژه"> سایت پروژه</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="ContractType" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Company-->
+                <div>
+                    <label asp-for="Company" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Company" asp-items="@(new SelectList(ListCompany,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     شرکت را انتخاب کنید</option>
+
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="Company" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--MahalKhedmat-->
+                <div>
+                    <label asp-for="MahalKhedmat" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="MahalKhedmat" asp-items="@(new SelectList(ListMahalKhedmat,"MahalKhedmatName","MahalKhedmatName"))" class="form-control selectpicker custominput" id="select-MahalKhedmat" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     محل خدمت را انتخاب کنید</option>
+
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="MahalKhedmat" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--VaziatEshteqal-->
+                <div>
+                    <label asp-for="VaziatEshteqal" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="VaziatEshteqal" class="form-control selectpicker custominput" id="select-VaziatEshteqal" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     وضعیت اشتغال را انتخاب کنید</option>
+                            <option data-tokens="بازنشسته">  بازنشسته</option>
+                            <option data-tokens="مردسوری">  سوری</option>
+                            <option data-tokens="تسویه حساب">  تسویه حساب</option>
+                            <option data-tokens="بلاتکلیف">  بلاتکلیف</option>
+                            <option data-tokens="شاغل">  شاغل</option>
+                            <option data-tokens="کارآموز">  کارآموز</option>
+                            <option data-tokens="مرخصی بدون حقوق">  مرخصی بدون حقوق</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="VaziatEshteqal" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--JobCategory-->
+                <div>
+                    <label asp-for="JobCategory" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="JobCategory" asp-items="@(new SelectList(ListJobCategory,"JobCategoryName","JobCategoryName"))" class="form-control selectpicker custominput" id="select-JobCategory" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     رده شغلی را انتخاب کنید</option>
+
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="JobCategory" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--TasfiehDate-->
+                <div style="margin-bottom:15px;">
+                    <label asp-for="TasfieDate" class="control-label col-md-3 col-xs-12" for="TasfiehDate"></label>
+                    <div class="input-group col-md-9 col-xs-12" style="padding-left:9px; padding-right:9px;">
+                        <div class="input-group-addon"
+                             style="border:1px solid gray; padding:6px">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        <input asp-for="TasfieDate" id="tasfiehdate" value="@ConvertDateTime.ConvertMiladiToShamsi(@Model.TasfieDate,"yyyy/MM/dd")" name="tasfiehdate" type="text" class="form-control custominput" data-mddatetimepicker="true" data-placement="right" data-mdpersiandatetimepicker="" data-trigger="focus" data-enabletimepicker="false" data-mdpersiandatetimepickerselecteddatetime="{&quot;Year&quot;:1399,&quot;Month&quot;:1,&quot;Day&quot;:13,&quot;Hour&quot;:0,&quot;Minute&quot;:0,&quot;Second&quot;:0}" data-mdpersiandatetimepickershowing="true" aria-describedby="popover265350">
+
+                    </div>
+                    <span asp-validation-for="TasfieDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-xs-12">
+
+                <!--Address-->
+                <div>
+                    <label asp-for="Address" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <textarea asp-for="Address" type="text" class="form-control custominput" placeholder="آدرس ..." autocomplete="off">
+                        </textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--ElatTarkKar-->
+                <div>
+                    <label asp-for="ElatTarkKar" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <textarea asp-for="ElatTarkKar" type="text" class="form-control custominput" placeholder="علت ترک کار ..." autocomplete="off">
+                        </textarea>
+                        <span asp-validation-for="ElatTarkKar" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Cover-->
+                <div>
+                    <label asp-for="Cover" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Cover" class="form-control selectpicker custominput" id="select-Cover" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     کاور را انتخاب کنید</option>
+                            <option data-tokens="بله">  بله</option>
+                            <option data-tokens="خیر">  خیر</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="Cover" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Moaref-->
+                <div>
+                    <label asp-for="Moaref" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Moaref" type="text" class="form-control custominput" placeholder="معرف ..." autocomplete="off" />
+                        <span asp-validation-for="Moaref" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--PhoneNumber-->
+                <div>
+                    <label asp-for="PhoneNumber" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="PhoneNumber" type="text" class="form-control custominput" placeholder="تلفن همراه ..." autocomplete="off" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Post-->
+                <div>
+                    <label asp-for="Post" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Post" asp-items="@(new SelectList(ListPost,"PostName","PostName"))" class="form-control selectpicker custominput" id="select-Post" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     سمت را انتخاب کنید</option>
+
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="Post" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--WorkPlace-->
+                <div>
+                    <label asp-for="WorkPlace" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="WorkPlace" asp-items="@(new SelectList(ListWorkPlace,"WorkPlaceName","WorkPlaceName"))" class="form-control selectpicker custominput" id="select-WorkPlace" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     محل کار را انتخاب کنید</option>
+
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="WorkPlace" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Introduction-->
+                <div>
+                    <label asp-for="Introduction" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Introduction" type="text" class="form-control custominput" placeholder="نحوه آشنایی با شرکت ..." autocomplete="off" />
+                        <span asp-validation-for="Introduction" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--BloodType-->
+                <div>
+                    <label asp-for="BloodType" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="BloodType" class="form-control selectpicker custominput" id="select-BloodType" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     گروه خونی را انتخاب کنید</option>
+                            <option data-tokens="A+">  A+</option>
+                            <option data-tokens="A-">  A-</option>
+                            <option data-tokens="B-">  B-</option>
+                            <option data-tokens="B+">  B+</option>
+                            <option data-tokens="AB-">  AB-</option>
+                            <option data-tokens="AB+">  AB+</option>
+                            <option data-tokens="O+">  O+</option>
+                            <option data-tokens="O-">  O-</option>
+                        </select>
+                        <div>   </div>
+                        <span asp-validation-for="BloodType" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--SpecialDrug-->
+                <div>
+                    <label asp-for="SpecialDrug" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="SpecialDrug" type="text" class="form-control custominput" placeholder="داروهای مصرفی ..." autocomplete="off" />
+                        <span asp-validation-for="SpecialDrug" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Sickness-->
+                <div>
+                    <label asp-for="Sickness" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Sickness" type="text" class="form-control custominput" placeholder="بیماری های خاص ..." autocomplete="off" />
+                        <span asp-validation-for="Sickness" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--SaqfKarkard-->
+                <div>
+                    <label asp-for="SaqfKarkard" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="SaqfKarkard" type="text" class="form-control custominput" placeholder="سقف کارکرد ..." autocomplete="off" />
+                        <span asp-validation-for="SaqfKarkard" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--Overtime-->
+                <div>
+                    <label asp-for="Overtime" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Overtime" type="text" class="form-control custominput" placeholder="اضافه کار ..." autocomplete="off" />
+                        <span asp-validation-for="Overtime" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--shenasnamescanPath-->
+                <div>
+                    <label asp-for="ShenasnameScanPath" class="control-label col-md-3 col-xs-12"></label>
+
+                    <div class="col-md-9 col-xs-12">
+                        <div class="form-horizontal">
+                            <div class="col-md-6 col-xs-6">
+                                <label for="ShenasnameScanPath" class="btn" style="width:145px; height:30px; margin-bottom:2px; border-radius:3px;
+                                        border:1px solid gray;">
+                                    انتخاب فایل
+                                    <i class="icon-file-picture"></i>
+                                </label>
+
+                                <span id="spnShenasnameScanPath" style="color:black; font-size:12px;"></span>
+                                <input asp-for="ShenasnameScanPath" type="file" accept=".rar" style="visibility:hidden" />
+                            </div>
+                            <div class="col-md-6 col-xs-6">
+
+                                <input type="button" value="آپلود فایل" id="btnupload" onclick="UploadShenas()" class="btn"
+                                       style="height:30px; border-radius:3px; border:1px solid gray; width:145px; margin-bottom:2px;" />
+                                <di id="divmessage" class="text-center hidden"></di>
+                                <!--نام جدید تصویر-->
+                                <input id="newScanShenasnamePath" name="newScanShenasnamePath" value="@Model.ShenasnameScanPath" hidden />
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--Melliscan path -->
+                <div>
+                    <label asp-for="MelliScanPath" class="control-label col-md-3 col-xs-12"></label>
+
+                    <div class="col-md-9 col-xs-12">
+                        <div class="form-horizontal">
+                            <div class="col-md-6 col-xs-6">
+                                <label for="MelliScanPath" class="btn" style="width:145px; height:30px; margin-bottom:2px; border-radius:3px;
+                                        border:1px solid gray;">
+                                    انتخاب فایل
+                                    <i class="icon-file-picture"></i>
+                                </label>
+                                <span id="spnMelliScanpath" style="color:black; font-size:12px;"></span>
+                                <input asp-for="MelliScanPath" type="file" accept=".rar" style="visibility:hidden" />
+
+                            </div>
+                            <div class="col-md-6 col-xs-6">
+
+                                <input type="button" value="آپلود فایل" id="btnupload" onclick="UploadMelli()" class="btn"
+                                       style="height:30px; border-radius:3px; border:1px solid gray; width:145px; margin-bottom:10px;" />
+                                <di id="divmessage1" class="text-center hidden"></di>
+                                <!--نام جدید تصویر-->
+                                <input id="newMelliPath" name="newMelliPath" value="@Model.MelliScanPath" hidden />
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--Personl image path -->
+                <div>
+                    <label asp-for="PersonalImagePath" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <div class="col-md-6">
+                            <div class="form-horizontal">
+
+                                <label for="PersonalImagePath" class="btn" style="width:145px; height:30px; margin-bottom:5px; border-radius:3px;
+                                        border:1px solid gray;">
+                                    انتخاب تصویر
+                                    <i class="icon-file-picture"></i>
+                                </label>
+                                <input asp-for="PersonalImagePath" type="file" accept=".jpg, .png, .tif, .tiff, .jpeg" style="visibility:hidden" />
+                                <span id="spnimageuser" style="color:black; font-size:12px;"></span>
+
+                                <!--نام جدید تصویر-->
+                                <input id="newImagePathName" name="newImagePathName" value="@Model.PersonalImagePath" hidden />
+                                <input type="button" value="آپلود و نمایش تصویر" id="btnupload" onclick="UploadImage()" class="btn"
+                                       style="height:30px; border-radius:3px; border:1px solid gray; width:145px; margin-bottom:10px;" />
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img id="imguserimage" src="~/upload/personelimage/@Model.PersonalImagePath"
+                                 style="height:130px; width:110px; margin:5px auto; border:1px solid gray; background-size:100%; width:100%;" />
+
+                            <div id="divmessage2" class="text-center hidden"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--Signature path -->
+                <div>
+                    <label asp-for="SignaturePath" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <div class="col-md-6">
+                            <div class="form-horizontal">
+
+                                <label for="SignaturePath" class="btn" style="width:140px; height:30px; margin-bottom:5px; border-radius:3px;
+                                        border:1px solid gray;">
+                                    انتخاب تصویر
+                                    <i class="icon-file-picture"></i>
+                                </label>
+                                <input asp-for="SignaturePath" type="file" accept=".jpg, .png, .tif, .tiff, .jpeg" style="visibility:hidden" />
+                                <span id="spnsignatureimg" style="color:black; font-size:12px;"></span>
+
+                                <!--نام جدید تصویر-->
+                                <input id="newSignaturePathName" name="newSignaturePathName" value="@Model.SignaturePath" hidden />
+
+                                <input type="button" value="آپلود و نمایش تصویر" id="btnupload" onclick="UploadSignature()" class="btn"
+                                       style="height:30px; border-radius:3px; border:1px solid gray; width:140px; margin-bottom:10px;" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img id="imgsignatureimage" src="~/upload/signatureimage/@Model.SignaturePath"
+                                 style="height:130px; width:110px; margin:5px auto; border:1px solid gray; background-size:100%; width:100%;" />
+
+                            <div id="divmessage3" class="text-center hidden"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 form-group" style="margin-top:15px;color:black">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;background-color:lightsteelblue"
+                           value="ویرایش اطلاعات" class="btn pull-right" />
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+
+</div>
+@section PersonelScripts{
+    <script>
+        $("#ShenasnameScanPath").change(function () {
+            var filename = this.files[0].name;
+            $("#spnShenasnameScanPath").html(filename);
+        });
+    </script>
+
+    <script>
+        $("#MelliScanPath").change(function () {
+            var filename = this.files[0].name;
+            $("#spnMelliScanpath").html(filename);
+        });
+    </script>
+    <script>
+        $("#PersonalImagePath").change(function () {
+            var filename = this.files[0].name;
+            $("#spnimageuser").html(filename);
+        });
+    </script>
+    <script>
+        $("#SignaturePath").change(function () {
+            var filename = this.files[0].name;
+            $("#spnsignatureimg").html(filename);
+        });
+    </script>
+
+    <script>
+        var UploadShenas = function () {
+            var data = new FormData;
+            var file = $("#ShenasnameScanPath").get(0);
+            var files = file.files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray',files[i]);
+            }
+            data.append('path', "upload\\atachments\\Shenasname-scan");
+
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("UploadFile","Personel", new { area = "PersonelArea"})',
+                data: data,
+                contentType: false,
+                processData: false
+
+            }).done(function (result) {
+                if (result.status == "success") {
+                    $("#divmessage").text("آپلود موفقیت آمیز بود.");
+                    $("#divmessage").css("color", "green");
+                    $("#divmessage").removeClass("hidden");
+
+
+                    $("#newScanShenasnamePath").val(result.imagename);
+                }
+
+            }).fail(function (result) {
+                   if (result.status != "success") {
+                    $("#divmessage").css("color", "red");
+                    $("#divmessage").removeClass("hidden");
+                    $("#divmessage").text("در حین آپلود اشکالی بوجود آمد.");
+                }
+            });
+
+        }
+    </script>
+    <script>
+        var UploadMelli = function () {
+            var data = new FormData;
+            var file = $("#MelliScanPath").get(0);
+            var files = file.files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray',files[i]);
+            }
+            data.append('path', "upload\\atachments\\Melliscan");
+
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("UploadFile","Personel", new { area = "PersonelArea"})',
+                data: data,
+                contentType: false,
+                processData: false
+
+            }).done(function (result) {
+                if (result.status == "success") {
+                    $("#divmessage1").text("آپلود موفقیت آمیز بود.");
+                    $("#divmessage1").css("color", "green");
+                    $("#divmessage1").removeClass("hidden");
+
+
+                    $("#newMelliPath").val(result.imagename);
+                }
+
+            }).fail(function (result) {
+                   if (result.status != "success") {
+                    $("#divmessage1").css("color", "red");
+                    $("#divmessage1").removeClass("hidden");
+                    $("#divmessage1").text("در حین آپلود اشکالی بوجود آمد.");
+                }
+            });
+
+        }
+    </script>
+    <script>
+        var UploadImage = function () {
+            var data = new FormData;
+            var file = $("#PersonalImagePath").get(0);
+            var files = file.files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray',files[i]);
+            }
+            data.append('path', "upload\\personelimage\\");
+
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("UploadFile","Personel", new { area = "PersonelArea"})',
+                data: data,
+                contentType: false,
+                processData: false
+
+            }).done(function (result) {
+                if (result.status == "success") {
+                    $("#imguserimage").attr('src', "\\upload\\personelimage\\" + result.imagename);
+                    $("#divmessage2").text("آپلود موفقیت آمیز بود.");
+                    $("#divmessage2").css("color", "green");
+                    $("#divmessage2").removeClass("hidden");
+
+
+                    $("#newImagePathName").val(result.imagename);
+                }
+
+            }).fail(function (result) {
+                   if (result.status != "success") {
+                    $("#divmessage2").css("color", "red");
+                    $("#divmessage2").removeClass("hidden");
+                    $("#divmessage2").text("در حین آپلود اشکالی بوجود آمد.");
+                }
+            });
+
+        }
+    </script>
+    <script>
+        var UploadSignature = function () {
+            var data = new FormData;
+            var file = $("#SignaturePath").get(0);
+            var files = file.files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray',files[i]);
+            }
+            data.append('path', "upload\\signatureimage\\");
+
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("UploadFile","Personel", new { area = "PersonelArea"})',
+                data: data,
+                contentType: false,
+                processData: false
+
+            }).done(function (result) {
+                if (result.status == "success") {
+                    $("#imgsignatureimage").attr('src', "\\upload\\signatureimage\\" + result.imagename);
+                    $("#divmessage3").text("آپلود موفقیت آمیز بود.");
+                    $("#divmessage3").css("color", "green");
+                    $("#divmessage3").removeClass("hidden");
+
+
+                    $("#newSignaturePathName").val(result.imagename);
+                }
+
+            }).fail(function (result) {
+                   if (result.status != "success") {
+                    $("#divmessage3").css("color", "red");
+                    $("#divmessage3").removeClass("hidden");
+                    $("#divmessage3").text("در حین آپلود اشکالی بوجود آمد.");
+                }
+            });
+
+        }
+    </script>
+}
+
+
+

@@ -1,0 +1,536 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.D_RevisionViewModel
+@using DPEnergy.DataModelLayer.Entities.DMS
+@{
+    ViewData["Title"] = "AddRevision";
+    List<D_RevisionCode> ListRevisionCode = ViewBag.revisioncodelist;
+    List<D_CommentSheetStage> ListCSheetStage = ViewBag.csheetstage;
+    List<D_ReplySheetStage> ListRSheetStage = ViewBag.rsheetstage;
+    List<D_RetReplysheetStage> ListRetSheetStage = ViewBag.retsheetstage;
+    List<D_MDR> ListMDR = ViewBag.mdrlist;
+    List<D_Progress> ListProgress = ViewBag.progresslist;
+}
+<style>
+    /* Customize the appearance of the checkboxes */
+    .form-check-input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+        /* Customize the appearance of the checked state */
+        .form-check-input[type="checkbox"]:checked {
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+    .btn {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        background: linear-gradient(to bottom, #ffffff, #f6f6f6);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+        color: #333;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-right: 20px; /* Add margin between buttons */
+    }
+
+        .btn:last-child {
+            margin-right: 0; /* Remove margin from last button */
+        }
+
+    .btn-primary {
+        background: linear-gradient(to bottom, #4a90e2, #116cba);
+        color: #fff;
+        border-color: #116cba;
+    }
+
+        .btn-primary:hover {
+            background: linear-gradient(to bottom, #116cba, #4a90e2);
+            border-color: #4a90e2;
+        }
+
+    .btn-danger {
+        background: linear-gradient(to bottom, #e64c65, #c52d46);
+        color: #fff;
+        border-color: #c52d46;
+    }
+
+        .btn-danger:hover {
+            background: linear-gradient(to bottom, #c52d46, #e64c65);
+            border-color: #e64c65;
+        }
+</style>
+
+
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "Revision") ">Revision</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Revision</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New Revision
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="Revision" asp-action="AddRevision" method="post" enctype="multipart/form-data">
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-md-12">
+                    <div class="align-middle">
+                        <label class="control-label col-md-3 col-xs-12"> Project</label>
+                        <div class="col-md-9 col-xs-12">
+                            <input id="proj" class="form-control" type="text" readonly>
+                            <input id="ptitle" asp-for="ProjectTitle" type="hidden" />
+                            <input id="pcode" asp-for="ProjectCode" type="hidden" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Document Information:</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ClientNumber" class="control-label col-md-4 col-xs-12 text-right"></label>
+                                        <div class="col-md-8 col-xs-12">
+                                            <select asp-for="ClientNumber" asp-items="@(new SelectList(ListMDR,"ClientNumber","ClientNumber"))" id="client-number" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                                                <option value="" selected disabled hidden style="direction: ltr">Select ClientNumber</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="DpNumber" class="control-label col-md-4 col-xs-12 text-right"></label>
+                                    <div class="col-md-8 col-xs-12">
+                                        <input readonly id="dp-number" asp-for="DpNumber" type="text" class="form-control custominput" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label asp-for="DocumentTitle" class="control-label col-md-2 col-xs-12 text-right"></label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <input readonly id="document-title" asp-for="DocumentTitle" type="text" class="form-control custominput" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Revision Information:</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Company" class="control-label">Company</label>
+                                        <input asp-for="Company" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="CheckList" class="control-label">CheckList</label>
+                                        <div></div>
+                                        <input asp-for="CheckList" class="form-check-input" type="checkbox" value="false" id="check1" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="IncomingTransmittalCheck" class="control-label">Incoming Transmittal Check</label>
+                                        <div></div>
+                                        <input asp-for="IncomingTransmittalCheck" class="form-check-input" type="checkbox" value="false" id="check2" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Revision" class="control-label">Revision</label>
+                                        <select asp-for="Revision" asp-items="@(new SelectList(ListRevisionCode,"RevisionName","RevisionName"))" class="form-control selectpicker" data-live-search="true">
+                                            <option value="" selected disabled hidden>Select Revision</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="StageName" class="control-label">Stage Name</label>
+                                        <select id="stage" asp-for="StageName" asp-items="@(new SelectList(ListProgress,"Stage","Stage"))" class="form-control selectpicker" data-live-search="true">
+                                            <option value="" selected disabled hidden>Select Stage Name</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Size" class="control-label">Size</label>
+                                        <input asp-for="Size" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Page" class="control-label">Page</label>
+                                        <input asp-for="Page" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Progress" class="control-label">Progress</label>
+                                        <input readonly id="progress" asp-for="Progress" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Classification" class="control-label">Classification</label>
+                                        <input readonly id="classification" asp-for="Classification" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="DpDicipline" class="control-label">DP Discipline</label>
+                                        <input readonly id="dp-dicipline" asp-for="DpDicipline" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="ClientDicipline" class="control-label">Client Discipline</label>
+                                        <input readonly id="client-dicipline" asp-for="ClientDicipline" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="PreparedBy" class="control-label">Prepared By</label>
+                                        <input asp-for="PreparedBy" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="text-align: left;">Correspondence:</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label asp-for="CommentsheetNo" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="CommentsheetNo" type="text" class="form-control custominput" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="Commentsheetdate" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="Commentsheetdate" type="date" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="CommentsheetStatus" class="control-label"></label>
+                                    <div>
+                                        <select asp-for="CommentsheetStatus" asp-items="@(new SelectList(ListCSheetStage,"Stage","Stage"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                                            <option value="" selected disabled hidden>Select Comm Sheet Status</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label asp-for="RepltysheetNo" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="RepltysheetNo" type="text" class="form-control custominput" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="ReplysheetDate" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="ReplysheetDate" type="date" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="ReplysheetStatus" class="control-label"></label>
+                                    <div>
+                                        <select asp-for="ReplysheetStatus" asp-items="@(new SelectList(ListRSheetStage,"Stage","Stage"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                                            <option value="" selected disabled hidden>Select RSheet Status</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label asp-for="ReturnedRepltysheetNo" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="ReturnedRepltysheetNo" type="text" class="form-control custominput" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="ReturnedReplysheetDate" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="ReturnedReplysheetDate" type="date" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="ReturnedReplysheetStatus" class="control-label"></label>
+                                    <div>
+                                        <select asp-for="ReturnedReplysheetStatus" asp-items="@(new SelectList(ListRetSheetStage,"Stage","Stage"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                                            <option value="" selected disabled hidden>Select Ret ReplySheet Status</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label asp-for="RelatedMOMNo" class="control-label"></label>
+                                    <div>
+                                        <input readonly id="dp-dicipline" asp-for="RelatedMOMNo" type="text" class="form-control custominput" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="RelatedMOMDate" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="RelatedMOMDate" type="date" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label asp-for="MeetingHeld" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="MeetingHeld" type="text" class="form-control custominput" />
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="text-align: left;">Correspondence:</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:left">
+                                    <label asp-for="Remark" class="control-label " style="text-align:left"></label>
+
+                                    <textarea asp-for="Remark" type="text" class="form-control custominput" autocomplete="off">
+                                        </textarea>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="CustomField1" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="CustomField1" type="text" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="CustomField2" class="control-label"></label>
+                                    <div>
+                                        <div>
+                                            <input asp-for="CustomField1" type="text" class="form-control custominput" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="CustomFiled3" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="CustomField1" type="text" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="CustomField4" class="control-label"></label>
+                                    <div>
+                                        <input asp-for="CustomField4" type="date" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="text-align: left;">Attachment:</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:left">
+                                    <input class="form-control"  type="file" />
+                                    <span id="spnmessage" style="color:black; font-size:12px;"></span>
+                                    <!--نام جدید فایل-->
+                                    <input id="newfilePathName" name="newfilePathName" hidden />
+
+                                </div>
+                                <div class="col-md-2 col-xs-12" style="text-align:left; color:green;">
+                                    <input type="button" value="Upload" id="btnupload" onclick="UploadFile()" class="btn"
+                                           style="height:30px; border-radius:3px; border:1px solid gray; background-color:white; width:100px; font-size:11px ;text-align:center" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 form-group" style="margin-top:15px; text-align:right ">
+                <input type="submit" name="buttonId" value="Save" id="btn1" class="btn btn-primary btn" />
+                <!-- <input type="submit" name="buttonId" value="Save and Next Item" id="btn2" class="btn btn-primary btn" /> -->
+                <input type="submit" name="buttonId" value="Cancel" id="btn3" class="btn btn-danger btn" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+</div>
+@section DMSScripts{
+    <script>
+        var UploadFile = function () {
+            var data = new FormData;
+            var files = $("#myfile").get(0).files;
+
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray', files[i]);
+
+            }
+            if (files[0].size >= 10000000) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('حجم فایل بیش از 10 مگا بایت است');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            $.ajax({
+                    type: "post",
+                    url: '@Url.Action("UploadReports", "Reports", new { area = "DMSArea"})',
+                    data: data,
+                    contentType: false,
+                    processData: false
+
+            }).done(function (result) {
+                    if (result.status == "success") {
+                        $("#divmessage").text("پیوست انجام شد");
+                        $("#divmessage").css("color", "green");
+                        $("#divmessage").removeClass("hidden");
+                        $("#path").val(result.imagename);
+
+
+                    }
+
+                    else if (result.status == "duplicate") {
+                        $("#divmessage").removeClass('hidden');
+                        $("#divmessage").text('نام فایل تکراری است');
+                        $("#divmessage").css("color", "red");
+                    }
+                    else if (result.status == "badsize") {
+                        $("#divmessage").removeClass('hidden');
+                        $("#divmessage").text('سایز فایل باید کمتر از 5 مگا بایت و بیشتر از 0 کیلوبایت باشد');
+                        $("#divmessage").css("color", "red");
+                    }
+
+            }).fail(function (result) {
+                    if (result.status != "success") {
+                        $("#divmessage").css("color", "red");
+                        $("#divmessage").removeClass("hidden");
+                        $("#divmessage").text("در حین آپلود اشکالی بوجود آمد.");
+                    }
+            });
+
+
+
+        }
+    </script>
+    <script>
+        var pcode = $("#pcode").val().trim();
+        var ptitle = $("#ptitle").val().trim();
+        $("#proj").val(pcode + "-" + ptitle);
+
+    </script>
+    <script>
+        // Attach an event listener to the client number selection field
+        $('#stage').change(function () {
+            var stage = $(this).val();
+
+            // Send an AJAX request to the server
+            $.ajax({
+                url: "/DMSArea/Revision/GetProgress",
+                type: 'GET',
+                data: {
+                    stage: stage
+                },
+                success: function (data) {
+
+                    $('#progress').val(data);
+
+                },
+                error: function () {
+                    console.log('Error retrieving document title');
+                }
+            });
+        });
+    </script>
+    <script>
+        // Attach an event listener to the client number selection field
+        $('#client-number').change(function () {
+            var clientNumber = $(this).val();
+
+            // Send an AJAX request to the server
+            $.ajax({
+                url: "/DMSArea/Revision/GetDocTitle",
+                type: 'GET',
+                data: {
+                    clientNumber: clientNumber
+                },
+                success: function (data) {
+                    console.log(data)
+                    // Update the Document title field with the retrieved data
+                    //var result = JSON.parse(data);
+                    var DN = data.dpNumber;
+                    var DT = data.docTitle;
+                    var CL = data.classification;
+                    var DD = data.dpDicipline;
+                    var CD = data.clientDicipline;
+
+
+                    $('#document-title').val(DT);
+                    $('#dp-number').val(DN);
+                    $('#classification').val(CL);
+                    $('#dp-dicipline').val(DD);
+                    $('#client-dicipline').val(CD);
+                },
+                error: function () {
+                    console.log('Error retrieving document title');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function ck1(val) {
+            document.getElementById("check1").value = document.getElementById("check1").checked;
+
+        }
+        function ck2(val) {
+            document.getElementById("check2").value = document.getElementById("check2").checked;
+        }
+    </script>
+}

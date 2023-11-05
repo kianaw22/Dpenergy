@@ -1,0 +1,278 @@
+﻿@model IEnumerable<DPEnergy.DataModelLayer.Entities.DMS.D_Revision>
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "Index";
+}
+    <div class="content">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Revision</li>
+            </ol>
+        </nav>
+        <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+            <span style="font-weight:bold;">
+                <i class="glyphicon glyphicon-list"></i>
+                Revision List
+            </span>
+        </div>
+        <div style="margin-bottom:5px;">
+            <a class="btn customGreen1" id="BtnSetProject">
+                <i class="glyphicon glyphicon-plus"></i>
+                Add New Item
+            </a>
+        </div>
+
+
+        <div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
+            <div id="dummyScroll" style="height: 20px;">
+            </div>
+        </div>
+
+        <div id="grid"></div>
+        <div class="modal fade" id="myModaldeletor">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form asp-controller="Revision" asp-action="DeleteRevisionPost" method="post">
+                        <div class="modal-header" style="background-color:darkred; color:white; border-radius:5px 5px 0 0;">
+                            <h4 class="modal-title">Delete Revision</h4>
+                        </div>
+
+                        <div class="modal-body" id="DeleteModalBody">
+
+                        </div>
+
+                        <div dir="rtl" class="modal-footer" style="text-align:left;">
+                            <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">Reject</button>
+                            <button type="submit" class="btn" style="width:80px; color:white; background-color:darkred;">
+                                Accept
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModalSetter">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form asp-controller="Revision" asp-action="AddRevision" method="Get">
+                        <div class="modal-header" style="background-color:darkblue; color:white;">
+                            <h4 class="modal-title">Choose project</h4>
+                        </div>
+
+                        <div class="modal-body" id="SetModalBody"> </div>
+                        <div class="modal-footer" style="text-align:right;">
+                            <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">cancle</button>
+                            <button type="submit" class="btn" style="width:80px; color:white; background-color:darkblue;">
+                                continue
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section DMSScripts{
+    <script>
+        $(document).ready(function () {
+         var myobj = '@Html.Raw(Json.Serialize(Model))';
+            console.log ( myobj);
+            var dpjson = JSON.parse(myobj);
+            console.log(dpjson);
+
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: dpjson,
+                    pageSize: 5
+                },
+                height: 550,
+                filterable: true,
+                groupable: true,
+                reorderable: true,
+                columnMenu: true,
+                sortable: true,
+                resizable: true,
+                filterable: true,
+                toolbar: ["pdf", "search", "excel"],
+                excel: {
+                    allPages: true
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                dataBound: function (e) {
+                    var dataElement = $(e.sender.element).find(".k-grid-content");
+                    var fakeScroll = document.getElementById("dummyScroll");
+                    fakeScroll.style.width = dataElement.children(0).width() + "px";
+
+                    dataElement.scroll(function () {
+                        $("#dummyScrollWrapper").scrollLeft(dataElement.scrollLeft());
+                    });
+                    $("#dummyScrollWrapper").scroll(function () {
+                        dataElement.scrollLeft($("#dummyScrollWrapper").scrollLeft());
+                    });
+                },
+                columns: [{
+                    field: "projectCode",
+                    width: 150,
+                    title: "ProjectCode"
+                }, {
+                     field: "dpNumber",
+                     width: 150,
+                     title: "DpNumber"
+                }, {
+                    field: "transmittalNumber",
+                    width: 150,
+                    title: "Transmittal Number"
+                }, {
+                    field: "clientNumber ",
+                    width: 150,
+                    title: "Client Number "
+                }, {
+                    field: "revision",
+                    width: 150,
+                    title: "Revision"
+                }, {
+                    field: "stageName",
+                    width: 150,
+                    title: "Stage Name"
+                }, {
+                     field: "size",
+                     width: 150,
+                     title: "Size"
+                }, {
+                    field: "progress",
+                    width: 150,
+                    title: "Progress"
+                }, {
+                     field: "classification",
+                     width: 150,
+                     title: "Classification"
+                }, {
+                     field: "checkList",
+                     width: 150,
+                     title: "CheckList"
+                }, {
+                    field: "incomingTransmittalCheck",
+                    width: 150,
+                    title: "Incoming Transmittal Check"
+
+                }, {
+                    field: "dpDicipline",
+                    width: 150,
+                    title: "Dp Dicipline"
+
+                }, {
+                     field: "clientDicipline",
+                     width: 150,
+                     title: "Client Dicipline"
+
+                }, {
+                    field: "preparedBy",
+                    width: 150,
+                    title: "Prepared By"
+
+                }, {
+                     field: "creator",
+                     width: 100,
+                     title: "Creator"
+                }, {
+                     field: "creationDate",
+                        width: 150,
+                     title: "Creation Date"
+                }, {
+                     field: "modifier",
+                     width: 150,
+                     title: "Modifier"
+                }, {
+                     field: "modificationDate",
+                     width: 150,
+                     title: "Modification Date"
+                },
+
+
+
+
+                    {
+                        width: 150,
+                        command: [
+
+                            {
+                                name: "del",
+                                text: "Delete",
+                                click: function (e) {
+                                    // command button click handler
+                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                    url = "/DMSArea/Revision/DeleteRevision";
+                                    $.ajax({
+                                        url: url,
+                                        data: { id: item.id },
+                                        type: 'Get',
+                                        success: function (result) {
+                                            if (result === "bad") {
+                                                alert("Revision with existed Transmittal Number cannot be deleted");
+                                            } else {
+                                                $('#DeleteModalBody').html(result);
+                                                $("#myModaldeletor").modal("show");
+                                            }
+                                        },
+                                        error: function (xhr, status) {
+                                            alert(status);
+                                        }
+                                    });
+                                }
+                            },
+                            {
+                                name: "edit",
+                                text: "Edit",
+                                click: function (e) {
+                                    // command button click handler
+                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                    console.log(item )
+                                    window.location.href = '@Url.Action("EditRevision", "Revision")/' + item.id;
+                                }
+                            },
+
+                        ]
+                    }
+                ]
+
+            });
+            var grid = $("#grid").data("kendoGrid");
+            grid.hideColumn("id");
+            grid.hideColumn("order");
+
+            //$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+
+        });
+
+        $("#BtnSetProject").click(function (e) {
+            url = "/DMSArea/Revision/SetProject";
+            $.ajax({
+                url: url,
+                type: 'Get',
+                success: function (result) {
+                    $('#SetModalBody').html(result);
+
+                    $("#myModalSetter").modal("show");
+
+                },
+                error: function (xhr, status) {
+                    alert(status);
+                }
+            });
+        });
+
+
+    </script>
+}
+

@@ -1,0 +1,344 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.D_MDRViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "AddMDR";
+    List<D_Project> ListProject = ViewBag.projectlist;
+    List<D_Phase> ListPhase = ViewBag.phaselist;
+    List<D_DocumentType> ListDType = ViewBag.dtype;
+    List<D_DpDicipline> ListDpDicipline = ViewBag.dpdicipline;
+    List<D_Unit> ListUnit = ViewBag.listunit;
+    List<D_ClientDicipline> ListClientDicipline = ViewBag.listclientdicipline;
+    List<D_Classification> ListClass = ViewBag.listclass;
+    List<D_AdditionalWork> ListAddW = ViewBag.listaddw;
+}
+}
+
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "MDR") ">MDR</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add NEW ITEM</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New Item
+        </span>
+    </div>
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="MDR" asp-action="AddMDR" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-xs-12">
+
+
+                <!--ProjectCode-->
+                <div>
+                    <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input id="proj" class="form-control" type="text" readonly>
+                        <input id="ptitle" asp-for="ProjectTitle" type="hidden" />
+                        <input id="pcode" asp-for="ProjectCode" type="hidden" />
+                    </div>
+                    <div>   </div>
+
+                </div>
+                <!--ClientNumber-->
+                <div>
+                    <label asp-for="ClientNumber" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ClientNumber" type="text" class="form-control custominput" placeholder="ClientNumber ..." autocomplete="off" />
+                        <span asp-validation-for="ClientNumber" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--DocumentTitle-->
+                <div>
+                    <label asp-for="DocumentTitle" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="DocumentTitle" type="text" class="form-control custominput" placeholder="Document Title ..." autocomplete="off" />
+                        <span asp-validation-for="DocumentTitle" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--DaryapalaNumber-->
+                <div>
+                    <label asp-for="DaryapalaNumber" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="DaryapalaNumber" type="text" class="form-control custominput" placeholder="Daryapala Number ..." autocomplete="off" />
+                        <span asp-validation-for="DaryapalaNumber" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--WF-->
+                <div>
+                    <label asp-for="WF" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="WF" type="text" class="form-control custominput" placeholder="WF ..." autocomplete="off" />
+                        <span asp-validation-for="WF" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--DpDicipline-->
+                <div class="lef">
+                    <label asp-for="DpDicipline" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="DpDicipline" asp-items="@(new SelectList(ListDpDicipline,"Dicipline","Dicipline"))" class="form-control selectpicker custominput " data-live-search="true" style="direction: ltr; text-align:left">
+                            <option value="" selected disabled hidden style="direction: ltr">Select DpDicipline</option>
+                        </select>
+                        <div>   </div>
+
+                    </div>
+
+                </div>
+                <!--Unit-->
+                <div>
+                    <label asp-for="Unit" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Unit" asp-items="@(new SelectList(ListUnit,"Unit","Unit"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Unit</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+
+                </div>
+                <!--Phase-->
+                <div>
+                    <label asp-for="Phase" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Phase" asp-items="@(new SelectList(ListPhase,"Phase","Phase"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Phase</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--DocumentType-->
+                <div>
+                    <label asp-for="DocumentType" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="DocumentType" asp-items="@(new SelectList(ListDType,"TypesOfFile","TypesOfFile"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select DocumentType </option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--Bidover-->
+                <div>
+                    <label asp-for="Bidover" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Bidover" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" />
+                        <span asp-validation-for="Bidover" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <!--ClientDicipline-->
+                <div>
+                    <label asp-for="ClientDicipline" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ClientDicipline" asp-items="@(new SelectList(ListClientDicipline,"Dicipline","Dicipline"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select DpDicipline</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--Classification-->
+                <div>
+                    <label asp-for="Classification" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Classification" asp-items="@(new SelectList(ListClass,"Classification","Classification"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Classification</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+
+
+                <!--AdditionalWork-->
+                <div>
+                    <label asp-for="AdditionalWork" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="AdditionalWork" asp-items="@(new SelectList(ListAddW,"Title","Title"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select AdditionalWork</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+
+
+                <!--FirstIssueDate-->
+                <div>
+                    <label asp-for="FirstIssueDate" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="FirstIssueDate" type="date" class="form-control custominput" placeholder="FirstIssueDate ..." autocomplete="off" />
+                        <span asp-validation-for="FirstIssueDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--SecondIssueDate-->
+                <div>
+                    <label asp-for="SecondIssueDate" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="SecondIssueDate" type="date" class="form-control custominput" placeholder="SecondIssueDate ..." autocomplete="off" />
+                        <span asp-validation-for="SecondIssueDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--FinalIssueDate-->
+                <div>
+                    <label asp-for="FinalIssueDate" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="FinalIssueDate" type="date" class="form-control custominput" placeholder="FinalIssueDate ..." autocomplete="off" />
+                        <span asp-validation-for="FinalIssueDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--CustomField1-->
+                <div>
+                    <label asp-for="CustomField1" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CustomField1" type="text" class="form-control custominput" placeholder="CustomField1 ..." autocomplete="off" />
+                        <span asp-validation-for="CustomField1" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--CustomField2-->
+                <div>
+                    <label asp-for="CustomField2" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CustomField2" type="text" class="form-control custominput" placeholder="CustomField2 ..." autocomplete="off" />
+                        <span asp-validation-for="CustomField2" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--CustomField3-->
+                <div>
+                    <label asp-for="CustomField3" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CustomField3" type="date" class="form-control custominput" placeholder="CustomField3 ..." autocomplete="off" />
+                        <span asp-validation-for="CustomField3" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <!--CustomField4-->
+                <div>
+                    <label asp-for="CustomField4" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CustomField4" type="date" class="form-control custominput" placeholder="CustomField4 ..." autocomplete="off" />
+                        <span asp-validation-for="CustomField4" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--CustomField5-->
+                <div>
+                    <label asp-for="CustomField5" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CustomField5" type="text" class="form-control custominput" placeholder="CustomField5 ..." autocomplete="off" />
+                        <span asp-validation-for="CustomField5" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Active-->
+                <div>
+                    <label asp-for="Active" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Active" type="text" class="form-control custominput" placeholder="Active ..." autocomplete="off" />
+                        <span asp-validation-for="Active" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Remarks-->
+                <div>
+                    <label asp-for="Remarks" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Remarks" type="text" class="form-control custominput" placeholder="Remarks ..." autocomplete="off" />
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--User-->
+                <div>
+                    <label asp-for="User" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="User" type="text" class="form-control custominput" placeholder="User ..." autocomplete="off" />
+                        <span asp-validation-for="User" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Area-->
+                <div>
+                    <label asp-for="Area" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Area" type="text" class="form-control custominput" placeholder="Remarks ..." autocomplete="off" />
+                        <span asp-validation-for="Area" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Section-->
+                <div>
+                    <label asp-for="Section" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Section" type="text" class="form-control custominput" placeholder="Section ..." autocomplete="off" />
+                        <span asp-validation-for="Section" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--MHR-->
+                <div>
+                    <label asp-for="MHR" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="MHR" type="text" class="form-control custominput" placeholder="MHR..." autocomplete="off" />
+                        <span asp-validation-for="MHR" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+
+                <!--Creation Date -->
+                <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+                <!--Creator-->
+                <input asp-for="Creator" type="hidden" class="form-control custominput" />
+
+                <!--ModificationDate -->
+                <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+                <!--Modifier-->
+                <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+@section DMSScripts{
+
+    <script>
+        var pcode = $("#pcode").val().trim();
+        var ptitle = $("#ptitle").val().trim();
+        $("#proj").val(pcode + "-" + ptitle);
+
+    </script>
+
+
+}

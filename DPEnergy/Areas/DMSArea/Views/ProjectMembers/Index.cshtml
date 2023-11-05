@@ -1,0 +1,174 @@
+﻿@model IEnumerable<DPEnergy.DataModelLayer.Entities.DMS.Stackholders.D_ProjectMembers>
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Stackholders</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ProjectMembers</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            ProjectMembers List
+        </span>
+    </div>
+    <div style="margin-bottom:5px;">
+        <a class="btn customGreen1" asp-controller="ProjectMembers" asp-action="AddProjectMembers">
+            <i class="glyphicon glyphicon-plus"></i>
+            Add  ProjectMember
+        </a>
+    </div>
+
+
+    <div>
+        <div id="grid"></div>
+    </div>
+</div>
+<div class="modal fade" id="myModaldeletor">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-controller="ProjectMembers" asp-action="DeleteProjectMembersPost" method="post">
+                <div class="modal-header" style="background-color:darkred; color:white; border-radius:5px 5px 0 0;">
+                    <h4 class="modal-title">Delete ProjectMember</h4>
+                </div>
+
+                <div class="modal-body" id="DeleteModalBody">
+
+                </div>
+
+                <div dir="rtl" class="modal-footer" style="text-align:left;">
+                    <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">Reject</button>
+                    <button type="submit" class="btn" style="width:80px; color:white; background-color:darkred;">
+                        Accept
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section DMSScripts{
+    <script>
+        $(document).ready(function () {
+           var myobj = '@Html.Raw(Json.Serialize(Model))';
+            var dpjson = JSON.parse(myobj);
+            console.log(dpjson);
+
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: dpjson,
+                    pageSize: 5
+                },
+                height: 550,
+                filterable: true,
+                groupable: true,
+                sortable: true,
+                toolbar: ["pdf", "search"],
+
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [{
+                    field: "id",
+                    title: "id"
+                }, {
+                    field: "project" ,
+                    width: 200 ,
+                    title: "Project"
+                }, {
+                    field: "company",
+                    width: 200,
+                    title: "Company"
+                }, {
+                    field: "position",
+                    width: 200,
+                    title: "Position"
+                }, {
+                    field: "person",
+                    width: 200,
+                    title: "Person"
+                }, {
+                    field: "creator ",
+                    width: 200,
+                    title: "Creator"
+                }, {
+                    field: "creationDate",
+                    width: 200,
+                   title: "CreationDate"
+                }, {
+                    field: "modifier",
+                    width: 200,
+                    title: "Modifier"
+                }, {
+                        field: "modificationDate",
+                        width: 200,
+                        title: "ModificationDate"
+                },
+
+
+
+
+                    {
+                        width : 200,
+                        command: [
+                            {
+                                name: "del",
+                                text: "Delete",
+                                width: 200,
+                                click: function (e) {
+                                    // command button click handler
+                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                    url = "/DMSArea/ProjectMembers/DeleteProjectMembers";
+                                    $.ajax({
+                                        url: url,
+                                        data: { id: item.id },
+                                        type: 'Get',
+                                        success: function (result) {
+                                            $('#DeleteModalBody').html(result);
+                                            $("#myModaldeletor").modal("show");
+                                        },
+                                        error: function (xhr, status) {
+                                            alert(status);
+                                        }
+                                    });
+                                }
+                            },
+                            {
+                                name: "edit",
+                                text: "Edit",
+                                width: 200,
+                                click: function (e) {
+                                    // command button click handler
+                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                    console.log(item )
+                                    window.location.href = '@Url.Action("EditProjectMembers", "ProjectMembers")/' + item.id;
+                                }
+                            },
+
+                        ]
+                    }
+                ]
+
+            });
+            var grid = $("#grid").data("kendoGrid");
+            grid.hideColumn("id");
+
+            //$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+
+        });
+
+
+    </script>
+}
+
+

@@ -1,0 +1,346 @@
+﻿
+
+@{
+    List<D_Project> ListProject = ViewBag.projectlist;
+    ViewData["Title"] = "Index";
+}
+
+<h1>DMSs</h1>
+<div>
+   
+
+    <div class="container-fluid">
+        <div class="row">
+            <select   asp-items="@(new SelectList(from x in ListProject select new { Value = x.Id ,Text = x.ProjectCode + " - " + x.Title}, "Value","Text"))" class="form-control selectpicker custominput " data-live-search="true" style="direction: ltr; text-align:left">
+                <option value="" selected disabled hidden style="direction: ltr">Select Project</option>
+            </select>
+            <div>   </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="chart" style="width: 300px; height: 300px;margin-bottom:20px;"></div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="donutchart" style="width: 300px; height: 300px;margin-bottom:20px;"></div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="areachart" style="width: 300px; height: 300px; margin-bottom: 20px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="piechart" style="width: 300px; height: 300px;"></div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="linechart" style="width: 300px; height: 300px;"></div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="bulletchart" style="width: 300px; height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section DMSScripts {
+    <script>
+      
+            //var jsonData = JSON.stringify(dpjson);
+            /*
+            console.log(dpjson);
+            function download(content, fileName, contentType) {
+                var a = document.createElement("a");
+                var file = new Blob([content], { type: contentType });
+                a.href = URL.createObjectURL(file);
+                a.download = fileName;
+                a.click();
+            }
+            download(jsonData, 'json.txt', 'text/plain');
+        });
+        */
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            var myobj = '@Html.Raw(Json.Serialize(Model))';
+            var dpjson = JSON.parse(myobj);
+            var seriesData = [{
+                year: "2000",
+                sold: 100,
+                produced: 200
+            }, {
+                year: "2001",
+                sold: 250,
+                produced: 280
+            }];
+
+            $("#chart").kendoChart({
+                dataSource: {
+                    data: seriesData
+                },
+                series: [{
+                    name: "Sold",
+                    field: "sold"
+                }, {
+                    name: "Produced",
+                    field: "produced"
+                }],
+                categoryAxis: {
+                    field: "year"
+                }
+            });
+        });
+          
+
+
+        $("#donutchart").kendoChart({
+            title: {
+                position: "bottom",
+                text: "Share of Internet Population Growth"
+            },
+            legend: {
+                visible: false
+            },
+            chartArea: {
+                background: ""
+            },
+            seriesDefaults: {
+                type: "donut",
+                startAngle: 150
+            },
+            series: [{
+                name: "2011",
+                data: [{
+                    category: "Asia",
+                    value: 30.8,
+                    color: "#9de219"
+                }, {
+                    category: "Europe",
+                    value: 21.1,
+                    color: "#90cc38"
+                }, {
+                    category: "Latin America",
+                    value: 16.3,
+                    color: "#068c35"
+                }, {
+                    category: "Africa",
+                    value: 17.6,
+                    color: "#006634"
+                }, {
+                    category: "Middle East",
+                    value: 9.2,
+                    color: "#004d38"
+                }, {
+                    category: "North America",
+                    value: 4.6,
+                    color: "#033939"
+                }]
+            }, {
+                name: "2012",
+                data: [{
+                    category: "Asia",
+                    value: 53.8,
+                    color: "#9de219"
+                }, {
+                    category: "Europe",
+                    value: 16.1,
+                    color: "#90cc38"
+                }, {
+                    category: "Latin America",
+                    value: 11.3,
+                    color: "#068c35"
+                }, {
+                    category: "Africa",
+                    value: 9.6,
+                    color: "#006634"
+                }, {
+                    category: "Middle East",
+                    value: 5.2,
+                    color: "#004d38"
+                }, {
+                    category: "North America",
+                    value: 3.6,
+                    color: "#033939"
+                }],
+                labels: {
+                    visible: true,
+                    background: "transparent",
+                    position: "outsideEnd",
+                    template: "#= category #: \n #= value#%"
+                }
+            }],
+            tooltip: {
+                visible: true,
+                template: "#= category # (#= series.name #): #= value #%"
+            }
+        });
+
+
+        $("#scatterchart").kendoChart({
+            title: {
+                text: "Charge current vs. charge time"
+            },
+            legend: {
+                visible: true
+            },
+            seriesDefaults: {
+                type: "scatterLine"
+            },
+            series: [{
+                name: "0.8C",
+                data: [[10, 10], [15, 20], [20, 25], [32, 40],]
+            }, {
+                name: "1.6C",
+                data: [[10, 40], [17, 50], [18, 70], [35, 90],]
+            }, {
+                name: "3.1C",
+                data: [[10, 70], [13, 90],]
+            }],
+            xAxis: {
+                max: 50,
+                labels: {
+                    format: "{0}m"
+                },
+                title: {
+                    text: "Time"
+                }
+            },
+            yAxis: {
+                max: 100,
+                labels: {
+                    format: "{0}%"
+                },
+                title: {
+                    text: "Charge"
+                }
+            }
+        });
+
+
+        $("#piechart").kendoChart({
+            title: {
+                text: "Spain Electricity Production"
+            },
+            legend: {
+                position: "bottom"
+            },
+            seriesDefaults: {
+                labels: {
+                    visible: true,
+                    format: "{0}%"
+                }
+            },
+            series: [{
+                type: "pie",
+                data: [{
+                    category: "Hydro",
+                    value: 22,
+                    color: "#5673F5"
+                }, {
+                    category: "Solar",
+                    color: "#a0b0c0",
+                    value: 2
+                }, {
+                    category: "Nuclear",
+                    color: "#9920A3",
+                    value: 49
+                }, {
+                    category: "Wind",
+                    color: "#F445B4",
+                    value: 27
+                }]
+            }]
+        });
+
+
+        $("#linechart").kendoChart({
+            title: {
+                text: "Internet Users"
+            },
+            legend: {
+                position: "bottom"
+            },
+            seriesDefaults: {
+                type: "line"
+            },
+            series: [{
+                name: "World",
+                data: [15.7, 16.7, 20, 23.5, 26.6],
+                color: "#652E2E"
+            }, {
+                name: "United States",
+                data: [67.96, 68.93, 75, 74, 78],
+                color: "#F60909"
+                    
+            }],
+            valueAxis: {
+                labels: {
+                    format: "{0}%"
+                }
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            }
+        });
+
+        $("#areachart").kendoChart({
+            title: {
+                text: "Internet Users"
+            },
+            legend: {
+                position: "bottom"
+            },
+            seriesDefaults: {
+                type: "area"
+            },
+            series: [{
+                name: "World",
+                data: [15.7, 16.7, 20, 23.5, 26.6],
+                color: "#EEF556"
+            }, {
+                name: "United States",
+                data: [67.96, 68.93, 75, 74, 78],
+                color: "#D39B05"
+            }],
+            valueAxis: {
+                labels: {
+                    format: "{0}%"
+                }
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            }
+        });
+
+        var salesData = [
+            { current: 750, target: 762.5, category: 1 }, { current: 764, target: 768.5, category: 2 },
+            { current: 772, target: 770, category: 3 }, { current: 764, target: 773, category: 4 },
+            { current: 763, target: 760, category: 5 }, { current: 758, target: 765, category: 6 }];
+        $("#bulletchart").kendoChart({
+           
+            dataSource: {
+                data: salesData
+            },
+            series: [{
+                type: "bullet",
+                color: "darkblue",
+                currentField: "current",
+                targetField: "target",
+                target: {
+                    color: 'green',
+                    line: {
+                        width: 4
+                    },
+                    border: {
+                        width: 2,
+                        color: 'turquoise'
+                    }
+                }
+            }],
+            categoryAxis: {
+                field: "category"
+            }
+        });
+        
+    </script>
+   
+}

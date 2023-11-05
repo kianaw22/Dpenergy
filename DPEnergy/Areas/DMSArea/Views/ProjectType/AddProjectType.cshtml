@@ -1,0 +1,52 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation.D_ProjectTypeViewModel
+
+@{
+    ViewData["Title"] = "AddProjectType";
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "ProjectType") ">Project Type</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Project Type</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New Project Type
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="ProjectType" asp-action="AddProjectType" method="post" enctype="multipart/form-data">
+            <div class="col-md-6 col-md-offset-3">
+                <!--ProjectType-->
+                <div>
+                    <label asp-for="ProjectType" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ProjectType" type="text" class="form-control custominput" placeholder="Project Type..." autocomplete="off" />
+                        <span asp-validation-for="ProjectType" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--ProjectTypePersian-->
+                <div>
+                    <label asp-for="ProjectTypePersian" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ProjectTypePersian" type="text" class="form-control custominput" placeholder="Project Type..." autocomplete="off" />
+                        <span asp-validation-for="ProjectTypePersian" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+            </div>
+            
+
+        </form>
+    </div>
+</div>

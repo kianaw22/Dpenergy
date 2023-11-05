@@ -1,0 +1,99 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation.D_ProjectBudgetViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "AddProjectBudget";
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "ProjectBudget") ">ProjectBudget</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add ProjectBudget</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add  ProjectBudget
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="ProjectBudget" asp-action="AddProjectBudget" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-md-offset-3">
+
+                <!--ProjectCode-->
+                <div>
+                    <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ProjectCode" type="text" class="form-control custominput" placeholder="ProjectCode ..." autocomplete="off" />
+                        <span asp-validation-for="ProjectCode" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--ProjectTitle-->
+                <div>
+                    <label asp-for="ProjectTitle" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ProjectTitle" type="text" class="form-control custominput" placeholder="ProjectTitle ..." autocomplete="off" />
+                        <span asp-validation-for="ProjectTitle" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <!--Department-->
+                <div>
+                    <label asp-for="Department" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Department" type="text" class="form-control custominput" placeholder="Department ..." autocomplete="off" />
+                        <span asp-validation-for="Department" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--DepartmentalBudget-->
+                <div>
+                    <label asp-for="DepartmentalBudget" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="DepartmentalBudget" type="text" class="form-control custominput" placeholder="DepartmentalBudget ..." autocomplete="off" />
+                        <span asp-validation-for="DepartmentalBudget" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--TotalBudget-->
+                <div>
+                    <label asp-for="TotalBudget" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="TotalBudget" type="text" class="form-control custominput" placeholder="TotalBudget ..." autocomplete="off" />
+                        <span asp-validation-for="TotalBudget" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--OverTimeOrDeduction-->
+                <div>
+                    <label asp-for="OverTimeOrDeduction" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="OverTimeOrDeduction" type="text" class="form-control custominput" placeholder="OverTimeOrDeduction ..." autocomplete="off" />
+                        <span asp-validation-for="OverTimeOrDeduction" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
+
+

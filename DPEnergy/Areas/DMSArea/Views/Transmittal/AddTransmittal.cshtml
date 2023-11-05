@@ -1,0 +1,341 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.D_RevisionViewModel
+@using DPEnergy.DataModelLayer.Entities.DMS
+@{
+    ViewData["Title"] = "AddTransmittal";
+    List<D_Project> ListProject = ViewBag.projectlist;
+
+}
+<style>
+    .checkbox-box {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .checkboxes label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .checkboxes input[type="checkbox"] {
+        margin-right: 10px;
+    }
+</style>
+
+
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "Transmittal") ">Transmittal</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Transmittal</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New Transmittal
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:  #dae7f4 ;">
+        <form id="myform" asp-controller="Transmittal" asp-action="AddTransmittal" method="post" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="panel-group">
+                    <div class="panel panel-default" style="border: 2px solid #ccc; background-color: ;">
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label asp-for="ProjectCode" class="control-label col-md-2 col-xs-12 text-left" style="margin-top:8px"></label>
+                                    <div class="col-md-10 col-xs-12">
+                                        <select id="projectfilter" asp-for="ProjectCode" asp-items="@(new SelectList(from x in ListProject select new { Value = x.ProjectCode ,Text = x.ProjectCode + "-" + x.Title}, "Value","Text"))" id="client-number" class="form-control selectpicker custominput" data-live-search="true">
+                                            <option value="" selected disabled hidden style="direction: ltr">Select ProjectCode</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Outgoing Transmittal Queue</div>
+                        <div class="panel-body">
+                            <div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
+                                <div id="dummyScroll"></div>
+                            </div>
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="TransmittalNumber" class="control-label"></label>
+                                        <div>
+                                            <input asp-for="TransmittalNumber" type="text" class="form-control custominput" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="TransmittalDate" class="control-label"></label>
+                                    <div>
+                                        <input id="Tdate" asp-for="TransmittalDate" type="date" class="form-control custominput" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Consultant" class="control-label "></label>
+                                        <div>
+                                            <input id="consultant" asp-for="Consultant" type="text" class="form-control custominput" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Client" class="control-label "></label>
+                                    <div>
+                                        <input id="client" asp-for="Client" type="text" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="IssuedBy" class="control-label "></label>
+                                        <div>
+                                            <input id="issuedby" asp-for="IssuedBy" type="text" class="form-control custominput" autocomplete="off" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Reciever" class="control-label "></label>
+                                    <div>
+                                        <input id="reciever" asp-for="Reciever" type="text" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="SentType" class="control-label"></label>
+                                        <div class="checkbox-box">
+
+                                            <div class="checkboxes">
+                                                <label><input asp-for="CD" id="ck1" type="checkbox">CD</label>
+                                                <label><input asp-for="Print" id="ck2" type="checkbox">Print</label>
+                                                <label><input asp-for="Email" id="ck3" type="checkbox">Email</label>
+                                                <label><input asp-for="Other" id="ck4" type="checkbox">Other</label>
+                                                <label><input asp-for="Original" id="ck5" type="checkbox">Original</label>
+                                                <label><input asp-for="File" id="ck6" type="checkbox">File(CD)</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12" style="text-align:left ">
+                                                <label asp-for="RemarksTransmittal" class="control-label " style="text-align:left;margin-top:20px"></label>
+
+                                                <textarea asp-for="RemarksTransmittal" type="text" class="form-control custominput" autocomplete="off">
+                                        </textarea>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="NumberofCopies" class="control-label "></label>
+                                    <div>
+                                        <input asp-for="NumberofCopies" type="text" class="form-control custominput" autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" name="checkedItems" id="checkedItems" />
+                </div>
+            </div>
+            <div class="col-xs-12 form-group" style="margin-top:15px; text-align:right ">
+                <input type="submit" name="buttonId" value="Save" id="btn1" class="btn btn-primary btn" />
+                <!--  <input type="submit" name="buttonId" value="Append" id="btn2" class="btn btn-primary btn" /> -->
+                    <input type="submit" name="buttonId" value="Cancel" id="btn3" class="btn btn-danger btn" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    </div>
+    @section DMSScripts{
+
+        <script>
+           $(document).ready(function () {
+               var myobj = '@Html.Raw(Json.Serialize(Model))';
+               var dpjson = JSON.parse(myobj);
+               console.log('model' , dpjson);
+
+               var grid =  $("#grid").kendoGrid({
+                    dataSource: {
+                        data: dpjson,
+                        pageSize: 5
+                    },
+
+                    height: 550,
+                    filterable: true,
+                    groupable: true,
+                    reorderable: true,
+                    columnMenu: true,
+                    sortable: true,
+                    resizable: true,
+                    filterable: true,
+                    toolbar: [ "search"],
+                    excel: {
+                        allPages: true
+                    },
+                    pageable: {
+                        refresh: true,
+                        pageSizes: true,
+                        buttonCount:5
+                    },
+                    height: 350,
+                    dataBound: function (e) {
+                        var dataElement = $(e.sender.element).find(".k-grid-content");
+                        var fakeScroll = document.getElementById("dummyScroll");
+                        fakeScroll.style.width = dataElement.children(0).width() + "px";
+
+                        dataElement.scroll(function () {
+                            $("#dummyScrollWrapper").scrollLeft(dataElement.scrollLeft());
+                        });
+                        $("#dummyScrollWrapper").scroll(function () {
+                            dataElement.scrollLeft($("#dummyScrollWrapper").scrollLeft());
+                        });
+                    },
+                    columns: [
+                    {
+                       title: "Item",
+                       template: "<input type='checkbox'  class='rowCheckbox' />",
+                       width: "50px"
+
+                    },
+                    {
+
+                        field: "clientNumber ",
+                        width: 150,
+                        title: "Client Number "
+                    }, {
+                        field: "revision",
+                        width: 150,
+                        title: "Revision"
+                    }, {
+                        field: "stageName",
+                        width: 150,
+                        title: "Stage Name"
+                    }, {
+                        field: "dpDicipline",
+                        width: 150,
+                        title: "Dp Dicipline"
+
+                    }, {
+                         field: "clientDicipline",
+                         width: 150,
+                         title: "Client Dicipline"
+
+                    },
+                    ]
+
+               }).data("kendoGrid");
+
+              // var panelHeight = $(".panel-body").height();
+              // $("#grid").height(panelHeight);
+                grid.hideColumn("id");
+                grid.hideColumn("order");
+
+                //$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+               $("#projectfilter").on("change", function () {
+                   var projectcode = $("#projectfilter").val();
+
+                   var currentDate = new Date().toISOString().slice(0, 10); // Get the current date
+                   $('#Tdate').val(currentDate);
+                   // Use AJAX to retrieve the filtered data from the controller
+                   $.ajax({
+                       url: "/DMSArea/Transmittal/FilterDataGrid",
+                       data: { projectcode: projectcode },
+                       dataType: "json",
+                       success: function (filteredData) {
+
+
+                           grid.dataSource.data(filteredData);
+
+                           // Update the total count of the data source
+                           grid.dataSource.total(filteredData.length);
+
+                           // Refresh the grid to display the first page of data
+                           grid.refresh();
+                       }
+                   });
+                   $.ajax({
+                       url: "/DMSArea/Transmittal/GetFields",
+                       data: { projectcode: projectcode },
+                       success: function (data) {
+                           console.log(data)
+
+                           var consultant = data.consultant;
+                           var client = data.client;
+                           var issuedby = data.issuedby;
+                           var reciever = data.reciever;
+
+
+
+                           $('#consultant').val(consultant);
+                           $('#client').val(client);
+                           $('#issuedby').val(issuedby);
+                           $('#reciever').val(reciever);
+                       },
+                       error: function () {
+                           console.log('Error retrieving data');
+                       }
+                   })
+               });
+            });
+
+
+
+        </script>
+        <script>
+            $("#btn1").click(function () {
+
+                if (!$("#grid").find(".rowCheckbox:checked").length) {
+                    alert("Please select at least one item.");
+                    return false;
+                }
+            });
+            $("#btn2").click(function () {
+
+                if (!$("#grid").find(".rowCheckbox:checked").length) {
+                    alert("Please select at least one item.");
+                    return false;
+                }
+            });
+
+        </script>
+
+
+        <script>
+            var checkedItems = [];
+            $("#grid").on("click", ".rowCheckbox", function () {
+                var isChecked = $(this).is(":checked");
+                var row = $(this).closest("tr");
+                var dataItem = $("#grid").data("kendoGrid").dataItem(row);
+                if (isChecked) {
+                    checkedItems.push(dataItem);
+                } else {
+                    checkedItems.splice(checkedItems.indexOf(dataItem), 1);
+                }
+                console.log('checked:', checkedItems);
+                $("#checkedItems").val(JSON.stringify(checkedItems));
+            });
+
+        </script>
+    }

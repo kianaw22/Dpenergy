@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_Project
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" >
+    Are you sure you want to delete 
+    <span style="font-weight:bold;">@Model.ProjectCode</span>
+    with title
+    <span style="font-weight:bold;">@Model.Title</span>
+    ?
+</div>
+<input type="hidden" asp-for="Id" />

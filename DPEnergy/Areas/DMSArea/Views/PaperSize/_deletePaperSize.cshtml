@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_PaperSize
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete Phase
+    <span style="font-weight:bold;">
+        @Model.TypeOfPaper
+    </span>
+    ?
+</div>
+<input type="hidden" asp-for="Id" />

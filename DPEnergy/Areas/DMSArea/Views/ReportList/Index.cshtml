@@ -1,0 +1,152 @@
+﻿@model IEnumerable<DPEnergy.DataModelLayer.ViewModels.DMS.D_ReportListViewModel>
+@using Stimulsoft.Report.Mvc
+
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="content">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Reports</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Reports List
+        </span>
+    </div>
+
+
+
+    <div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
+        <div id="dummyScroll" style="height: 20px;">
+        </div>
+    </div>
+
+    <div id="grid"></div>
+
+
+</div>
+
+
+@section DMSScripts{
+
+
+    <script>
+
+        $(document).ready(function () {
+           var myobj = '@Html.Raw(Json.Serialize(Model))';
+            var dpjson = JSON.parse(myobj);
+            console.log ( dpjson)
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: dpjson,
+                    pageSize: 5
+                },
+                height: 550,
+                filterable: true,
+                groupable: true,
+                reorderable: true,
+                columnMenu: true,
+                sortable: true,
+                resizable: true,
+                filterable: true,
+                toolbar: ["pdf", "search", "excel"],
+                excel: {
+                    allPages: true
+                },
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                dataBound: function (e) {
+                    var dataElement = $(e.sender.element).find(".k-grid-content");
+                    var fakeScroll = document.getElementById("dummyScroll");
+                    fakeScroll.style.width = dataElement.children(0).width() + "px";
+
+                    dataElement.scroll(function () {
+                        $("#dummyScrollWrapper").scrollLeft(dataElement.scrollLeft());
+                    });
+                    $("#dummyScrollWrapper").scroll(function () {
+                        dataElement.scrollLeft($("#dummyScrollWrapper").scrollLeft());
+                    });
+                },
+                columns: [{
+                    field: "id",
+                    title: "id"
+                }, {
+                    field: "reportName",
+                    width: 200,
+                    title: "Name",
+                        template: function (dataItem) {
+                            var reportpath = dataItem.reportPath
+                            return "<a href='/DMSArea/ReportList/ReadReports?reportpath=" + reportpath + "'>" + dataItem.reportName + " </a > ";
+                        }
+                }, {
+                     field: "description",
+                     width: 400,
+                     title: "Description"
+                },{
+                   field: "reportPath",
+                      width: 300,
+                    title: "ReportPath"
+                    },{
+                    field: "projectCode",
+                    width: 150,
+                    title: "Project Code"
+                },
+
+
+
+
+                    {
+                        width:150,
+                        command: [
+                            {
+                                name: "view",
+                                text: "View",
+                                click: function (e) {
+                                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                                    var reportpath = dataItem.reportPath
+                                    var url = "/DMSArea/ReportList/ViewReportsPage?reportpath=" + reportpath;
+                                    var newWindow = window.open(url, "_blank");
+
+                                }
+                            },
+                          
+                            {
+                                name: "read",
+                                text: "Read",
+                                click: function (e) {
+                                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+                                    var reportpath = dataItem.reportPath
+                                    var url = "/DMSArea/ReportList/ReadReports?reportpath=" + reportpath;
+                                    var newWindow = window.open(url, "_blank");
+
+                                }
+                            },
+                            
+                        ]
+                    }
+                ]
+
+            });
+            var grid = $("#grid").data("kendoGrid");
+            grid.hideColumn("id");
+            grid.hideColumn("reportPath");
+
+
+            //$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+
+        });
+
+
+    </script>
+}
+

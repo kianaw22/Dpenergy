@@ -1,0 +1,14 @@
+﻿@model DPEnergy.DataModelLayer.Entities.DMS.BasicInformation.D_UserProject
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+    Are you sure you want to delete
+    <span style="font-weight:bold;">@Model.ProjectCode</span>
+    for user
+    <span style="font-weight:bold;">@Model.UserName</span>
+    ?
+</div>
+
+<input type="hidden" asp-for="Id" />

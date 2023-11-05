@@ -1,0 +1,43 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.P_CompanyViewModel
+@{
+    ViewData["Title"] = "AddCompany";
+}
+
+    <div class="content">
+        <ul class="breadcrumb">
+            <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+            <li><a href="#"><i class="position-left"></i> اطلاعات اولیه</a></li>
+            <li><a asp-controller="Company" asp-action="index"><i class="icon-person position-left"></i> لیست شرکت ها</a></li>
+            <li class="active">اضافه کردن شرکت</li>
+        </ul>
+        <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+            <span style="font-weight:bold;">
+                <i class="icon-accessibility2"></i>
+                فرم ثبت شرکت
+            </span>
+        </div>
+
+
+        <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+            <form asp-controller="Company" asp-action="AddCompany" method="post">
+                <div class="col-md-6 col-md-offset-3">
+                    <!--CompanyName-->
+                    <div>
+                        <label asp-for="CompanyName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="CompanyName" type="text" class="form-control custominput" placeholder="نام شرکت..." autocomplete="off" />
+                            <span asp-validation-for="CompanyName" class="text-danger"></span>
+                        </div>
+                    </div>
+                   
+                    <div class="col-xs-12 form-group" style="margin-top:15px;">
+                        <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                               value="ثبت شرکت" class="btn pull-right" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
