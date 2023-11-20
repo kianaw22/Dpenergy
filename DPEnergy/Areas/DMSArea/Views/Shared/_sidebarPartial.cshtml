@@ -1,126 +1,126 @@
 ﻿@using DPEnergy.DataModelLayer.Entities.Admin
 @using Microsoft.AspNetCore.Identity;
 @inject UserManager<A_UserManager> UserManager
-     
 
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img id="myimage" src="~/dist/img/avatar2.png" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>@UserManager.GetUserName(User)</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
+
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img id="myimage" src="~/dist/img/avatar2.png" class="img-circle" alt="User Image">
             </div>
-            <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">MAIN NAVIGATION</li>
-                <li class="treeview active">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-info"></i> <span>Basic Information</span> <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="@Url.Action("Index", "Project")"><i class="fa fa-circle-o"></i> Project</a></li>
-                        <li><a href="@Url.Action("Index", "ProjectType")"><i class="fa fa-circle-o"></i> Project Type</a></li>
-                        <li><a href="@Url.Action("Index", "ProjectParties")"><i class="fa fa-circle-o"></i> Project Parties</a></li>
-                        <!--<li><a href="@Url.Action("Index", "ProjectManager")"><i class="fa fa-circle-o"></i> Project Manager</a></li> -->
-                        <li><a href="@Url.Action("Index", "Contractor")"><i class="fa fa-circle-o"></i> Contractor</a></li>
-                        <li><a href="@Url.Action("Index", "DpDicipline")"><i class="fa fa-circle-o"></i> DpDicipline</a></li>
-                        <li><a href="@Url.Action("Index", "ClientDicipline")"><i class="fa fa-circle-o"></i> ClientDicipline</a></li>
-                        <li><a href="@Url.Action("Index", "Phase")"><i class="fa fa-circle-o"></i> Phase</a></li>
-                        <li><a href="@Url.Action("Index", "Unit")"><i class="fa fa-circle-o"></i> Unit </a></li>
-                        <li><a href="@Url.Action("Index", "DocumentType")"><i class="fa fa-circle-o"></i> Document Type</a></li>
-                        <li><a href="@Url.Action("Index", "Classification")"><i class="fa fa-circle-o"></i> Classification</a></li>
-                        <li><a href="@Url.Action("Index", "Stage")"><i class="fa fa-circle-o"></i> Stage</a></li>
-                        <li><a href="@Url.Action("Index", "Progress")"><i class="fa fa-circle-o"></i> Progress</a></li>
-                        <li><a href="@Url.Action("Index", "CommentSheetStage")"><i class="fa fa-circle-o"></i> CommentSheetStage</a></li>
-                        <li><a href="@Url.Action("Index", "ReplySheetStage")"><i class="fa fa-circle-o"></i> ReplySheetStage</a></li>
-                        <li><a href="@Url.Action("Index", "RetReplySheetStage")"><i class="fa fa-circle-o"></i>  Returned ReplySheetStage</a></li>
-                        <li><a href="@Url.Action("Index", "SentType")"><i class="fa fa-circle-o"></i>SentType</a></li>
-                        <li><a href="@Url.Action("Index", "PaperSize")"><i class="fa fa-circle-o"></i> PaperSize</a></li>
-                        <li><a href="@Url.Action("Index", "AdditionalWork")"><i class="fa fa-circle-o"></i> AdditionalWork</a></li>
-                        <li><a href="@Url.Action("Index", "Area")"><i class="fa fa-circle-o"></i> Area</a></li>
-                        <li><a href="@Url.Action("Index", "Section")"><i class="fa fa-circle-o"></i> Section</a></li>
-                        <li><a href="@Url.Action("Index", "ProjectBudget")"><i class="fa fa-circle-o"></i> Project Budget</a></li>
-                        <li><a href="@Url.Action("Index", "RevisionCode")"><i class="fa fa-circle-o"></i> Revision Code</a></li>
-                        <li><a href="@Url.Action("Index", "UserProject")"><i class="fa fa-circle-o"></i> Access User to Project</a></li>
+            <div class="pull-left info">
+                <p>@UserManager.GetUserName(User)</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="treeview" >
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class=""><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                    <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                </ul>
+            </li>
+            <li class="treeview" >
+                <a href="#">
+                    <i class="fa fa-info"></i> <span>Basic Information</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li  ><a href="@Url.Action("Index", "Project")"><i class="fa fa-circle-o"></i> Project</a></li>
+                    <li ><a href="@Url.Action("Index", "ProjectType")"><i class="fa fa-circle-o"></i> Project Type</a></li>
+                    <li><a href="@Url.Action("Index", "ProjectParties")"><i class="fa fa-circle-o"></i> Project Parties</a></li>
+                    <!--<li><a href="@Url.Action("Index", "ProjectManager")"><i class="fa fa-circle-o"></i> Project Manager</a></li> -->
+                    <li><a href="@Url.Action("Index", "Contractor")"><i class="fa fa-circle-o"></i> Contractor</a></li>
+                    <li><a href="@Url.Action("Index", "DpDicipline")"><i class="fa fa-circle-o"></i> DpDicipline</a></li>
+                    <li><a href="@Url.Action("Index", "ClientDicipline")"><i class="fa fa-circle-o"></i> ClientDicipline</a></li>
+                    <li><a href="@Url.Action("Index", "Phase")"><i class="fa fa-circle-o"></i> Phase</a></li>
+                    <li><a href="@Url.Action("Index", "Unit")"><i class="fa fa-circle-o"></i> Unit </a></li>
+                    <li><a href="@Url.Action("Index", "DocumentType")"><i class="fa fa-circle-o"></i> Document Type</a></li>
+                    <li><a href="@Url.Action("Index", "Classification")"><i class="fa fa-circle-o"></i> Classification</a></li>
+                    <li><a href="@Url.Action("Index", "Stage")"><i class="fa fa-circle-o"></i> Stage</a></li>
+                    <li><a href="@Url.Action("Index", "Progress")"><i class="fa fa-circle-o"></i> Progress</a></li>
+                    <li><a href="@Url.Action("Index", "CommentSheetStage")"><i class="fa fa-circle-o"></i> CommentSheetStage</a></li>
+                    <li><a href="@Url.Action("Index", "ReplySheetStage")"><i class="fa fa-circle-o"></i> ReplySheetStage</a></li>
+                    <li><a href="@Url.Action("Index", "RetReplySheetStage")"><i class="fa fa-circle-o"></i>  Returned ReplySheetStage</a></li>
+                    <li><a href="@Url.Action("Index", "SentType")"><i class="fa fa-circle-o"></i>SentType</a></li>
+                    <li><a href="@Url.Action("Index", "PaperSize")"><i class="fa fa-circle-o"></i> PaperSize</a></li>
+                    <li><a href="@Url.Action("Index", "AdditionalWork")"><i class="fa fa-circle-o"></i> AdditionalWork</a></li>
+                    <li><a href="@Url.Action("Index", "Area")"><i class="fa fa-circle-o"></i> Area</a></li>
+                    <li><a href="@Url.Action("Index", "Section")"><i class="fa fa-circle-o"></i> Section</a></li>
+                    <li><a href="@Url.Action("Index", "ProjectBudget")"><i class="fa fa-circle-o"></i> Project Budget</a></li>
+                    <li><a href="@Url.Action("Index", "RevisionCode")"><i class="fa fa-circle-o"></i> Revision Code</a></li>
+                    <li><a href="@Url.Action("Index", "UserProject")"><i class="fa fa-circle-o"></i> Access User to Project</a></li>
 
-                    </ul>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index", "MDR")">
-                        <i class="fa fa-th"></i> <span> MDR </span>
+                </ul>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "MDR")">
+                    <i class="fa fa-th"></i> <span> MDR </span>
 
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index", "Revision")">
-                        <i class="fa fa-table"></i> <span> Revision </span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Revision")">
+                    <i class="fa fa-table"></i> <span> Revision </span>
 
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index", "Reports")">
-                        <i class="fa fa-edit"></i> <span> Add Report </span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Reports")">
+                    <i class="fa fa-edit"></i> <span> Add Report </span>
 
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("Index", "ReportList")">
-                        <i class="fa fa-edit"></i> <span> ReportList </span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "ReportList")">
+                    <i class="fa fa-edit"></i> <span> ReportList </span>
 
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("AddTransmittal", "Transmittal")">
-                        <i class="fa fa-edit"></i> <span> Add Transmittal </span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("AddTransmittal", "Transmittal")">
+                    <i class="fa fa-edit"></i> <span> Add Transmittal </span>
 
-                    </a>
-                </li>
-                <li>
-                    <a href="@Url.Action("DeleteTransmittal", "Transmittal")">
-                        <i class="fa fa-edit"></i> <span> Delete Transmittal </span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("DeleteTransmittal", "Transmittal")">
+                    <i class="fa fa-edit"></i> <span> Delete Transmittal </span>
 
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-user-secret"></i>
-                        <span dir="rtl">Stackholders Inf</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="@Url.Action("Index", "Position")"><i class="fa fa-circle-o"></i>Position</a></li>
-                        <li><a href="@Url.Action("Index", "ProjectMembers")"><i class="fa fa-circle-o"></i>Project Members</a></li>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user-secret"></i>
+                    <span dir="rtl">Stackholders Inf</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Index", "Position")"><i class="fa fa-circle-o"></i>Position</a></li>
+                    <li><a href="@Url.Action("Index", "ProjectMembers")"><i class="fa fa-circle-o"></i>Project Members</a></li>
 
-                    </ul>
-                </li>
-                <!--
+                </ul>
+            </li>
+            <!--
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
@@ -215,17 +215,49 @@
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
                 -->
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
-    <script>
-        var url = window.location;
-        // Will only work if string in href matches with location
-        $('ul.treeview-menu a[href="' + url + '"]').parent().addClass('active');
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
 
-        // Will also work for relative and absolute hrefs
-        $('ul.treeview-menu a').filter(function () {
-            return this.href == url;
-        }).parent().addClass('active');
-    </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Handle click event on treeview items
+
+        // Handle click event on treeview menu items
+        $('.treeview-menu > li').click(function () {
+            // Remove 'active' class from all treeview menu items
+            $('.treeview-menu > li').removeClass('active');
+
+            // Add 'active' class to the clicked treeview menu item
+            $(this).addClass('active');
+        });
+
+        // Automatically activate the corresponding item when the page loads
+        var currentUrl = window.location.pathname;
+
+        // Remove 'active' class from all treeview menu items
+        $('.treeview-menu > li').removeClass('active');
+
+        // Find the corresponding treeview menu item based on the current URL
+        var activeMenuItem = $('.treeview-menu > li').filter(function () {
+            var menuItemUrl = $(this).find('a').attr('href');
+            return currentUrl.endsWith(menuItemUrl);
+        });
+
+        // Add 'active' class to the matching treeview menu item
+        activeMenuItem.addClass('active');
+
+        // Expand the parent treeview menu
+        activeMenuItem.closest('.treeview-menu').css('display', 'block');
+
+        // Add 'active' class to the parent treeview item
+        activeMenuItem.closest('.treeview').addClass('active');
+    });
+
+
+
+
+
+</script>
