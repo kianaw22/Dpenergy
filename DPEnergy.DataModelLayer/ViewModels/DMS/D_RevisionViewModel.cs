@@ -124,7 +124,7 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
         [Display(Name = "Custom Field 2")]
         public string CustomField2 { get; set; }
         [Display(Name = "Custom Field 3")]
-        public string CustomFiled3 { get; set; }
+        public string CustomField3 { get; set; }
         [Display(Name = "CustomField 4")]
         public DateTime? CustomField4 { get; set; }
         public string Creator { get; set; }
@@ -140,5 +140,8 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
         public bool File { get; set; }
       
         public bool Consideration { get; set; }
+        [Display(Name = "Attachment")]
+        public string Attachment { get; set; }
+
     }
 }

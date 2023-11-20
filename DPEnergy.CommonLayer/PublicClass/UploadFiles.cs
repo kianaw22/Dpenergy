@@ -110,6 +110,36 @@ namespace DPEnergy.CommonLayer.PublicClass
             }
             return Path.Combine(upload , filename);
         }
+        public bool UploadRevAttchment(IEnumerable<IFormFile> files, string uploadPath, string projectcode , string name )
+        {
+            var result = false;
+            var upload = Path.Combine(_appEnvironment.WebRootPath, uploadPath);
+
+            if (!Directory.Exists(upload + projectcode))
+            {
+                Directory.CreateDirectory(upload + projectcode);
+            }
+
+            upload = upload + projectcode;
+            var f = Path.Combine(upload, name);
+
+            if (File.Exists(f))
+            {
+                result = true;
+                return result;
+            }
+
+            foreach (var item in files)
+            {
+   
+                using (var fs = new FileStream(Path.Combine(upload, name), FileMode.Create))
+                {
+                    item.CopyTo(fs);
+                }
+
+            }
+            return result;
+        }
     }
      
 

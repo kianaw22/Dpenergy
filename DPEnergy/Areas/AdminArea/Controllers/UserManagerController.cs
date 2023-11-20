@@ -128,7 +128,7 @@ namespace DPEnergy.Areas.AdminArea.Controllers
         }
         public void FillCombo()
         {
-            List<P_Personel> ListPersonel = _context.ProjectUW.Get().ToList();
+            List<P_Personel> ListPersonel = _context.PersonelUW.Get().ToList();
             ViewBag.personellist = ListPersonel;
         }
     }

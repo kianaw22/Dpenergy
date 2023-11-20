@@ -1,7 +1,9 @@
 ﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation.D_ProjectViewModel
+@using DPEnergy.DataModelLayer.Entities;
 @{
     ViewData["Title"] = "EditProject";
-    List<D_ProjectManager> ListProjectManager = ViewBag.projectmanagerlist;
+
+    List<P_Personel> ListProjectManager = ViewBag.projectmanagerlist;
     List<D_ProjectType> ListProjectType = ViewBag.projecttypelist;
     List<D_Contractor> ListContractor = ViewBag.contractorlist;
 }
@@ -61,7 +63,7 @@
                 <div>
                     <label asp-for="ProjectManager" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="ProjectManager" asp-items="@(new SelectList(ListProjectManager,"ProjectManager","ProjectManager"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                        <select asp-for="ProjectManager" asp-items="@(new SelectList(from x in ListProjectManager select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Manager</option>
                         </select>
                         <div>   </div>

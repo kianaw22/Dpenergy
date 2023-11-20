@@ -4,14 +4,16 @@ using DPEnergy.DataModelLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DPEnergy.DataModelLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231107083435_mig122")]
+    partial class mig122
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1188,11 +1190,11 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("CustomField2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CustomField3")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("CustomField4")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CustomFiled3")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DocumentTitle")
                         .HasColumnType("nvarchar(max)");

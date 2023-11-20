@@ -134,7 +134,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             List<D_Project> ListProject = _context.projectManagerUW.Get().ToList();
             ViewBag.projectlist = ListProject;
-            List<D_ProjectManager> ListProjectManager = _context.ProjectManagerManagerUW.Get().ToList();
+            List<P_Personel> ListProjectManager = _context.PersonelUW.Get().ToList();
             ViewBag.projectmanagerlist = ListProjectManager;
             List<D_ProjectType> ListProjectType = _context.ProjectTypeManagerUW.Get().ToList();
             ViewBag.projecttypelist = ListProjectType;

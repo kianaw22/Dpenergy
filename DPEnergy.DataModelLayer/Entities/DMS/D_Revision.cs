@@ -45,7 +45,7 @@ namespace DPEnergy.DataModelLayer.Entities.DMS
         public string SentType { get; set; }
         public string CustomField1 { get; set; }
         public string CustomField2 { get; set; }
-        public string CustomFiled3 { get; set; }
+        public string CustomField3 { get; set; }
         public DateTime? CustomField4 { get; set; }
         public string PreparedBy { get; set; }
         public string MeetingHeld { get; set; }
@@ -65,6 +65,7 @@ namespace DPEnergy.DataModelLayer.Entities.DMS
         public bool File { get; set; }
 
         public bool Consideration { get; set; }
+        public string Attachment { get; set; }
 
 
 

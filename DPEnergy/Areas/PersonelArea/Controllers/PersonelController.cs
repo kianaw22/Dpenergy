@@ -33,7 +33,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
         }
         public IActionResult Index()
         {
-            var model = _context.ProjectUW.Get();
+            var model = _context.PersonelUW.Get();
             return View(model);
         }
 
@@ -63,7 +63,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
                 {
                     
                     //کنترل تکراری نبودن نام کاربری
-                    if ( _context.ProjectUW.GetById(model.PersonelCode) != null)
+                    if ( _context.PersonelUW.GetById(model.PersonelCode) != null)
                     { 
                         ModelState.AddModelError("PersonelCode", "شماره پرسنلی تکراری می باشد.");
                         return View(model);
@@ -86,7 +86,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
                     personelMapped.PersonalImagePath = newImagePathName;
                     personelMapped.MelliScanPath = newMelliPath;
                     personelMapped.ShenasnameScanPath = newScanShenasnamePath;
-                    _context.ProjectUW.Create(personelMapped);
+                    _context.PersonelUW.Create(personelMapped);
                     _context.save();
                     return RedirectToAction("Index");
                 }
@@ -107,7 +107,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
             {
                 return RedirectToAction("ErrorView", "Home");
             }
-            var personel = _context.ProjectUW.GetById(PersonelCode);
+            var personel = _context.PersonelUW.GetById(PersonelCode);
             var mappersonel = _mapper.Map<PersonelViewModel>(personel);
             return View(mappersonel);
         }
@@ -145,7 +145,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
 
                 //update
 
-                _context.ProjectUW.Update(personelMapped);
+                _context.PersonelUW.Update(personelMapped);
                 _context.save();
                 return RedirectToAction("Index");
             }
@@ -158,7 +158,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
             {
                 return RedirectToAction("ErrorView", "Home");
             }
-            var p = _context.ProjectUW.GetById(PersonelCode);
+            var p = _context.PersonelUW.GetById(PersonelCode);
             if (p == null)
             {
                 return RedirectToAction("ErrorView", "Home");
@@ -173,7 +173,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
             {
                 return RedirectToAction("ErrorView", "Home");
             }
-            _context.ProjectUW.DeleteById(PersonelCode);
+            _context.PersonelUW.DeleteById(PersonelCode);
             _context.save();
             return RedirectToAction("Index");
 

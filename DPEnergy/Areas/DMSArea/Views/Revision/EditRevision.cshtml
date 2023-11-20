@@ -139,6 +139,15 @@
                         </div>
                     </div>
                     <div class="panel panel-default">
+                        <div class="panel-heading">Revision History</div>
+                        <div class="panel-body">
+                            <div id="dummyScrollWrapper" style="overflow-x: scroll; margin-right:17px; margin-left:2px;">
+                                <div id="dummyScroll"></div>
+                            </div>
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
                         <div class="panel-heading">Revision Information:</div>
                         <div class="panel-body">
                             <div class="row">
@@ -167,7 +176,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label asp-for="Revision" class="control-label">Revision</label>
-                                        <select asp-for="Revision" asp-items="@(new SelectList(ListRevisionCode,"RevisionName","RevisionName"))" class="form-control selectpicker" data-live-search="true">
+                                        <select asp-for="Revision" asp-items="@(new SelectList(ListRevisionCode,"RevisionName","RevisionName"))" id="revision" class="form-control selectpicker" data-live-search="true">
                                             <option value="" selected disabled hidden>Select Revision</option>
                                         </select>
                                     </div>
@@ -346,16 +355,16 @@
                                     <label asp-for="CustomField2" class="control-label"></label>
                                     <div>
                                         <div>
-                                            <input asp-for="CustomField1" type="text" class="form-control custominput" autocomplete="off" />
+                                            <input asp-for="CustomField2" type="text" class="form-control custominput" autocomplete="off" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label asp-for="CustomFiled3" class="control-label"></label>
+                                    <label asp-for="CustomField3" class="control-label"></label>
                                     <div>
-                                        <input asp-for="CustomField1" type="text" class="form-control custominput" autocomplete="off" />
+                                        <input asp-for="CustomField3" type="text" class="form-control custominput" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -369,53 +378,30 @@
                         </div>
 
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="text-align: left;">Attachment:</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-8 col-xs-12" style="text-align:left">
+                                    <input class="form-control" type="file" id="myfile" />
+                                    <span id="spnmessage" style="color:black; font-size:12px;"></span>
+                                </div>
+                                <div class="col-md-4 col-xs-12" style="text-align:left; color:green;">
+                                    <input type="button" value="Upload" id="btnupload" onclick="UploadFile()" class="btn"
+                                           style="height:30px; border-radius:3px; border:1px solid gray; background-color:white; width:100px; font-size:11px ;text-align:center" />
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control" asp-for="Attachment" id="attach" />
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <!--Creation Date -->
-            <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
-            <!--Creator-->
-            <input asp-for="Creator" type="hidden" class="form-control custominput" />
-
-            <!--ModificationDate -->
-            <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
-            <!--Modifier-->
-            <input asp-for="Modifier" type="hidden" class="form-control custominput" />
             <div class="col-xs-12 form-group" style="margin-top:15px; text-align:right ">
                 <input type="submit" name="buttonId" value="Save" id="btn1" class="btn btn-primary btn" />
+                <!-- <input type="submit" name="buttonId" value="Save and Next Item" id="btn2" class="btn btn-primary btn" /> -->
                 <input type="submit" name="buttonId" value="Cancel" id="btn3" class="btn btn-danger btn" />
             </div>
-            <!--ModificationDate -->
-            <input asp-for="TransmittalNumber" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="TransmittalDate" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Consultant" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Client" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="IssuedBy" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Reciever" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="CD" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Print" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Email" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Other" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Original" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="File" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="RemarksTransmittal" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="NumberofCopies" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Print" type="hidden" class="form-control custominput" />
-            <!--ModificationDate -->
-            <input asp-for="Print" type="hidden" class="form-control custominput" />
 
         </form>
     </div>
@@ -423,7 +409,86 @@
 
 </div>
 @section DMSScripts{
+    <script>
+        var UploadFile = function () {
+            var data = new FormData;
+            var files = $("#myfile").get(0).files;
+            projectcode = $("#pcode").val();
+            cnumber = $("#client-number").val();
+            rev = $("#revision").val();
+            if (cnumber == null || rev == null)
+            {
+                alert("select client number and Revision then try to upload attachment");
+            }
 
+            if (files.length == 0) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('لطفا یک فایل انتخاب کنید');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            var newname = cnumber + "-" + rev + "." + files[0].name.split('.').pop();
+            data.append("name", newname);
+            data.append("projectcode", projectcode);
+            data.append("path", "upload\\RevisionAttachments\\");
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray', files[i]);
+
+            }
+            if (projectcode == null) {
+                alert("select project code");
+
+            }
+
+            if (files[0].size >= 10000000) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('حجم فایل بیش از 10 مگا بایت است');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            $.ajax({
+                    type: "post",
+                    url: '@Url.Action("UploadRevAttach", "Revision", new { area = "DMSArea"})',
+                    data: data,
+                    contentType: false,
+                    processData: false
+
+            }).done(function (result) {
+                    if (result.status == "success") {
+
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text(newname + " File attachment was successful");
+                        $("#spnmessage").css("color", "green");
+                        $("#attach").val(result.newfilename);
+
+
+                    }
+
+                    else if (result.status == "duplicate") {
+                        $("#spnmessage").removeClass('hidden');
+                        $("#spnmessage").text("Duplicate file name " +newname);
+                        $("#spnmessage").css("color", "red");
+                    }
+                    else if (result.status == "badsize") {
+                        $("#spnmessage").removeClass('hidden');
+                        $("#spnmessage").text('سایز فایل باید کمتر از 5 مگا بایت و بیشتر از 0 کیلوبایت باشد');
+                        $("#spnmessage").css("color", "red");
+                    }
+
+            }).fail(function (result) {
+                    if (result.status != "success") {
+                        $("#spnmessage").css("color", "red");
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text("در حین آپلود اشکالی بوجود آمد.");
+                    }
+            });
+
+
+
+        }
+    </script>
     <script>
         var pcode = $("#pcode").val().trim();
         var ptitle = $("#ptitle").val().trim();
@@ -457,7 +522,18 @@
         // Attach an event listener to the client number selection field
         $('#client-number').change(function () {
             var clientNumber = $(this).val();
+            var pcode = $("#pcode").val();
+            $.ajax({
+                url: "/DMSArea/Revision/RevHistoryGrid",
+                data: { projectcode: pcode, clientnumber: clientNumber },
+                dataType: "json",
+                success: function (filteredData) {
 
+                    grid.dataSource.data(filteredData);
+                    grid.dataSource.total(filteredData.length);
+                    grid.refresh();
+                }
+            });
             // Send an AJAX request to the server
             $.ajax({
                 url: "/DMSArea/Revision/GetDocTitle",
@@ -488,7 +564,62 @@
             });
         });
     </script>
+    <script>
 
+        var grid = $("#grid").kendoGrid({
+            dataSource: {
+
+                pageSize: 5
+            },
+
+            height: 300,
+            filterable: true,
+            groupable: true,
+            reorderable: true,
+            columnMenu: true,
+            sortable: true,
+            resizable: true,
+            filterable: true,
+            toolbar: ["search"],
+            excel: {
+                allPages: true
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            dataBound: function (e) {
+                var dataElement = $(e.sender.element).find(".k-grid-content");
+                var fakeScroll = document.getElementById("dummyScroll");
+                fakeScroll.style.width = dataElement.children(0).width() + "px";
+
+                dataElement.scroll(function () {
+                    $("#dummyScrollWrapper").scrollLeft(dataElement.scrollLeft());
+                });
+                $("#dummyScrollWrapper").scroll(function () {
+                    dataElement.scrollLeft($("#dummyScrollWrapper").scrollLeft());
+                });
+            },
+            columns: [
+                {
+                    field: "revision",
+                    width: 150,
+                    title: "Revision"
+                }, {
+                    field: "commentsheetStatus",
+                    width: 150,
+                    title: "commentsheet Status"
+                }, {
+                    field: "replysheetStatus",
+                    width: 150,
+                    title: "ReplysheetStatus"
+
+                },
+            ]
+
+        }).data("kendoGrid");
+    </script>
     <script>
         function ck1(val) {
             document.getElementById("check1").value = document.getElementById("check1").checked;
@@ -499,4 +630,3 @@
         }
     </script>
 }
-

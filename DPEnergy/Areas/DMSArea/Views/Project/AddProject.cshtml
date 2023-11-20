@@ -1,303 +1,304 @@
 ﻿@model DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation.D_ProjectViewModel
+@using DPEnergy.DataModelLayer.Entities;
 @using DPEnergy.CommonLayer.PublicClass
 @{
     ViewData["Title"] = "AddProject";
-    
-    List<D_ProjectManager> ListProjectManager = ViewBag.projectmanagerlist;
+
+    List<P_Personel> ListProjectManager = ViewBag.projectmanagerlist;
     List<D_ProjectType> ListProjectType = ViewBag.projecttypelist;
     List<D_Contractor> ListContractor = ViewBag.contractorlist;
 }
 }
-    <div class="content">
+<div class="content">
 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
-                <li class="breadcrumb-item"><a href=" @Url.Action("Index", "Project") ">Project</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add Project</li>
-            </ol>
-        </nav>
-        <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
-            <span style="font-weight:bold;">
-                <i class="glyphicon glyphicon-list"></i>
-                Add New Project
-            </span>
-        </div>
-
-        <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
-            <form asp-controller="Project" asp-action="AddProject" method="post" enctype="multipart/form-data">
-
-                <div class="col-md-6 col-xs-12">
-
-
-                    <!--ProjectCode-->
-                    <div>
-                        <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="ProjectCode" type="text" class="form-control custominput" placeholder="Project Code ..." autocomplete="off" />
-                            <span asp-validation-for="ProjectCode" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--Title-->
-                    <div>
-                        <label asp-for="Title" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="Title" type="text" class="form-control custominput" placeholder="Title ..." autocomplete="off" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--PersianTitle-->
-                    <div>
-                        <label asp-for="PersianTitle" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="PersianTitle" type="text" class="form-control custominput" placeholder="PersianTitle ..." autocomplete="off" />
-                            <span asp-validation-for="PersianTitle" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--Project Manager-->
-                    <div>
-                        <label asp-for="ProjectManager" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="ProjectManager" asp-items="@(new SelectList(ListProjectManager,"ProjectManager","ProjectManager"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
-                                <option value="" selected disabled hidden style="direction: ltr">Select Project Manager</option>
-                            </select>
-                            <div>   </div>
-                        </div>
-
-                    </div>
-                    <!--ProjectType-->
-                    <div>
-                        <label asp-for="ProjectType" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="ProjectType" asp-items="@(new SelectList(ListProjectType,"ProjectType","ProjectType"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
-                                <option value="" selected disabled hidden style="direction: ltr">Select Project Type</option>
-                            </select>
-                            <div>   </div>
-                        </div>
-
-                    </div>
-                    <!--ContractorCompany-->
-                    <div>
-                        <label asp-for="Contractor" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="Contractor" asp-items="@(new SelectList(ListContractor,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
-                                <option value="" selected disabled hidden style="direction: ltr">Select Contractor Company </option>
-                            </select>
-                            <div>   </div>
-                        </div>
-
-                    </div>
-
-                    <!--ContractorName-->
-                    <div>
-                        <label asp-for="ContractorName" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="ContractorName" asp-items="@(new SelectList(ListContractor,"ManagerName","ManagerName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
-                                <option value="" selected disabled hidden style="direction: ltr">Select Contractor Name</option>
-                            </select>
-                            <div>   </div>
-                        </div>
-
-                    </div>
-                    <!--Company-->
-                    <div>
-                        <label asp-for="Company" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="Company" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
-                                <option value="" selected disabled hidden style="direction: ltr">   Select company</option>
-                                <option data-tokens="Daryapala Energy">  Daryapala Energy</option>
-
-                            </select>
-                            <div>   </div>
-                        </div>
-
-                    </div>
-                   
-
-                </div>
-
-                <div class="col-md-6 col-xs-12">
-                    <!--ProjectCost-->
-                    <div>
-                        <label asp-for="ProjectCost" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="ProjectCost" type="text" class="form-control custominput" placeholder="Project Cost ..." autocomplete="off" />
-                            <span asp-validation-for="ProjectCost" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--ContractDate-->
-                    <div>
-                        <label asp-for="ContractDate" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="ContractDate" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" asp-format="{0:yyyy-MM-dd}" />
-                            <span asp-validation-for="ContractDate" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--StartDate-->
-                    <div>
-                        <label asp-for="StartDate" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="StartDate" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" asp-format="{0:yyyy-MM-dd}" />
-                            <span asp-validation-for="ProjectType" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--CompletionDate-->
-                    <div>
-                        <label asp-for="CompletionDate" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="CompletionDate" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" asp-format="{0:yyyy-MM-dd}" />
-                            <span asp-validation-for="CompletionDate" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--Users-->
-                    <div>
-                        <label asp-for="Users" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="Users" type="text" class="form-control custominput" placeholder="Users ..." autocomplete="off" />
-                            <span asp-validation-for="Users" class="text-danger"></span>
-                        </div>
-
-                    </div>
-                    <!--Activation-->
-                    <div>
-                        <label asp-for="Activation" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="Activation" class="form-control selectpicker custominput" id="select-Activation" data-live-search="true" style="direction: ltr">
-                                <option value="" selected disabled hidden style="direction: ltr">   Select Activation</option>
-                                <option data-tokens="Active">  Active</option>
-                                <option data-tokens="Deactive">  Deactive</option>
-                            </select>
-                            <div>   </div>
-                        </div>
-
-                    </div>
-                    <!--Order-->
-                    <div>
-                        <label asp-for="Order" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <input asp-for="Order" type="text" class="form-control custominput" placeholder="Order ..." autocomplete="off" />
-                            <span asp-validation-for="Order" class="text-danger"></span>
-                        </div>
-
-                    </div>
-
-                    <!--StartUpRequest-->
-                    <div>
-                        <label asp-for="StartUpRequest" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="StartUpRequest" class="form-control selectpicker custominput" id="select-StartUpRequest" data-live-search="true" style="direction: ltr">
-                                <option value="" selected disabled hidden style="direction: ltr">   Select StartUpRequest</option>
-                                <option data-tokens="موقت">  موقت</option>
-                                <option data-tokens="دائم">  دائم</option>
-                            </select>
-                        </div>
-                        <div>   </div>
-
-                    </div>
-
-                    <!--Status-->
-                    <div>
-                        <label asp-for="Status" class="control-label col-md-3 col-xs-12"></label>
-                        <div class="col-md-9 col-xs-12">
-                            <select asp-for="Status" class="form-control selectpicker custominput" id="select-Company" data-live-search="true">
-                                <option value="" selected disabled hidden style="direction: ltr">   Select Status</option>
-                                <option data-tokens="قطعی">  قطعی</option>
-                                <option data-tokens="خاتمه یافته">  خاتمه یافته</option>
-                                <option data-tokens="کاریابی"> کاریابی</option>
-                            </select>
-                            <div>   </div>
-                        </div>
-
-                    </div>
-                    <!--ServiceType-->
-                    <div>
-                        <label class="control-label col-md-3 col-xs-12">Service Type</label>
-                        <div class="col-md-9 col-xs-12">
-                            <div class="form-check">
-                                <input asp-for="EmkanSanji" class="form-check-input" type="checkbox" value="false" id="check1" onchange="ck1(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault">امکان سنجی و طراحی مفهومی</label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="TarahiPaye" class="form-check-input" type="checkbox" value="false" id="check2" onchange="ck2(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> طراحی پایه </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="TarahiTafzili" class="form-check-input" type="checkbox" value="false" id="check3" onchange="ck3(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> طراحی تفضیلی </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="KhadamatKharid" class="form-check-input" type="checkbox" value="false" id="check4" onchange="ck4(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> خدمات خرید </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="Kharid" class="form-check-input" type="checkbox" value="false" id="check5" onchange="ck5(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault">  خرید </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="TahieAsnadMonaqese" class="form-check-input" type="checkbox" value="false" id="check6" onchange="ck6(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault">  تهیه اسناد مناقضه </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="NezaratAlie" class="form-check-input" type="checkbox" value="false" id="check7" onchange="ck7(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault">  نظارت عالیه </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="Karagahi" class="form-check-input" type="checkbox" value="false" id="check8" onchange="ck8(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault">  کارآگاهی </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="EPC" class="form-check-input" type="checkbox" value="false" id="check9" onchange="ck9(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> EPC </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="MTO" class="form-check-input" type="checkbox" value="false" id="check10" onchange="ck10(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> MTO </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="MC" class="form-check-input" type="checkbox" value="false" id="check11" onchange="ck11(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> MC </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="Gheire" class="form-check-input" type="checkbox" value="false" id="check12" onchange="ck12(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> غیره </label>
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="BaravardHazine" class="form-check-input" type="checkbox" value="false" id="check13" onchange="ck13(this.value)" />
-                                <label class="form-check-label" for="flexCheckDefault"> برآورد هزینه </label>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <!--Creation Date -->
-                    <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
-                    <!--Creator-->
-                    <input asp-for="Creator" type="hidden" class="form-control custominput" />
-
-                    <!--ModificationDate -->
-                    <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
-                    <!--Modifier-->
-                    <input asp-for="Modifier" type="hidden" class="form-control custominput" />
-
-
-                    <div class="col-xs-12 form-group" style="margin-top:15px;">
-                        <input type="submit" style="border:1px solid gray; border-radius:3px;"
-                               value="Submit" class="btn pull-right" />
-                    </div>
-                </div>
-
-            </form>
-        </div>
-      
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Basic Information</a></li>
+            <li class="breadcrumb-item"><a href=" @Url.Action("Index", "Project") ">Project</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Project</li>
+        </ol>
+    </nav>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            Add New Project
+        </span>
     </div>
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
+        <form asp-controller="Project" asp-action="AddProject" method="post" enctype="multipart/form-data">
+
+            <div class="col-md-6 col-xs-12">
+
+
+                <!--ProjectCode-->
+                <div>
+                    <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ProjectCode" type="text" class="form-control custominput" placeholder="Project Code ..." autocomplete="off" />
+                        <span asp-validation-for="ProjectCode" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Title-->
+                <div>
+                    <label asp-for="Title" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Title" type="text" class="form-control custominput" placeholder="Title ..." autocomplete="off" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--PersianTitle-->
+                <div>
+                    <label asp-for="PersianTitle" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="PersianTitle" type="text" class="form-control custominput" placeholder="PersianTitle ..." autocomplete="off" />
+                        <span asp-validation-for="PersianTitle" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Project Manager-->
+                <div>
+                    <label asp-for="ProjectManager" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ProjectManager" asp-items="@(new SelectList(from x in ListProjectManager select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Project Manager</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--ProjectType-->
+                <div>
+                    <label asp-for="ProjectType" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ProjectType" asp-items="@(new SelectList(ListProjectType,"ProjectType","ProjectType"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Project Type</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--ContractorCompany-->
+                <div>
+                    <label asp-for="Contractor" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Contractor" asp-items="@(new SelectList(ListContractor,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Contractor Company </option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+
+                <!--ContractorName-->
+                <div>
+                    <label asp-for="ContractorName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ContractorName" asp-items="@(new SelectList(ListContractor,"ManagerName","ManagerName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Contractor Name</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--Company-->
+                <div>
+                    <label asp-for="Company" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Company" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">   Select company</option>
+                            <option data-tokens="Daryapala Energy">  Daryapala Energy</option>
+
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+                <!--ProjectCost-->
+                <div>
+                    <label asp-for="ProjectCost" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ProjectCost" type="text" class="form-control custominput" placeholder="Project Cost ..." autocomplete="off" />
+                        <span asp-validation-for="ProjectCost" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--ContractDate-->
+                <div>
+                    <label asp-for="ContractDate" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ContractDate" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" asp-format="{0:yyyy-MM-dd}" />
+                        <span asp-validation-for="ContractDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--StartDate-->
+                <div>
+                    <label asp-for="StartDate" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="StartDate" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" asp-format="{0:yyyy-MM-dd}" />
+                        <span asp-validation-for="ProjectType" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--CompletionDate-->
+                <div>
+                    <label asp-for="CompletionDate" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CompletionDate" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" asp-format="{0:yyyy-MM-dd}" />
+                        <span asp-validation-for="CompletionDate" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Users-->
+                <div>
+                    <label asp-for="Users" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Users" type="text" class="form-control custominput" placeholder="Users ..." autocomplete="off" />
+                        <span asp-validation-for="Users" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <!--Activation-->
+                <div>
+                    <label asp-for="Activation" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Activation" class="form-control selectpicker custominput" id="select-Activation" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">   Select Activation</option>
+                            <option data-tokens="Active">  Active</option>
+                            <option data-tokens="Deactive">  Deactive</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--Order-->
+                <div>
+                    <label asp-for="Order" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="Order" type="text" class="form-control custominput" placeholder="Order ..." autocomplete="off" />
+                        <span asp-validation-for="Order" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <!--StartUpRequest-->
+                <div>
+                    <label asp-for="StartUpRequest" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="StartUpRequest" class="form-control selectpicker custominput" id="select-StartUpRequest" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">   Select StartUpRequest</option>
+                            <option data-tokens="موقت">  موقت</option>
+                            <option data-tokens="دائم">  دائم</option>
+                        </select>
+                    </div>
+                    <div>   </div>
+
+                </div>
+
+                <!--Status-->
+                <div>
+                    <label asp-for="Status" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="Status" class="form-control selectpicker custominput" id="select-Company" data-live-search="true">
+                            <option value="" selected disabled hidden style="direction: ltr">   Select Status</option>
+                            <option data-tokens="قطعی">  قطعی</option>
+                            <option data-tokens="خاتمه یافته">  خاتمه یافته</option>
+                            <option data-tokens="کاریابی"> کاریابی</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+
+                </div>
+                <!--ServiceType-->
+                <div>
+                    <label class="control-label col-md-3 col-xs-12">Service Type</label>
+                    <div class="col-md-9 col-xs-12">
+                        <div class="form-check">
+                            <input asp-for="EmkanSanji" class="form-check-input" type="checkbox" value="false" id="check1" onchange="ck1(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault">امکان سنجی و طراحی مفهومی</label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="TarahiPaye" class="form-check-input" type="checkbox" value="false" id="check2" onchange="ck2(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> طراحی پایه </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="TarahiTafzili" class="form-check-input" type="checkbox" value="false" id="check3" onchange="ck3(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> طراحی تفضیلی </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="KhadamatKharid" class="form-check-input" type="checkbox" value="false" id="check4" onchange="ck4(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> خدمات خرید </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="Kharid" class="form-check-input" type="checkbox" value="false" id="check5" onchange="ck5(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault">  خرید </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="TahieAsnadMonaqese" class="form-check-input" type="checkbox" value="false" id="check6" onchange="ck6(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault">  تهیه اسناد مناقضه </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="NezaratAlie" class="form-check-input" type="checkbox" value="false" id="check7" onchange="ck7(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault">  نظارت عالیه </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="Karagahi" class="form-check-input" type="checkbox" value="false" id="check8" onchange="ck8(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault">  کارآگاهی </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="EPC" class="form-check-input" type="checkbox" value="false" id="check9" onchange="ck9(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> EPC </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="MTO" class="form-check-input" type="checkbox" value="false" id="check10" onchange="ck10(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> MTO </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="MC" class="form-check-input" type="checkbox" value="false" id="check11" onchange="ck11(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> MC </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="Gheire" class="form-check-input" type="checkbox" value="false" id="check12" onchange="ck12(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> غیره </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="BaravardHazine" class="form-check-input" type="checkbox" value="false" id="check13" onchange="ck13(this.value)" />
+                            <label class="form-check-label" for="flexCheckDefault"> برآورد هزینه </label>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--Creation Date -->
+                <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+                <!--Creator-->
+                <input asp-for="Creator" type="hidden" class="form-control custominput" />
+
+                <!--ModificationDate -->
+                <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+                <!--Modifier-->
+                <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="Submit" class="btn pull-right" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
 
 
 @section DMSScripts{

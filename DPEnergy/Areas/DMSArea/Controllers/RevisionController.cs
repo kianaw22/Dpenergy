@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.Services;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.DMS;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -20,11 +22,25 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         private readonly IUnitOfWork _context;
         private readonly IMapper _mapper;
         private readonly UserManager<A_UserManager> _userManager;
-        public RevisionController(IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager)
+        private readonly IUploadFiles _upload;
+        public RevisionController(IUploadFiles upload,IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager)
         {
             _context = uow;
             _mapper = mapper;
             _userManager = userManager;
+            _upload = upload;
+        }
+        public IActionResult UploadRevAttach(IEnumerable<IFormFile> filearray, string path, string projectcode
+            , string name )
+        {
+            var result = _upload.UploadRevAttchment(filearray, path, projectcode , name);
+            if (result == true)
+            {
+                return Json(new { status = "duplicate" });
+            }
+
+            return Json(new { status = "success"});
+
         }
         public IActionResult Index()
         {
@@ -209,6 +225,11 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             };
            
             return Json(a);
+        }
+        public IActionResult RevHistoryGrid(string projectcode , string clientnumber)
+        {
+            var model = _context.RevisionUW.Get(x => x.ProjectCode == projectcode && x.ClientNumber == clientnumber);
+            return Json(model);
         }
         public void FillCombo()
         {

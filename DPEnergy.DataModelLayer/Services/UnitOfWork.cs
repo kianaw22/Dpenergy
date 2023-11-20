@@ -626,7 +626,7 @@ namespace DPEnergy.DataModelLayer.Services
             }
         }
         //پرسنل
-        public GenericClass<P_Personel> ProjectUW
+        public GenericClass<P_Personel> PersonelUW
         {
             //فقط خواندنی    
             get

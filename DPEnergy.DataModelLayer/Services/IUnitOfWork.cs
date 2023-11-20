@@ -16,7 +16,7 @@ namespace DPEnergy.DataModelLayer.Services
     {
         public GenericClass<U_ExLetterAttachments> LetterAttachmentsUW { get; }
         public GenericClass<A_UserManager> UserManagerUW { get; }
-        public GenericClass<P_Personel> ProjectUW { get; }
+        public GenericClass<P_Personel> PersonelUW { get; }
         public GenericClass<P_City> CityManagerUW { get; }
         public GenericClass<P_Department> DepartmentManagerUW { get; }
         public GenericClass<P_Company> CompanyManagerUW { get; }
