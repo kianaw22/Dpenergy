@@ -90,6 +90,7 @@
                         <select asp-for="DpDicipline" asp-items="@(new SelectList(ListDpDicipline,"Dicipline","Dicipline"))" class="form-control selectpicker custominput " data-live-search="true" style="direction: ltr; text-align:left">
                             <option value="" selected disabled hidden style="direction: ltr">Select DpDicipline</option>
                         </select>
+                        <span asp-validation-for="DpDicipline" class="text-danger"></span>
                         <div>   </div>
 
                     </div>
@@ -102,6 +103,7 @@
                         <select asp-for="Unit" asp-items="@(new SelectList(ListUnit,"Unit","Unit"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Unit</option>
                         </select>
+                        <span asp-validation-for="Unit" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -114,6 +116,7 @@
                         <select asp-for="Phase" asp-items="@(new SelectList(ListPhase,"Phase","Phase"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Phase</option>
                         </select>
+                        <span asp-validation-for="Phase" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -125,6 +128,7 @@
                         <select asp-for="DocumentType" asp-items="@(new SelectList(ListDType,"TypesOfFile","TypesOfFile"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select DocumentType </option>
                         </select>
+                        <span asp-validation-for="DocumentType" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -144,9 +148,12 @@
                     <label asp-for="ClientDicipline" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="ClientDicipline" asp-items="@(new SelectList(ListClientDicipline,"Dicipline","Dicipline"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
-                            <option value="" selected disabled hidden style="direction: ltr">Select DpDicipline</option>
+                            <option value="" selected disabled hidden style="direction: ltr">Select ClientDicipline</option>
                         </select>
+                        <span asp-validation-for="ClientDicipline" class="text-danger"></span>
                         <div>   </div>
+
+
                     </div>
 
                 </div>
@@ -158,6 +165,7 @@
                             <option value="" selected disabled hidden style="direction: ltr">Select Classification</option>
                         </select>
                         <div>   </div>
+                        <span asp-validation-for="Classification" class="text-danger"></span>
                     </div>
 
                 </div>
@@ -336,7 +344,9 @@
     <script>
         var pcode = $("#pcode").val().trim();
         var ptitle = $("#ptitle").val().trim();
-        $("#proj").val(pcode + "-" + ptitle);
+        $("#proj").val(pcode);
+        $("#DocumentTitle").val(ptitle);
+      
 
     </script>
 

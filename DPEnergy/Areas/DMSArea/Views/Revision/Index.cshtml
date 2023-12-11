@@ -92,6 +92,7 @@
                     data: dpjson,
                     pageSize: 5
                 },
+
                 height: 550,
                 filterable: true,
                 groupable: true,
@@ -124,6 +125,9 @@
                 columns: [{
                     field: "projectCode",
                     width: 150,
+                    filterable: {
+                        multi: true
+                    },
                     title: "ProjectCode"
                 }, {
                      field: "dpNumber",
@@ -131,7 +135,7 @@
                      title: "DpNumber"
                 }, {
                     field: "transmittalNumber",
-                    width: 150,
+                    width: 200,
                     title: "Transmittal Number"
                 }, {
                     field: "clientNumber ",
@@ -140,6 +144,9 @@
                 }, {
                     field: "revision",
                     width: 150,
+                    filterable: {
+                          multi: true
+                    },
                     title: "Revision"
                 }, {
                     field: "stageName",
@@ -163,7 +170,7 @@
                      title: "CheckList"
                 }, {
                     field: "incomingTransmittalCheck",
-                    width: 150,
+                    width: 200,
                     title: "Incoming Transmittal Check"
 
                 }, {
@@ -178,17 +185,17 @@
 
                 }, {
                     field: "commentsheetNo",
-                    width: 150,
+                    width: 200,
                     title: "Commentsheet No"
 
                 }, {
                     field: "commentsheetdate",
-                    width: 150,
+                    width:200,
                     title: "Commentsheet date"
 
                 }, {
                     field: "commentsheetStatus",
-                    width: 150,
+                    width: 200,
                     title: "Commentsheet Status"
 
                 }, {
@@ -198,27 +205,37 @@
 
                 }, {
                     field: "replysheetDate",
-                    width: 150,
+                    width: 200,
                     title: "Replysheet Date"
 
                 }, {
                     field: "replysheetStatus",
-                    width: 150,
+                    width: 200,
                     title: "Replysheet Status"
 
                 }, {
                     field: "returnedRepltysheetNo",
-                    width: 150,
+                    width: 200,
                     title: "ReturnedRepltysheet No"
 
                 }, {
                     field: "returnedReplysheetDate",
-                    width: 150,
+                    width: 200,
                     title: "ReturnedReplysheet Date"
+
+                },  {
+                     field: "returnedReplysheetStatus",
+                      width: 200,
+                     title: "ReturnedReplysheet Status"
+
+                }, {
+                     field: "sentType",
+                      width: 150,
+                      title: "Sent Type"
 
                 }, {
                     field: "returnedReplysheetStatus",
-                    width: 150,
+                    width: 200,
                     title: "ReturnedReplysheet Status"
 
                 }, {
@@ -247,6 +264,18 @@
                    title: "Prepared By"
 
                 }, {
+                        field: "attachment",
+                        width: 200,
+                        title: "Attachment",
+                        template: function (dataItem) {
+                          
+                            if (dataItem.attachment != null) {
+                                return "<a href=/" + dataItem.attachment + "  download =download '> attachment </a > ";
+                            } else {
+                                return ''; 
+                            }
+                        }
+                },{
                     field: "creator",
                     width: 100,
                     title: "Creator"
@@ -260,7 +289,7 @@
                      title: "Modifier"
                 }, {
                      field: "modificationDate",
-                     width: 150,
+                     width: 200,
                      title: "Modification Date"
                 },
 

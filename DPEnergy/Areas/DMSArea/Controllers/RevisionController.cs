@@ -34,12 +34,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             , string name )
         {
             var result = _upload.UploadRevAttchment(filearray, path, projectcode , name);
-            if (result == true)
+            if (result.Item1 == true)
             {
                 return Json(new { status = "duplicate" });
             }
 
-            return Json(new { status = "success"});
+            return Json(new { status = "success" , mypath =   result.Item2.Replace("\\" , "/")});
 
         }
         public IActionResult Index()
@@ -59,18 +59,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
          
             var projcode = _context.projectManagerUW.GetById(ProjectID).ProjectCode;
             var projtitle = _context.projectManagerUW.GetById(ProjectID).Title;
-            List<D_CommentSheetStage> ListCsheetStage = _context.CommentSheetStageManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.csheetstage = ListCsheetStage;
-            List<D_ReplySheetStage> ListRsheetStage = _context.ReplySheetStageManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.rsheetstage = ListRsheetStage;
-            List<D_RetReplysheetStage> ListRetsheetStage = _context.RetReplySheetStageUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.retsheetstage = ListRetsheetStage;
-            List<D_RevisionCode> ListRevisionCode = _context.RevisionCodeUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.revisionCodelist = ListRevisionCode;
-            List<D_MDR> ListMDR = _context.MDRManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.mdrlist = ListMDR;
-            List<D_Progress> ListProgress = _context.ProgressManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.progresslist = ListProgress;
+            FillRevcombo(projcode);
             var model = new D_RevisionViewModel
             {
                 ProjectTitle= projtitle,
@@ -83,8 +72,9 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddRevision(D_RevisionViewModel model, string buttonId)
         {
-            List<D_MDR> ListMDR = _context.MDRManagerUW.Get().ToList();
-            ViewBag.mdrlist = ListMDR;
+            var projectcode = model.ProjectCode;
+            FillRevcombo(projectcode);
+
             if (buttonId == "Cancel")
             {
                 return RedirectToAction("Index");
@@ -115,24 +105,24 @@ namespace DPEnergy.Areas.DMSArea.Controllers
 
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
-
+           
             var rev = _context.RevisionUW.GetById(Id);
             var projcode = rev.ProjectCode;
-            var projtitle = _context.projectManagerUW.Get(x => x.ProjectCode == projcode).ToList()[0].Title;
-            List<D_CommentSheetStage> ListCsheetStage = _context.CommentSheetStageManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.csheetstage = ListCsheetStage;
-            List<D_ReplySheetStage> ListRsheetStage = _context.ReplySheetStageManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.rsheetstage = ListRsheetStage;
-            List<D_RetReplysheetStage> ListRetsheetStage = _context.RetReplySheetStageUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.retsheetstage = ListRetsheetStage;
-            List<D_RevisionCode> ListRevisionCode = _context.RevisionCodeUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.revisionCodelist = ListRevisionCode;
-            List<D_MDR> ListMDR = _context.MDRManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.mdrlist = ListMDR;
-            List<D_Progress> ListProgress = _context.ProgressManagerUW.Get(x => x.ProjectCode == projcode).ToList();
-            ViewBag.progresslist = ListProgress;
+            string projtitle = rev.ProjectTitle;
+            FillRevcombo(projcode);
+            var project = _context.projectManagerUW.Get(x => x.ProjectCode == projcode).ToList();
+            if (project.Any())
+            {
+               projtitle = project[0].Title;
+            }
+            else
+            {
+                var errorMessage = "No project found for the specified project code.";
+                return View("~/Views/Shared/Error.cshtml" ,errorMessage );
+            }
             rev.ModificationDate = DateTime.Now;
             rev.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             var maprev = _mapper.Map<D_RevisionViewModel>(rev);
@@ -145,6 +135,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult EditRevision(D_RevisionViewModel model, string buttonId)
         {
+           var projcode = model.ProjectCode;
+           
             if (buttonId == "Cancel")
             {
                 return RedirectToAction("Index");
@@ -156,6 +148,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                 _context.save();
                 return RedirectToAction("Index");
             }
+            FillRevcombo(projcode);
             return View(model);
         }
         [HttpGet]
@@ -169,7 +162,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             
             if (proj == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No project found for the selected row id.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             if ( proj.TransmittalNumber != null)
             {
@@ -183,7 +177,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No project id found to delete";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             _context.RevisionUW.DeleteById(Id);
             _context.save();
@@ -194,7 +189,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         {
             if (stage == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "stage cannot be null";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var data = _context.ProgressManagerUW.Get(x => x.Stage == stage).ToList()[0].Percent;
             return Json(data);
@@ -236,6 +232,21 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             List<D_Project> ListProject = _context.projectManagerUW.Get().ToList();
             ViewBag.projectlist = ListProject;
             
+        }
+        public void FillRevcombo(string projcode)
+        {
+            List<D_CommentSheetStage> ListCsheetStage = _context.CommentSheetStageManagerUW.Get(x => x.ProjectCode == projcode).ToList();
+            ViewBag.csheetstage = ListCsheetStage;
+            List<D_ReplySheetStage> ListRsheetStage = _context.ReplySheetStageManagerUW.Get(x => x.ProjectCode == projcode).ToList();
+            ViewBag.rsheetstage = ListRsheetStage;
+            List<D_RetReplysheetStage> ListRetsheetStage = _context.RetReplySheetStageUW.Get(x => x.ProjectCode == projcode).ToList();
+            ViewBag.retsheetstage = ListRetsheetStage;
+            List<D_RevisionCode> ListRevisionCode = _context.RevisionCodeUW.Get(x => x.ProjectCode == projcode).ToList();
+            ViewBag.revisionCodelist = ListRevisionCode;
+            List<D_MDR> ListMDR = _context.MDRManagerUW.Get(x => x.ProjectCode == projcode).ToList();
+            ViewBag.mdrlist = ListMDR;
+            List<D_Progress> ListProgress = _context.ProgressManagerUW.Get(x => x.ProjectCode == projcode).ToList();
+            ViewBag.progresslist = ListProgress;
         }
     }
 }

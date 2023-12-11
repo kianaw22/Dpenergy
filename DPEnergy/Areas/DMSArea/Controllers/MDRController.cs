@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.DataModelLayer.Entities;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
@@ -59,38 +60,29 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         public IActionResult AddMDR(string ProjectID)
         {
             FillCombo();
-            
-                var projcode = _context.projectManagerUW.GetById(ProjectID).ProjectCode;
-                var projtitle = _context.projectManagerUW.GetById(ProjectID).Title;
 
-
-                List<D_Unit> ListUnit = _context.UnitManagerUW.Get().Where(x => x.ProjectCode == projcode).ToList();
-                ViewBag.listunit = ListUnit;
-                List<D_ClientDicipline> ListClientDicipline = _context.ClientDiciplineManagerUW.Get().Where(x => x.ProjectCode == projcode).ToList();
-                ViewBag.listclientdicipline = ListClientDicipline;
-                List<D_Classification> ListClass = _context.ClassificationManagerUW.Get().Where(x => x.Project == projcode).ToList();
-                ViewBag.listclass = ListClass;
-                List<D_AdditionalWork> ListAddW = _context.AdditionalWorkManagerUW.Get().Where(x => x.ProjectCode == projcode).ToList();
-                ViewBag.listaddw = ListAddW;
-
+   
+            var projcode = _context.projectManagerUW.GetById(ProjectID).ProjectCode;
+            var projtitle = _context.projectManagerUW.GetById(ProjectID).Title;
+            FillMDRCombo(projcode);
                 var model = new D_MDRViewModel
                 {
                     ProjectTitle = projtitle,
                     ProjectCode = projcode,
                 };
                 var mapproj = _mapper.Map<D_MDRViewModel>(model);
-         
-            return View(model);
-            
-            
+            return View(model);     
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddMDR(D_MDRViewModel model)
         {
+
          
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.CreationDate = DateTime.Now;
                 model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 _context.MDRManagerUW.Create(_mapper.Map<D_MDR>(model));
@@ -98,6 +90,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
 
                 return RedirectToAction("Index");
             }
+            FillMDRCombo(model.ProjectCode);
+            FillCombo();
             return View(model);
         }
         [HttpGet]
@@ -105,21 +99,17 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         {
            
             FillCombo();
+            
+
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage); 
             }
             
             var proj = _context.MDRManagerUW.GetById(Id);
+            FillMDRCombo(proj.ProjectCode);
             var projtitle = _context.projectManagerUW.Get().Where(x => x.ProjectCode == proj.ProjectCode).ToList()[0].Title;
-            List<D_Unit> ListUnit = _context.UnitManagerUW.Get().Where(x => x.ProjectCode == proj.ProjectCode).ToList();
-            ViewBag.listunit = ListUnit;
-            List<D_ClientDicipline> ListClientDicipline = _context.ClientDiciplineManagerUW.Get().Where(x => x.ProjectCode == proj.ProjectCode).ToList();
-            ViewBag.listclientdicipline = ListClientDicipline;
-            List<D_Classification> ListClass = _context.ClassificationManagerUW.Get().Where(x => x.Project == proj.ProjectCode).ToList();
-            ViewBag.listclass = ListClass;
-            List<D_AdditionalWork> ListAddW = _context.AdditionalWorkManagerUW.Get().Where(x => x.ProjectCode == proj.ProjectCode).ToList();
-            ViewBag.listaddw = ListAddW;
             proj.ModificationDate = DateTime.Now;
             proj.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             var mapproj = _mapper.Map<D_MDRViewModel>(proj);
@@ -147,7 +137,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row to delete.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.MDRManagerUW.GetById(Id);
             var rev = _context.RevisionUW.Get(x => x.ProjectCode == proj.ProjectCode && x.ClientNumber == proj.ClientNumber);
@@ -157,7 +148,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             }
             if (proj == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No project found for the selected id.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             return PartialView("_deleteMDR", proj);
         }
@@ -167,7 +159,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row to delete.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             _context.MDRManagerUW.DeleteById(Id);
             _context.save();
@@ -181,10 +174,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                 return RedirectToAction("ErrorView", "Home");
             }
 
-           // var a = _context.MDRManagerUW.GetById(ID);
-
-            var model = _context.MDRManagerUW.Get(x => x.Id == ID).ToList()[0];
-           
+            var model = _context.MDRManagerUW.Get(x => x.Id == ID).ToList()[0]; 
             StiReport report = new StiReport();
             report["ClientNumber"] = model.ClientNumber;
             report.Load(StiNetCoreHelper.MapPath(this, "wwwroot/reports/mdr.mrt"));
@@ -192,10 +182,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         }
         public void FillCombo()
         {
-           // List<D_Project> ListProject = _context.projectManagerUW.Get().ToList();
-            
-           
-
+          
             List<D_Phase> ListPhase = _context.PhaseManagerUW.Get().ToList();
             ViewBag.phaselist = ListPhase;
 
@@ -205,7 +192,17 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             List<D_DpDicipline> ListDpDicipline = _context.DpDiciplineManagerUW.Get().ToList();
             ViewBag.dpdicipline = ListDpDicipline;
 
-
+        }
+        public void FillMDRCombo(string projcode)
+        {
+            List<D_Unit> ListUnit = _context.UnitManagerUW.Get().Where(x => x.ProjectCode == projcode).ToList();
+            ViewBag.listunit = ListUnit;
+            List<D_ClientDicipline> ListClientDicipline = _context.ClientDiciplineManagerUW.Get().Where(x => x.ProjectCode == projcode).ToList();
+            ViewBag.listclientdicipline = ListClientDicipline;
+            List<D_Classification> ListClass = _context.ClassificationManagerUW.Get().Where(x => x.Project == projcode).ToList();
+            ViewBag.listclass = ListClass;
+            List<D_AdditionalWork> ListAddW = _context.AdditionalWorkManagerUW.Get().Where(x => x.ProjectCode == projcode).ToList();
+            ViewBag.listaddw = ListAddW;
         }
     }
 }

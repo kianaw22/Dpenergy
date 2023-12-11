@@ -1,0 +1,61 @@
+mypaymentgateway
+├── cmd
+│   └── mypaymentgateway
+│       └── main.go           # The main entry point for your application
+│	├── root.go           # Contains the main function and root command for your application
+│       └── commands.go       # Defines subcommands and their corresponding logic
+│
+│
+├── config
+│   ├── config.go             #structs for objects and configure them . use viper here
+│   └── config.yaml         # Configuration file for the database settings
+
+│
+├── internal
+│   ├── accounts
+│   │   ├── company.go        # Handles company-specific functionalities such as registration and management
+│   │   └── user.go           # Manages functionalities related to individual users
+│   ├── docs
+│   │   ├── swagger.yaml        
+│   │   └── packages.md          # a folder which contains description for each package
+│   ├── admin
+│   │   └── admin.go          # Contains functions for admin-related tasks such as blocking and unblocking accounts
+│   ├── api
+│   │   ├── handlers
+│   │   │   └── handler.go    # Handles incoming requests and directs them to the appropriate services
+│   │   └── routes
+│   │       └── routes.go     # Defines the routes and their corresponding handlers
+│   │  
+│   ├── middleware                # Directory for middleware
+│   │   └── middleware.go         # Contains middleware functions   
+│   ├── auth
+│   │   └── auth.go           # Manages user authentication and authorization
+│   ├── db
+│   │   ├── models
+│   │   │   └── models.go     # Contains the data models for the payment gateway database
+│   │   ├── migrations                  # Directory for database migrations
+│   │   │   ├── 20230101000000_up.sql   # Example migration file
+│   │   │   └── 20230101000000_down.sql # Example rollback file
+│   │   └── database.go       # Manages the interactions with the database
+│   ├── payments
+│   │   ├── processors
+│   │   │   ├── stripe.go     # Contains functions specific to the Stripe payment processor
+│   │   │   └── paypal.go     # Contains functions specific to the PayPal payment processor
+│   │   └── services
+│   │       └── payment_service.go  # Provides services for processing payments and managing payment gateways
+│   ├── transactions
+│   │   ├── status.go         # Defines various transaction statuses such as "Payment has not been made" or "Payment is confirmed"
+│   │   ├── transaction.go    # Manages the creation and handling of transactions
+│   │   └── transaction_service.go  # Provides services for managing and tracking transactions
+│   └── utils
+│   │    └── utilities.go       # Contains utility functions used across the application such as Validation Utility,
+│   │				Error Handling Utility,Date and Time Utility,passwords and hashing ...
+│   └── filters
+│      └── filters.go 
+│
+├── pkg
+│   
+│
+└── go.mod                      # Manages the dependencies for the project
+│
+└── README                      #about project

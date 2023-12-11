@@ -67,12 +67,14 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                     modelrev.IssuedBy = model.IssuedBy;
                     modelrev.Client = model.Client;
                     modelrev.Reciever = model.Reciever;
-                    modelrev.CD = model.CD;
-                    modelrev.Email = model.Email;
-                    modelrev.File = model.File;
-                    modelrev.Original = model.Original;
-                    modelrev.Other = model.Other;
-                    modelrev.Print = model.Print;
+                    List<string> senttype = new List<string>();
+                    if (model.CD) { senttype.Add("CD"); }
+                    if (model.Email) { senttype.Add("Email"); }
+                    if (model.File) { senttype.Add("File"); }
+                    if (model.Original) { senttype.Add("Original"); }
+                    if (model.Other) { senttype.Add("Other"); }
+                    if (model.Print) { senttype.Add("Print"); }
+                    modelrev.SentType = string.Join(", ", senttype);
                     var mapp = _mapper.Map<D_Revision>(modelrev);
                     _context.RevisionUW.Update(mapp);
                     _context.save();

@@ -145,12 +145,15 @@
                     field: "id",
                     title: "id"
                 }, {
-                    field: "projectCode",
+                   field: "projectCode",
+                   filterable: {
+                       multi: true
+                    },
                     width: 150,
                     title: "ProjectCode"
                 }, {
                      field: "clientNumber",
-                     width: 150,
+                     width: 200,
                      title: "Client Number"
                 }, {
                     field: "documentTitle",
@@ -158,7 +161,7 @@
                     title: "Document Title"
                 }, {
                     field: "daryapalaNumber",
-                    width: 150,
+                    width: 200,
                     title: "Daryapala Number"
                 }, {
                     field: "wF",
@@ -191,7 +194,7 @@
 
                 }, {
                     field: "additionalWork",
-                        width: 150,
+                        width: 200,
                     title: "Additional Work"
 
                 }, {
@@ -201,37 +204,37 @@
 
                 }, {
                      field: "secondIssueDate",
-                        width: 150,
+                        width:200,
                      title: "Second Issue Date"
 
                 }, {
                     field: "finalIssueDate",
-                        width: 150,
+                        width: 200,
                     title: "Final Issue Date"
 
                 }, {
                     field: "customField1",
-                    width: 100,
+                    width: 200,
                     title: "CustomField1"
 
                 }, {
                     field: "customField2",
-                    width: 100,
+                    width: 200,
                     title: "CustomField2"
 
                 }, {
                     field: "customField3",
-                    width: 100,
+                    width:200,
                     title: "CustomField3"
 
                 }, {
                     field: "customField4",
-                    width: 100,
+                    width: 200,
                      title: "CustomField4"
 
                 }, {
                     field: "customField5",
-                    width: 100,
+                    width: 200,
                     title: "CustomField5"
 
                 }, {
@@ -273,7 +276,7 @@
                      title: "Modifier"
                 }, {
                      field: "modificationDate",
-                     width: 150,
+                     width: 200,
                      title: "Modification Date"
                 }, {
                      field: "order",
@@ -322,17 +325,7 @@
                                     window.location.href = '@Url.Action("EditMDR", "MDR")/' + item.id;
                                 }
                             },
-                            {
-                                name: "read",
-                                text: "Read",
-                                click: function (e) {
-                                    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-                                    var id = dataItem.id;
-                                    var url = "/DMSArea/MDR/ReadMDR?ID=" + id;
-                                    var newWindow = window.open(url, "_blank");
-                                    
-                                }
-                            },
+                           
 
                         ]
                     }

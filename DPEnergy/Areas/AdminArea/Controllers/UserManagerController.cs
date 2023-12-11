@@ -56,7 +56,7 @@ namespace DPEnergy.Areas.AdminArea.Controllers
                     }
                   
                     var userMapped = _mapper.Map<A_UserManager>(model);
-                    IdentityResult result = await _userManager.CreateAsync(userMapped, "Kiana@1234");
+                    IdentityResult result = await _userManager.CreateAsync(userMapped, userMapped.Password);
 
                     if (result.Succeeded)
                     {

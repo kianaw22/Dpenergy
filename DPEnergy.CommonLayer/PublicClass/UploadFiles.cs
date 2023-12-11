@@ -110,7 +110,7 @@ namespace DPEnergy.CommonLayer.PublicClass
             }
             return Path.Combine(upload , filename);
         }
-        public bool UploadRevAttchment(IEnumerable<IFormFile> files, string uploadPath, string projectcode , string name )
+        public Tuple<bool, string> UploadRevAttchment(IEnumerable<IFormFile> files, string uploadPath, string projectcode , string name )
         {
             var result = false;
             var upload = Path.Combine(_appEnvironment.WebRootPath, uploadPath);
@@ -126,7 +126,7 @@ namespace DPEnergy.CommonLayer.PublicClass
             if (File.Exists(f))
             {
                 result = true;
-                return result;
+                return Tuple.Create(result, Path.Combine("wwwroot" , uploadPath + projectcode , name ) );
             }
 
             foreach (var item in files)
@@ -138,7 +138,7 @@ namespace DPEnergy.CommonLayer.PublicClass
                 }
 
             }
-            return result;
+            return Tuple.Create(result, Path.Combine( uploadPath + projectcode, name));
         }
     }
      

@@ -12,43 +12,43 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
 
 
         [Display(Name = "ProjectCode")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ProjectCode { get; set; }
 
         [Display(Name = "ClientNumber")]
-       /// [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ClientNumber { get; set; }
 
         [Display(Name = "DocumentTitle")]
-       // [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DocumentTitle { get; set; }
 
         [Display(Name = "DaryapalaNumber")]
-       // [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DaryapalaNumber { get; set; }
 
         [Display(Name = "WF")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public float WF { get; set; }
 
         [Display(Name = "DpDicipline")]
-       // [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DpDicipline { get; set; }
 
         [Display(Name = "Unit")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string Unit { get; set; }
 
         [Display(Name = "Phase")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string Phase { get; set; }
 
         [Display(Name = "ClientDicipline")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ClientDicipline { get; set; }
 
         [Display(Name = "DocumentType")]
-       // [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+       [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DocumentType { get; set; }
 
         [Display(Name = "Bidover")]

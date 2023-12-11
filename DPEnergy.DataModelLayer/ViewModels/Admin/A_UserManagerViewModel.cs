@@ -40,7 +40,7 @@ namespace DPEnergy.DataModelLayer.ViewModels.Admin
     {
         [Display(Name = "نام کاربری")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "نام کاربری وارد نشده است")]
-        [RegularExpression(@"^[^\\/:*;\.\)\(]+$", ErrorMessage = "از کاراکترهای غیرمجاز استفاده نکنید.")]
+        [RegularExpression(@"^[^\\/:*;\\)\(]+$", ErrorMessage = "از کاراکترهای غیرمجاز استفاده نکنید.")]
         public string UserName { get; set; }
 
 

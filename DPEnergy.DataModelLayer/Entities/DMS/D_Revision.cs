@@ -11,6 +11,7 @@ namespace DPEnergy.DataModelLayer.Entities.DMS
       [Key]
        public string Id { get; set; }
         public string ProjectCode { get; set; }
+        public string ProjectTitle { get; set; }
         public string TransmittalNumber { get; set; }
         public string DpNumber { get; set; }
         public string DocumentTitle { get; set; }

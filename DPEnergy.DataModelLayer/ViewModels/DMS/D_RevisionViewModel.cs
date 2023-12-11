@@ -11,46 +11,47 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
         public string Id { get; set; }
 
         [Display(Name = "ProjectCode")]
-        
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ProjectCode { get; set; }
 
         [Display(Name = "ProjectTitle")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ProjectTitle { get; set; }
 
-
+        
         [Display(Name = "DP Number")]
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DpNumber { get; set; }
-
+       
         [Display(Name = "Document Title")]
-
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DocumentTitle { get; set; }
         [Display(Name = "Transmittal Number")]
        
         public string TransmittalNumber { get; set; }
         [Display(Name = "Client Number")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ClientNumber { get; set; }
         [Display(Name = "Company")]
         public string Company { get; set; }
 
         [Display(Name = "Revision")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
 
-        
         public string Revision { get; set; }
         [Display(Name = "Stage")]
-    
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string StageName { get; set; }
         [Display(Name = "Size")]
-   
         public string Size { get; set; }
         [Display(Name = "Transmittal Date")]
-        public DateTime TransmittalDate { get; set; }
+        public DateTime? TransmittalDate { get; set; }
 
         [Display(Name = "Transmittal Created By")]
         public string TransmittalCreatedBy { get; set; }
 
         [Display(Name = "Page")]
-  
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string Page{ get; set; }
 
         [Display(Name = "IssuedBy")]
@@ -73,25 +74,28 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
         public string SentType { get; set; }
 
         [Display(Name = "Progress")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+       
+     
         public float? Progress { get; set; }
         [Display(Name = "Classifi cation")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+   
         public string Classification { get; set; }
         [Display(Name = "CheckList")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+      
         public bool CheckList { get; set; }
         [Display(Name = "Incoming Transmittal Check")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        
         public bool IncomingTransmittalCheck { get; set; }
         [Display(Name = "Dp Dicipline")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+
         public string DpDicipline { get; set; }
         [Display(Name = "Client Dicipline")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+
         public string ClientDicipline { get; set; }
         [Display(Name = "Prepared By")]
-        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+       
         public string PreparedBy { get; set; }
         [Display(Name = "Comm Sheet No.")]
         public string CommentsheetNo { get; set; }
