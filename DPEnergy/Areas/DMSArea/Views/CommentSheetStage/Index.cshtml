@@ -71,7 +71,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search","excel"],
 
                 pageable: {
                     refresh: true,
@@ -83,27 +83,38 @@
                     title: "id"
                 }, {
                     field: "projectCode",
+                    width: 150,
+                     filterable: {
+                            multi: true
+                        },
                     title: "ProjectCode"
                 },{
-                    field: "stage",
+                     field: "stage",
+                    width: 150,
                     title: "Stage"
                 },{
-                    field: "description" ,
+                    field: "description",
+                    width: 150,
                     title: "Description"
                 }, {
                      field: "order",
+                     width: 150,
                      title: "Order"
                 },  {
-                        field: "creator",
-                        title: "Creator"
+                     field: "creator",
+                     width: 150,
+                     title: "Creator"
                 }, {
                      field: "creationDate",
+                     width: 150,
                      title: "Creation Date"
                 }, {
                      field: "modifier",
+                     width: 150,
                      title: "Modifier"
                 }, {
                      field: "modificationDate",
+                     width: 200,
                      title: "Modification Date"
                 },
 
@@ -111,6 +122,7 @@
 
 
                     {
+                        width: 150,
                         command: [
                             {
                                 name: "del",

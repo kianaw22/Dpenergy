@@ -35,6 +35,7 @@
                         <select asp-for="UserId" asp-items="@(new SelectList(from x in ListUser select new { Value = x.Id ,Text = x.UserName + " - " + x.Personel}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select User</option>
                         </select>
+                        <span asp-validation-for="UserId" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -46,6 +47,7 @@
                         <select asp-for="ProjectId" asp-items="@(new SelectList(from x in ListProject select new { Value = x.Id ,Text = x.ProjectCode + " - " + x.Title}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
                         </select>
+                        <span asp-validation-for="ProjectId" class="text-danger"></span>
                         <div>   </div>
                     </div>
 

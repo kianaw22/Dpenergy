@@ -8,7 +8,7 @@ namespace DPEnergy.DataModelLayer.Entities.DMS.BasicInformation
     public class D_UserProject
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserId { get; set;}
         public string UserName { get; set; }
         public string ProjectId { get; set; }

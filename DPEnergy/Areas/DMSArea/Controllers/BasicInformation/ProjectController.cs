@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.DataModelLayer.Entities;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
@@ -51,6 +52,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.CreationDate = DateTime.Now;
                 model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 _context.projectManagerUW.Create(_mapper.Map<D_Project>(model));
@@ -82,9 +84,10 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         public IActionResult EditProject(D_ProjectViewModel model)
         {
             FillCombo();
-            model.ModificationDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.ModificationDate = DateTime.Now;
                 model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 var projmapper = _mapper.Map<D_Project>(model);

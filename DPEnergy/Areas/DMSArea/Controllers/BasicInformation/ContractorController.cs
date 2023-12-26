@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.DataModelLayer.Entities;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
@@ -38,6 +39,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 _context.ContractorManagerUW.Create(_mapper.Map<D_Contractor>(model));
                 _context.save();
 
@@ -50,7 +52,9 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+
             }
             var proj = _context.ContractorManagerUW.GetById(Id);
             var mapproj = _mapper.Map<D_ContractorViewModel>(proj);
@@ -64,6 +68,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 var projmapper = _mapper.Map<D_Contractor>(model);
                 _context.ContractorManagerUW.Update(projmapper);
                 _context.save();
@@ -76,12 +81,16 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+
             }
             var proj = _context.ContractorManagerUW.GetById(Id);
             if (proj == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No data found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+
             }
             return PartialView("_deleteContractor", proj);
         }

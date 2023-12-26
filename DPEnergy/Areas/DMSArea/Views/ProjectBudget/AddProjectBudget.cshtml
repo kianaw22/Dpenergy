@@ -2,6 +2,7 @@
 @using DPEnergy.CommonLayer.PublicClass
 @{
     ViewData["Title"] = "AddProjectBudget";
+    List<D_Project> ListProject = ViewBag.projectlist;
 }
 <div class="content">
 
@@ -30,8 +31,11 @@
                 <div>
                     <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <input asp-for="ProjectCode" type="text" class="form-control custominput" placeholder="ProjectCode ..." autocomplete="off" />
+                        <select asp-for="ProjectCode" asp-items="@(new SelectList(ListProject,"ProjectCode","ProjectCode"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
+                        </select>
                         <span asp-validation-for="ProjectCode" class="text-danger"></span>
+                        <div>   </div>
                     </div>
 
                 </div>

@@ -73,7 +73,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search","excel"],
 
                 pageable: {
                     refresh: true,
@@ -84,25 +84,35 @@
                     field: "id",
                     title: "id"
                 }, {
-                    field: "classification" ,
+                    field: "classification",
+                    width: 150,
                     title: "Classification"
                 }, {
                     field: "project",
+                    width: 150,
+                    filterable: {
+                       multi: true
+                      },
                     title: "Project"
                 }, {
                      field: "order",
+                     width: 150,
                      title: "Order"
                 },  {
                      field: "creator",
+                     width: 150,
                      title: "Creator"
                 },{
                      field: "creationDate",
+                     width: 150,
                      title: "Creation Date"
                 }, {
                      field: "modifier",
+                    width: 150,
                      title: "Modifier"
                 }, {
                      field: "modificationDate",
+                     width: 200,
                      title: "Modification Date"
                 },
 
@@ -110,6 +120,7 @@
 
 
                     {
+                        width: 150,
                         command: [
                             {
                                 name: "del",

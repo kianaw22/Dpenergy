@@ -42,6 +42,14 @@
                         <span asp-validation-for="ManagerName" class="text-danger"></span>
                     </div>
                 </div>
+                <!--Company Phpne-->
+                <div>
+                    <label asp-for="CompanyPhone" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="CompanyPhone" type="text" class="form-control custominput" placeholder="Title..." autocomplete="off" />
+                        <span asp-validation-for="CompanyPhone" class="text-danger"></span>
+                    </div>
+                </div>
                 <!--Email-->
                 <div>
                     <label asp-for="Email" class="control-label col-md-3 col-xs-12"></label>
@@ -72,10 +80,10 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="CompanyType" class="form-control selectpicker custominput" id="select-CompanyType" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr"> Select Company Type</option>
-                            <option data-tokens="owner"> Client</option>
-                            <option data-tokens="contractor"> Consultant </option>
-                            <option data-tokens="Subcontractor"> Contractor </option>
-                            <option data-tokens="Vendor"> Design Contractor</option>
+                            <option data-tokens="Client" selected='@(Model.CompanyType == "owner" ? "selected" : "")'>Client</option>
+                            <option data-tokens="Consultant" selected='@(Model.CompanyType == "contractor" ? "selected" : "")'>Consultant</option>
+                            <option data-tokens="Contractor" selected='@(Model.CompanyType == "Subcontractor" ? "selected" : "")'>Contractor</option>
+                            <option data-tokens="Design Contractor" selected='@(Model.CompanyType == "Vendor" ? "selected" : "")'>Design Contractor</option>
                         </select>
                         <div>   </div>
                     </div>

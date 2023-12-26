@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
@@ -43,6 +44,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.CreationDate = DateTime.Now;
                 model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 _context.RevisionCodeUW.Create(_mapper.Map<D_RevisionCode>(model));
@@ -57,7 +59,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.RevisionCodeUW.GetById(Id);
             var mapproj = _mapper.Map<D_RevisionCodeViewModel>(proj);
@@ -69,6 +72,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         public IActionResult EditRevisionCode(D_RevisionCodeViewModel model)
         {
             FillCombo();
+            JsonHelper.SanitizeStringProperties(model);
             model.ModificationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
@@ -84,7 +88,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.RevisionCodeUW.GetById(Id);
             if (proj == null)
@@ -99,7 +104,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             _context.RevisionCodeUW.DeleteById(Id);
             _context.save();

@@ -73,7 +73,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search","excel"],
 
                 pageable: {
                     refresh: true,
@@ -88,7 +88,11 @@
                     title: "Title"
                 }, {
                         field: "projectCode",
-                        title: "Project Code"
+                        title: "Project Code",
+                        filterable: {
+                            multi: true
+                        },
+
                 }, {
                         field: "companyName",
                         title: "Company Name"

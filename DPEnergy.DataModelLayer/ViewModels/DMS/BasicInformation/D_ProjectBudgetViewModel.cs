@@ -8,25 +8,31 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
     public class D_ProjectBudgetViewModel
     {
         public string Id { get; set; }
-        [Required]
+       
         [Display(Name = "Project Code")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ProjectCode { get; set; }
 
         [Display(Name = "Project Title")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ProjectTitle { get; set; }
 
-        [Required]
+      
         [Display(Name = "Department")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string Department { get; set; }
 
-        [Required]
+        
         [Display(Name = "Departmental Budget")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DepartmentalBudget { get; set; }
 
         [Display(Name = "Total Budget")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string TotalBudget { get; set; }
 
         [Display(Name = "OverTime/Deduction")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string OverTimeOrDeduction { get; set; }
 
         [Display(Name = "Creator")]

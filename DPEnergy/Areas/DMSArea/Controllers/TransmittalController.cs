@@ -53,7 +53,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             }
             var checkedItemsList = JsonConvert.DeserializeObject<List<D_RevisionViewModel>>(checkedItems);
            
-            if (ModelState.IsValid)
+            if (ModelState["TransmittalNumber"].Errors.Count == 0 && ModelState["Client"].Errors.Count==0 && ModelState["TransmittalDate"].Errors.Count == 0)
             {
 
                 foreach (var item in checkedItemsList)
@@ -67,6 +67,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                     modelrev.IssuedBy = model.IssuedBy;
                     modelrev.Client = model.Client;
                     modelrev.Reciever = model.Reciever;
+                    modelrev.Consultant = model.Consultant;
                     List<string> senttype = new List<string>();
                     if (model.CD) { senttype.Add("CD"); }
                     if (model.Email) { senttype.Add("Email"); }

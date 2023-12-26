@@ -66,6 +66,7 @@
                         <select asp-for="ProjectManager" asp-items="@(new SelectList(from x in ListProjectManager select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Manager</option>
                         </select>
+                        <span asp-validation-for="ProjectManager" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -77,6 +78,7 @@
                         <select asp-for="ProjectType" asp-items="@(new SelectList(ListProjectType,"ProjectType","ProjectType"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Type</option>
                         </select>
+                        <span asp-validation-for="ProjectType" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -85,9 +87,10 @@
                 <div>
                     <label asp-for="Contractor" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="Contractor" asp-items="@(new SelectList(ListContractor,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                        <select asp-for="Contractor" asp-items="@(new SelectList(ListContractor,"CompanyName","CompanyName"))" class="form-control selectpicker custominput"  data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Contractor Company </option>
                         </select>
+                        <span asp-validation-for="Contractor" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -97,9 +100,10 @@
                 <div>
                     <label asp-for="ContractorName" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="ContractorName" asp-items="@(new SelectList(ListContractor,"ManagerName","ManagerName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                        <select asp-for="ContractorName" asp-items="@(new SelectList(ListContractor,"ManagerName","ManagerName"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Contractor Name</option>
                         </select>
+                        <span asp-validation-for="ContractorName" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -110,13 +114,15 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Company" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">   Select company</option>
-                            <option data-tokens="Daryapala Energy">  Daryapala Energy</option>
+                            <option value="Daryapala Energy" data-tokens="Daryapala Energy" selected="@((Model.Activation == "Daryapala Energy") ? "selected" : null)">Daryapala Energy</option>
 
                         </select>
+                        <span asp-validation-for="Company" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
                 </div>
+
 
             </div>
 
@@ -170,10 +176,10 @@
                 <div>
                     <label asp-for="Activation" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="Activation" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
+                        <select asp-for="Activation" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">   Select Activation</option>
-                            <option data-tokens="Active">  Active</option>
-                            <option data-tokens="Deactive">  Deactive</option>
+                            <option value="Active" data-tokens="Active" selected="@((Model.Activation == "Active") ? "selected" : null)">Active</option>
+                            <option value="Deactive" data-tokens="Deactive" selected="@((Model.Activation == "Deactive") ? "selected" : null)">Deactive</option>
                         </select>
                         <div>   </div>
                     </div>
@@ -195,8 +201,8 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="StartUpRequest" class="form-control selectpicker custominput" id="select-StartUpRequest" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">   Select StartUpRequest</option>
-                            <option data-tokens="موقت">  موقت</option>
-                            <option data-tokens="دائم">  دائم</option>
+                            <option value="موقت" data-tokens="موقت" selected="@Html.Raw((Model.StartUpRequest == "موقت") ? "selected" : "")">موقت</option>
+                            <option value="دائم" data-tokens="دائم" selected="@Html.Raw((Model.StartUpRequest == "دائم") ? "selected" : "")">دائم</option>
                         </select>
                     </div>
                     <div>   </div>
@@ -207,14 +213,13 @@
                     <label asp-for="Status" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Status" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
-                            <option value="" selected disabled hidden style="direction: ltr">   Select Status</option>
-                            <option data-tokens="قطعی">  قطعی</option>
-                            <option data-tokens="خاتمه یافته">  خاتمه یافته</option>
-                            <option data-tokens="کاریابی"> کاریابی</option>
+                            <option value="" selected disabled hidden style="direction: ltr">Select Status</option>
+                            <option value="قطعی" data-tokens="قطعی" selected="@Html.Raw((Model.Status == "قطعی") ? "selected" : null)">قطعی</option>
+                            <option value="خاتمه یافته" data-tokens="خاتمه یافته" selected="@Html.Raw((Model.Status == "خاتمه یافته") ? "selected" : null)">خاتمه یافته</option>
+                            <option value="کاریابی" data-tokens="کاریابی" selected="@Html.Raw((Model.Status == "کاریابی") ? "selected" : null)">کاریابی</option>
                         </select>
-                        <div>   </div>
+                        <div>   </div>
                     </div>
-
                 </div>
 
                 <!--ServiceType-->
@@ -222,55 +227,55 @@
                     <label class="control-label col-md-3 col-xs-12">Service Type</label>
                     <div class="col-md-9 col-xs-12">
                         <div class="form-check">
-                            <input asp-for="EmkanSanji" class="form-check-input" type="checkbox" value="false" id="check1" onchange="ck1(this.value)" />
+                            <input asp-for="EmkanSanji" class="form-check-input" type="checkbox"  id="check1" onchange="ck1(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault">امکان سنجی و طراحی مفهومی</label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="TarahiPaye" class="form-check-input" type="checkbox" value="false" id="check2" onchange="ck2(this.value)" />
+                            <input asp-for="TarahiPaye" class="form-check-input" type="checkbox"  id="check2" onchange="ck2(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> طراحی پایه </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="TarahiTafzili" class="form-check-input" type="checkbox" value="false" id="check3" onchange="ck3(this.value)" />
+                            <input asp-for="TarahiTafzili" class="form-check-input" type="checkbox"  id="check3" onchange="ck3(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> طراحی تفضیلی </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="KhadamatKharid" class="form-check-input" type="checkbox" value="false" id="check4" onchange="ck4(this.value)" />
+                            <input asp-for="KhadamatKharid" class="form-check-input" type="checkbox"  id="check4" onchange="ck4(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> خدمات خرید </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="Kharid" class="form-check-input" type="checkbox" value="false" id="check5" onchange="ck5(this.value)" />
+                            <input asp-for="Kharid" class="form-check-input" type="checkbox"  id="check5" onchange="ck5(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault">  خرید </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="TahieAsnadMonaqese" class="form-check-input" type="checkbox" value="false" id="check6" onchange="ck6(this.value)" />
+                            <input asp-for="TahieAsnadMonaqese" class="form-check-input" type="checkbox" id="check6" onchange="ck6(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault">  تهیه اسناد مناقضه </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="NezaratAlie" class="form-check-input" type="checkbox" value="false" id="check7" onchange="ck7(this.value)" />
+                            <input asp-for="NezaratAlie" class="form-check-input" type="checkbox"  id="check7" onchange="ck7(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault">  نظارت عالیه </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="Karagahi" class="form-check-input" type="checkbox" value="false" id="check8" onchange="ck8(this.value)" />
+                            <input asp-for="Karagahi" class="form-check-input" type="checkbox"  id="check8" onchange="ck8(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault">  کارآگاهی </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="EPC" class="form-check-input" type="checkbox" value="false" id="check9" onchange="ck9(this.value)" />
+                            <input asp-for="EPC" class="form-check-input" type="checkbox"  id="check9" onchange="ck9(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> EPC </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="MTO" class="form-check-input" type="checkbox" value="false" id="check10" onchange="ck10(this.value)" />
+                            <input asp-for="MTO" class="form-check-input" type="checkbox"  id="check10" onchange="ck10(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> MTO </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="MC" class="form-check-input" type="checkbox" value="false" id="check11" onchange="ck11(this.value)" />
+                            <input asp-for="MC" class="form-check-input" type="checkbox" id="check11" onchange="ck11(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> MC </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="Gheire" class="form-check-input" type="checkbox" value="false" id="check12" onchange="ck12(this.value)" />
+                            <input asp-for="Gheire" class="form-check-input" type="checkbox" id="check12" onchange="ck12(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> غیره </label>
                         </div>
                         <div class="form-check">
-                            <input asp-for="BaravardHazine" class="form-check-input" type="checkbox" value="false" id="check13" onchange="ck13(this.value)" />
+                            <input asp-for="BaravardHazine" class="form-check-input" type="checkbox"  id="check13" onchange="ck13(this.value)" />
                             <label class="form-check-label" for="flexCheckDefault"> برآورد هزینه </label>
                         </div>
                     </div>

@@ -36,9 +36,11 @@
                 <div>
                     <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
+
                         <input asp-for="ProjectCode" type="text" class="form-control custominput" placeholder="Project Code ..." autocomplete="off" />
                         <span asp-validation-for="ProjectCode" class="text-danger"></span>
                     </div>
+                   
 
                 </div>
                 <!--Title-->
@@ -66,6 +68,7 @@
                         <select asp-for="ProjectManager" asp-items="@(new SelectList(from x in ListProjectManager select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Manager</option>
                         </select>
+                        <span asp-validation-for="ProjectManager" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -77,6 +80,7 @@
                         <select asp-for="ProjectType" asp-items="@(new SelectList(ListProjectType,"ProjectType","ProjectType"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Type</option>
                         </select>
+                        <span asp-validation-for="ProjectType" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -88,6 +92,7 @@
                         <select asp-for="Contractor" asp-items="@(new SelectList(ListContractor,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Contractor Company </option>
                         </select>
+                        <span asp-validation-for="Contractor" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -100,6 +105,7 @@
                         <select asp-for="ContractorName" asp-items="@(new SelectList(ListContractor,"ManagerName","ManagerName"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Contractor Name</option>
                         </select>
+                        <span asp-validation-for="ContractorName" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -109,10 +115,11 @@
                     <label asp-for="Company" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Company" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
-                            <option value="" selected disabled hidden style="direction: ltr">   Select company</option>
-                            <option data-tokens="Daryapala Energy">  Daryapala Energy</option>
+                            <option value="" selected='@(Model == null || (Model!= null && Model.Company == null))"' disabled hidden>Select company</option>
+                            <option data-tokens="Daryapala Energy" value="Daryapala Energy" selected='@(Model != null && Model.Company == "Daryapala Energy")'>Daryapala Energy</option>
 
                         </select>
+                        <span asp-validation-for="Company" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -145,7 +152,7 @@
                     <label asp-for="StartDate" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <input asp-for="StartDate" type="date" class="form-control custominput" placeholder="Contract Date ..." autocomplete="off" asp-format="{0:yyyy-MM-dd}" />
-                        <span asp-validation-for="ProjectType" class="text-danger"></span>
+                    
                     </div>
 
                 </div>
@@ -173,7 +180,7 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Activation" class="form-control selectpicker custominput" id="select-Activation" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">   Select Activation</option>
-                            <option data-tokens="Active">  Active</option>
+                            <option data-tokens="Active">  Active </option>
                             <option data-tokens="Deactive">  Deactive</option>
                         </select>
                         <div>   </div>
@@ -195,9 +202,9 @@
                     <label asp-for="StartUpRequest" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="StartUpRequest" class="form-control selectpicker custominput" id="select-StartUpRequest" data-live-search="true" style="direction: ltr">
-                            <option value="" selected disabled hidden style="direction: ltr">   Select StartUpRequest</option>
-                            <option data-tokens="موقت">  موقت</option>
-                            <option data-tokens="دائم">  دائم</option>
+                            <option value="" selected='@(Model == null || (Model!= null && Model.StartUpRequest == null))' disabled hidden>Select StartUpRequest</option>
+                            <option data-tokens="موقت" value="موقت" selected='@(Model != null && Model.StartUpRequest == "موقت")'>موقت</option>
+                            <option data-tokens="دائم" value="دائم" selected='@(Model != null && Model.StartUpRequest == "دائم")'>دائم</option>
                         </select>
                     </div>
                     <div>   </div>
@@ -209,10 +216,10 @@
                     <label asp-for="Status" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Status" class="form-control selectpicker custominput" id="select-Company" data-live-search="true">
-                            <option value="" selected disabled hidden style="direction: ltr">   Select Status</option>
-                            <option data-tokens="قطعی">  قطعی</option>
-                            <option data-tokens="خاتمه یافته">  خاتمه یافته</option>
-                            <option data-tokens="کاریابی"> کاریابی</option>
+                            <option value="" selected='@(Model == null || (Model!= null && Model.Status == null)))' disabled hidden>Select Status</option>
+                            <option data-tokens="قطعی" value="قطعی" selected='@(Model != null && Model.Status == "قطعی")'>قطعی</option>
+                            <option data-tokens="خاتمه یافته" value="خاتمه یافته" selected='@(Model != null && Model.Status == "خاتمه یافته")'>خاتمه یافته</option>
+                            <option data-tokens="کاریابی" value="کاریابی" selected='@(Model != null && Model.Status == "کاریابی")'>کاریابی</option>
                         </select>
                         <div>   </div>
                     </div>
@@ -302,6 +309,14 @@
 
 
 @section DMSScripts{
+<script>
+    var elements = document.querySelectorAll('.input-validation-error');
+
+    // Loop through each element and remove the class
+    elements.forEach(function (element) {
+        element.classList.remove('input-validation-error');
+    });
+</script>
     <script>
         function ck1(val) {
             document.getElementById("check1").value = document.getElementById("check1").checked;

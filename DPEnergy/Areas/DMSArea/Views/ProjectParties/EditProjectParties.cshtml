@@ -42,8 +42,9 @@
                         <select asp-for="ProjectCode" asp-items="@(new SelectList(ListProject,"ProjectCode","ProjectCode"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
                         </select>
-                        <div>   </div>
                         <span asp-validation-for="ProjectCode" class="text-danger"></span>
+                        <div>   </div>
+
                     </div>
                 </div>
                 <!--CompanyName-->
@@ -53,8 +54,9 @@
                         <select asp-for="CompanyName" asp-items="@(new SelectList(ListCompanyName,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-CompanyName" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Company Name </option>
                         </select>
-                        <div>   </div>
                         <span asp-validation-for="CompanyName" class="text-danger"></span>
+                        <div>   </div>
+
                     </div>
                 </div>
                 <!--RoleInProject-->
@@ -62,19 +64,20 @@
                     <label asp-for="RoleInProject" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="RoleInProject" class="form-control selectpicker custominput" id="select-RoleInProject" data-live-search="true" style="direction: ltr">
-                            <option value="" selected disabled hidden style="direction: ltr"> Select Role in project</option>
-                            <option data-tokens="owner"> Owner</option>
-                            <option data-tokens="contractor">  Contractor</option>
-                            <option data-tokens="Subcontractor">  Subcontractor</option>
-                            <option data-tokens="Vendor">  Vendor</option>
-                            <option data-tokens="client">  Client</option>
-                            <option data-tokens="MC">  MC</option>
-                            <option data-tokens="consultant">  consultant</option>
-                            <option data-tokens="package">  Package</option>
-                            <option data-tokens="partner">  Partner</option>
-                            <option data-tokens="package"> Participation</option>
-                            <option data-tokens="package"> Consortium</option>
+                            <option value="" selected disabled hidden>Select Role</option>
+                            <option data-tokens="owner" selected='@(Model.RoleInProject == "owner" ? "selected" : "")'>Owner</option>
+                            <option data-tokens="contractor" selected='@(Model.RoleInProject == "contractor" ? "selected" : "")'>Contractor</option>
+                            <option data-tokens="Subcontractor" selected='@(Model.RoleInProject == "Subcontractor" ? "selected" : "")'>Subcontractor</option>
+                            <option data-tokens="Vendor" selected='@(Model.RoleInProject == "Vendor" ? "selected" : "")'>Vendor</option>
+                            <option data-tokens="client" selected='@(Model.RoleInProject == "client" ? "selected" : "")'>Client</option>
+                            <option data-tokens="MC" selected='@(Model.RoleInProject == "MC" ? "selected" : "")'>MC</option>
+                            <option data-tokens="consultant" selected='@(Model.RoleInProject == "consultant" ? "selected" : "")'>Consultant</option>
+                            <option data-tokens="package" selected='@(Model.RoleInProject == "package" ? "selected" : "")'>Package</option>
+                            <option data-tokens="partner" selected='@(Model.RoleInProject == "partner" ? "selected" : "")'>Partner</option>
+                            <option data-tokens="Participation" selected='@(Model.RoleInProject == "Participation" ? "selected" : "")'>Participation</option>
+                            <option data-tokens="Consortium" selected='@(Model.RoleInProject == "Consortium" ? "selected" : "")'>Consortium</option>
                         </select>
+                        <span asp-validation-for="RoleInProject" class="text-danger"></span>
                         <div>   </div>
                     </div>
                 </div>

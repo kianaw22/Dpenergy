@@ -572,6 +572,23 @@
         });
     </script>
     <script>
+        $('document').ready(function () {
+            var clientNumber = $('#client-number').val();
+            var pcode = $("#pcode").val();
+            $.ajax({
+                url: "/DMSArea/Revision/RevHistoryGrid",
+                data: { projectcode: pcode, clientnumber: clientNumber },
+                dataType: "json",
+                success: function (filteredData) {
+
+                    grid.dataSource.data(filteredData);
+                    grid.dataSource.total(filteredData.length);
+                    grid.refresh();
+                }
+            });
+        });
+    </script>
+    <script>
         // Attach an event listener to the client number selection field
         $('#client-number').change(function () {
             var clientNumber = $(this).val();

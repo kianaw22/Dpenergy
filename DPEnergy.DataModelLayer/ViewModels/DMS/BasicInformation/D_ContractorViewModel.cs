@@ -10,15 +10,15 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
         public string Id { get; set; }
 
         [Display(Name = "Company Name")]
-        [StringLength(maximumLength: 50, MinimumLength = 4, ErrorMessage = "{0} باید حداقل 4 و حداکثر 10 کاراکتر باشد.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         public string CompanyName { get; set; }
 
         [Display(Name = "Manager Name")]
-        [StringLength(maximumLength: 50, MinimumLength =2 , ErrorMessage = "{0} باید حداقل 2 و حداکثر 10 کاراکتر باشد.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         public string ManagerName { get; set; }
 
         [Display(Name = "Company Phone")]
-        [StringLength(maximumLength: 20, MinimumLength = 4, ErrorMessage = "{0} باید حداقل 4 و حداکثر 10 کاراکتر باشد.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         public string CompanyPhone { get; set; }
         
         [Display(Name = "Email")]

@@ -11,15 +11,18 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
 
 
         [Display(Name = "Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string Name { get; set; }
 
 
 
         [Display(Name = "Project Code")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ProjectCode { get; set; }
 
 
         [Display(Name = "Description")]
+
         public string Description { get; set; }
 
 

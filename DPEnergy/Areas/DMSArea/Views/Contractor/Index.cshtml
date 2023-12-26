@@ -71,7 +71,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search","excel"],
 
                 pageable: {
                     refresh: true,
@@ -82,7 +82,10 @@
                     field: "id",
                     title: "id"
                 }, {
-                        field: "companyName" ,
+                        field: "companyName",
+                        filterable: {
+                            multi: true
+                        },
                         width: 200 ,
                         title: "Company Name"
                 }, {

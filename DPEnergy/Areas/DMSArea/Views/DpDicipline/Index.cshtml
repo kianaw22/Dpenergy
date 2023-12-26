@@ -71,7 +71,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search", "excel"],
 
                 pageable: {
                     refresh: true,
@@ -82,7 +82,10 @@
                     field: "id",
                     title: "id"
                 }, {
-                    field: "dicipline" ,
+                     field: "dicipline",
+                     filterable: {
+                         multi: true
+                     },
                     title: "Dicipline"
                 }, {
                      field: "title",
@@ -92,12 +95,14 @@
                      title: "Creator"
                 }, {
                      field: "creationDate",
+                     width: 150,
                      title: "Creation Date"
                 }, {
                      field: "modifier",
                      title: "Modifier"
                 }, {
-                     field: "modificationDate",
+                    field: "modificationDate",
+                    width: 200,
                      title: "Modification Date"
                 }, {
                      field: "order",

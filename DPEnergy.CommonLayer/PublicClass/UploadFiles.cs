@@ -140,7 +140,21 @@ namespace DPEnergy.CommonLayer.PublicClass
             }
             return Tuple.Create(result, Path.Combine( uploadPath + projectcode, name));
         }
+        public bool DeleteFile(string uploadPath, string projectcode, string name)
+        {
+            var upload = Path.Combine(_appEnvironment.WebRootPath, uploadPath);
+            var filePath = Path.Combine(upload, projectcode, name);
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                return true;
+            }
+
+            return false;
+        }
+
     }
-     
+
 
 }

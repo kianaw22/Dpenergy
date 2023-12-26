@@ -71,7 +71,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search","excel"],
 
                 pageable: {
                     refresh: true,
@@ -82,9 +82,17 @@
                     field: "id",
                     title: "id"
                 }, {
-                    field: "projectType" ,
+                    field: "projectType",
+                    width: 150,
+                    filterable: {
+                        multi: true
+                        },
                     title: "Project Type"
-                }, 
+                }, {
+                    field: "projectTypePersian",
+                    width: 150,
+                    title: "Persian title"
+                },
 
 
 

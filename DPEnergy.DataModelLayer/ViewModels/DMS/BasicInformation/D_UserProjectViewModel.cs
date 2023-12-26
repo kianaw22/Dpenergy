@@ -7,16 +7,19 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
 {
     public class D_UserProjectViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Display(Name = "User")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string UserId { get; set; }
 
         public string ProjectTitle { get; set; }
+        [Display(Name = "Project")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string ProjectId { get; set; }
         public string UserName { get; set; }
 
-        [Display(Name = "Project")]
+     
         public string ProjectCode { get; set; }
         public string Creator { get; set; }
         public DateTime? CreationDate { get; set; }

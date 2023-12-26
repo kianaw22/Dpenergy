@@ -1,0 +1,26 @@
+1. create and modify fix : 
+   private readonly UserManager<A_UserManager> _userManager;
+UserManager<A_UserManager> userManager
+ _userManager = userManager;
+ model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
+   model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
+check edir view to have model fields
+
+2.jsonhelper
+ JsonHelper.SanitizeStringProperties(model);
+
+3.error handling 
+ var errorMessage = "No data found for the selected row id.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+ var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+
+4.fix combo box values
+
+5.view model fix
+ [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+6.fix grid in index 
+ width: 150,
+   filterable: {
+                            multi: true
+                        },

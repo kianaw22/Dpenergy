@@ -84,33 +84,46 @@
                     title: "id"
                 }, {
                     field: "projectCode",
+                    width: 150,
+                    filterable: {
+                            multi: true
+                        },
                     title: "ProjectCode"
                 }, {
-                    field: "projectTitle" ,
+                        field: "projectTitle",
+                        width: 150,
                     title: "ProjectTitle"
                 }, {
                     field: "department",
+                    width: 150,
                     title: "Department"
                 }, {
-                    field: "departmentalBudget",
-                    title: "Departmental Budget"
+                     field: "departmentalBudget",
+                     width: 200,
+                     title: "Departmental Budget"
                 }, {
-                    field: "totalBudjet",
-                    title: "Total Budget"
+                     field: "totalBudget",
+                     width: 150,
+                     title: "Total Budget"
                 }, {
                     field: "overTimeOrDeduction",
+                    width: 200,
                     title: "OverTimeOrDeduction"
                 },  {
-                    field: "creator",
-                    title: "Creator"
+                     field: "creator",
+                     width: 150,
+                     title: "Creator"
                 },{
                      field: "creationDate",
+                     width: 150,
                      title: "Creation Date"
                 }, {
                      field: "modifier",
+                     width: 150,
                      title: "Modifier"
                 }, {
                      field: "modificationDate",
+                     width: 200,
                      title: "Modification Date"
                 },
 
@@ -118,6 +131,7 @@
 
 
                     {
+                        width: 150,
                         command: [
                             {
                                 name: "del",

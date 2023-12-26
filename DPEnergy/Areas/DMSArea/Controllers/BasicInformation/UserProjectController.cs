@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
@@ -42,6 +43,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.UserName = _context.UserManagerUW.GetById(model.UserId).UserName;
                 model.CreationDate = DateTime.Now;
             
@@ -62,7 +64,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.UserProjectUW.GetById(Id);
             var mapproj = _mapper.Map<D_UserProjectViewModel>(proj);
@@ -77,6 +80,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             model.ModificationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.ModificationDate = DateTime.Now;
                 model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 var projmapper = _mapper.Map<D_UserProject>(model);
@@ -91,7 +95,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == 0)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.UserProjectUW.GetById(Id);
             if (proj == null)
@@ -106,7 +111,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == 0)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             _context.UserProjectUW.DeleteById(Id);
             _context.save();

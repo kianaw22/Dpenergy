@@ -11,6 +11,7 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
 
 
         [Display(Name = "Project Type")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         [StringLength(maximumLength: 30, MinimumLength = 2, ErrorMessage = "{0} باید حداقل 2 و حداکثر 10 کاراکتر باشد.")]
         public string ProjectType { get; set; }
 

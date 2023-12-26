@@ -12,38 +12,38 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
 
 
         [Display(Name = "Project Code")]
-        [StringLength(maximumLength: 10, MinimumLength = 4, ErrorMessage = "{0} باید حداقل 4 و حداکثر 10 کاراکتر باشد.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         public string ProjectCode { get; set; }
 
         [Display(Name = "Title")]
-        [StringLength(maximumLength: 100, ErrorMessage = "{0} باید  حداکثر 100 کاراکتر باشد.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
+        [StringLength(maximumLength: 100, ErrorMessage = "it should be less than 100 character")]
         public string Title { get; set; }
 
 
         [Display(Name = "Persian Title")]
         public string PersianTitle { get; set; }
 
-        [StringLength(maximumLength:100, ErrorMessage = "{0} باید  حداکثر 20 کاراکتر باشد.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         [Display(Name = "Project Manager")]
         public string ProjectManager { get; set; }
 
         [Display(Name = "Project Type")]
-    
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         public string ProjectType { get; set; }
 
         [Display(Name = "Contarctor Company")]
-        [StringLength(maximumLength: 100, ErrorMessage = "{0} باید  حداکثر 20 کاراکتر باشد.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0}")]
         public string Contractor { get; set; }
 
         [Display(Name = "Contractor's Name ")]
         public string ContractorName { get; set; }
-        [StringLength(maximumLength: 100, ErrorMessage = "{0} باید  حداکثر 20 کاراکتر باشد.")]
+ 
 
         [Display(Name = "Company")]
         public string Company { get; set; }
 
         [Display(Name = "Project Cost")]
-        [StringLength(maximumLength: 100, ErrorMessage = "{0} باید  حداکثر 20 کاراکتر باشد.")]
         public string ProjectCost { get; set; }
 
         [Display(Name = "Contract Date")]

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.CommonLayer.Services;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
@@ -40,6 +41,18 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             }
 
             return Json(new { status = "success" , mypath =   result.Item2.Replace("\\" , "/")});
+
+        }
+        public IActionResult DeleteRevAttach(IEnumerable<IFormFile> filearray, string path, string projectcode
+            , string name)
+        {
+            var result = _upload.DeleteFile( path, projectcode, name);
+            if (result == false)
+            {
+                return Json(new { status = "nofile" });
+            }
+
+            return Json(new { status = "success" });
 
         }
         public IActionResult Index()
@@ -81,6 +94,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             }
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.CreationDate = DateTime.Now;
                 model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 _context.RevisionUW.Create(_mapper.Map<D_Revision>(model));
@@ -123,6 +137,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                 var errorMessage = "No project found for the specified project code.";
                 return View("~/Views/Shared/Error.cshtml" ,errorMessage );
             }
+
             rev.ModificationDate = DateTime.Now;
             rev.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             var maprev = _mapper.Map<D_RevisionViewModel>(rev);
@@ -143,6 +158,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             }
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 var projmapper = _mapper.Map<D_Revision>(model);
                 _context.RevisionUW.Update(projmapper);
                 _context.save();

@@ -99,7 +99,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         {
            
             FillCombo();
-            
+           
 
             if (Id == null)
             {
@@ -110,8 +110,6 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             var proj = _context.MDRManagerUW.GetById(Id);
             FillMDRCombo(proj.ProjectCode);
             var projtitle = _context.projectManagerUW.Get().Where(x => x.ProjectCode == proj.ProjectCode).ToList()[0].Title;
-            proj.ModificationDate = DateTime.Now;
-            proj.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             var mapproj = _mapper.Map<D_MDRViewModel>(proj);
             mapproj.ProjectTitle = projtitle;
             return View(mapproj);
@@ -122,9 +120,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         public IActionResult EditMDR(D_MDRViewModel model)
         {
             FillCombo();
+            FillMDRCombo(model.ProjectCode);
             model.ModificationDate = DateTime.Now;
+            model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 var projmapper = _mapper.Map<D_MDR>(model);
                 _context.MDRManagerUW.Update(projmapper);
                 _context.save();

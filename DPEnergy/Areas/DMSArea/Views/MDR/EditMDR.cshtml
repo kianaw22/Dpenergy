@@ -89,6 +89,7 @@
                         <select asp-for="DpDicipline" asp-items="@(new SelectList(ListDpDicipline,"Dicipline","Dicipline"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select DpDicipline</option>
                         </select>
+                        <span asp-validation-for="DpDicipline" class="text-danger"></span>
                         <div>   </div>
 
                     </div>
@@ -101,6 +102,7 @@
                         <select asp-for="Unit" asp-items="@(new SelectList(ListUnit,"Unit","Unit"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Unit</option>
                         </select>
+                        <span asp-validation-for="Unit" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -113,6 +115,7 @@
                         <select asp-for="Phase" asp-items="@(new SelectList(ListPhase,"Phase","Phase"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Phase</option>
                         </select>
+                        <span asp-validation-for="Phase" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
@@ -124,6 +127,7 @@
                         <select asp-for="DocumentType" asp-items="@(new SelectList(ListDType,"TypesOfFile","TypesOfFile"))" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select DocumentType </option>
                         </select>
+                        <span asp-validation-for="DocumentType" class="text-danger"></span>
                         <div>   </div>
                     </div>
 

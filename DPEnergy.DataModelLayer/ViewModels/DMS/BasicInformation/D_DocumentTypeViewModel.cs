@@ -10,12 +10,12 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
         public string Id { get; set; }
 
         [Display(Name = "Types Of File")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} وارد نشده است.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string TypesOfFile { get; set; }
 
 
         [Display(Name = "Description")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "{0} وارد نشده است.")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string Description { get; set; }
 
         [Display(Name = "Project Code")]

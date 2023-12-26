@@ -71,7 +71,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search","excel"],
 
                 pageable: {
                     refresh: true,
@@ -83,34 +83,49 @@
                     title: "id"
                 }, {
                     field: "stage",
+                    width: 150,
+                    filterable: {
+                        multi: true
+                      },
                     title: "Stage"
                 }, {
-                    field: "description" ,
+                    field: "description",
+                    width: 150,
                     title: "Description"
                 },{
                     field: "projectCode",
-                     title: "ProjectCode"
+                    width: 150,
+                    filterable: {
+                            multi: true
+                        },
+                    title: "ProjectCode"
                 },{
+                     width: 150,
                      field: "order",
                      title: "Order"
-                },  {
-                        field: "creator",
-                        title: "Creator"
-                },{
+                }, {
+                     width: 150,
+                     field: "creator",
+                     title: "Creator"
+                }, {
+                     width: 150,
                      field: "creationDate",
                      title: "Creation Date"
                 }, {
                      field: "modifier",
+                     width: 150,
                      title: "Modifier"
                 }, {
-                     field: "modificationDate",
-                     title: "Modification Date"
+                    field: "modificationDate",
+                    width: 200,
+                    title: "Modification Date"
                 },
 
 
 
 
                     {
+                        width: 150,
                         command: [
                             {
                                 name: "del",

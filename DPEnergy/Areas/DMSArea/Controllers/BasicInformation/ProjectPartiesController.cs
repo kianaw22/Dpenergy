@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation;
@@ -39,6 +40,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 _context.ProjectPartiesManagerUW.Create(_mapper.Map<D_ProjectParties>(model));
                 _context.save();
 
@@ -52,7 +54,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.ProjectPartiesManagerUW.GetById(Id);
             var mapproj = _mapper.Map<D_ProjectPartiesViewModel>(proj);
@@ -66,6 +69,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 var projmapper = _mapper.Map<D_ProjectParties>(model);
                 _context.ProjectPartiesManagerUW.Update(projmapper);
                 _context.save();
@@ -78,12 +82,14 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.ProjectPartiesManagerUW.GetById(Id);
             if (proj == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No data  found for the selected row id .";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             return PartialView("_deleteProjectParties", proj);
         }
@@ -93,7 +99,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             _context.ProjectPartiesManagerUW.DeleteById(Id);
             _context.save();

@@ -35,6 +35,7 @@
                         <select asp-for="ProjectCode" asp-items="@(new SelectList(ListProject,"ProjectCode","ProjectCode"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
                         </select>
+                        <span asp-validation-for="ProjectCode" class="text-danger"></span>
                         <div>   </div>
                     </div>
 

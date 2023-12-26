@@ -63,18 +63,18 @@
                     <label asp-for="RoleInProject" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="RoleInProject" class="form-control selectpicker custominput" id="select-RoleInProject" data-live-search="true" style="direction: ltr">
-                            <option value="" selected disabled hidden style="direction: ltr"> Select Role in project</option>
-                            <option data-tokens="owner"> Owner</option>
-                            <option data-tokens="contractor">  Contractor</option>
-                            <option data-tokens="Subcontractor">  Subcontractor</option>
-                            <option data-tokens="Vendor">  Vendor</option>
-                            <option data-tokens="client">  Client</option>
-                            <option data-tokens="MC">  MC</option>
-                            <option data-tokens="consultant">  consultant</option>
-                            <option data-tokens="package">  Package</option>
-                            <option data-tokens="partner">  Partner</option>
-                            <option data-tokens="package"> Participation</option>
-                            <option data-tokens="package"> Consortium</option>
+                            <option value="" selected='@(Model == null || (Model!= null && Model.RoleInProject == null))' disabled hidden>Select Role in project</option>
+                            <option data-tokens="Owner" value="Owner" selected='@(Model != null && Model.RoleInProject == "Owner")'>Owner</option>
+                            <option data-tokens="Contractor" value="Contractor" selected='@(Model != null && Model.RoleInProject == "Contractor")'>Contractor</option>
+                            <option data-tokens="Subcontractor" value="Subcontractor" selected='@(Model != null && Model.RoleInProject == "Subcontractor")'>Subcontractor</option>
+                            <option data-tokens="Vendor" value="Vendor" selected='@(Model != null && Model.RoleInProject == "Vendor")'>Vendor</option>
+                            <option data-tokens="Client" value="Client" selected='@(Model != null && Model.RoleInProject == "Client")'>Client</option>
+                            <option data-tokens="MC" value="MC" selected='@(Model != null && Model.RoleInProject == "MC")'>MC</option>
+                            <option data-tokens="Consultant" value="Consultant" selected='@(Model != null && Model.RoleInProject == "Consultant")'>Consultant</option>
+                            <option data-tokens="Package" value="Package" selected='@(Model != null && Model.RoleInProject == "Package")'>Package</option>
+                            <option data-tokens="Partner" value="Partner" selected='@(Model != null && Model.RoleInProject == "Partner")'>Partner</option>
+                            <option data-tokens="Participation" value="Participation" selected='@(Model != null && Model.RoleInProject == "Participation")'>Participation</option>
+                            <option data-tokens="Consortium" value="Consortium" selected='@(Model != null && Model.RoleInProject == "Consortium")'>Consortium</option>
                         </select>
                         <div>   </div>
                     </div>

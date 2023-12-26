@@ -71,7 +71,7 @@
                 filterable: true,
                 groupable: true,
                 sortable: true,
-                toolbar: ["pdf", "search"],
+                toolbar: ["pdf", "search","excel"],
 
                 pageable: {
                     refresh: true,
@@ -83,33 +83,46 @@
                     title: "id"
                 }, {
                     field: "projectCode",
+                    width: 150,
+                    filterable: {
+                            multi: true
+                        },
                     title: "ProjectCode"
                 }, {
-                    field: "stage" ,
+                    field: "stage",
+                    width: 150,
                     title: "Stage"
                 }, {
                     field: "stageName",
+                    width: 150,
                     title: "StageName"
                 }, {
                     field: "stageDescription",
+                    width: 150,
                     title: "StageDescription"
                 }, {
                     field: "percent",
+                    width: 150,
                     title: "Percent"
                 }, {
                      field: "order",
+                     width: 150,
                      title: "Order"
                 },  {
                      field: "creator",
+                     width: 150,
                      title: "Creator"
                 },{
                      field: "creationDate",
+                     width: 150,
                      title: "Creation Date"
                 }, {
-                     field: "modifier",
+                    field: "modifier",
+                     width: 150,
                      title: "Modifier"
                 }, {
-                     field: "modificationDate",
+                    field: "modificationDate",
+                     width: 150,
                      title: "Modification Date"
                 },
 
@@ -117,6 +130,7 @@
 
 
                     {
+                        width: 150,
                         command: [
                             {
                                 name: "del",

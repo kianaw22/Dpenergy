@@ -48,7 +48,7 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
         public string ClientDicipline { get; set; }
 
         [Display(Name = "DocumentType")]
-       [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
         public string DocumentType { get; set; }
 
         [Display(Name = "Bidover")]

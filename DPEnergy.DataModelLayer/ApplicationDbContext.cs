@@ -60,7 +60,7 @@ namespace DPEnergy.DataModelLayer
         public DbSet<D_Revision> D_Revision { get; set; }
        public DbSet<D_RevisionCode> D_RevisionCode { get; set; }
         public DbSet<Reports> Reports { get; set; }
-        public DbSet<D_UserProject> D_UserProject { get; set; }
+      public DbSet<D_UserProject> D_UserProject { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

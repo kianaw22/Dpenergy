@@ -32,6 +32,10 @@
         </div>
 
         <div id="grid"></div>
+        <ul id="context-menu">
+            <li id="DeleteContext">Delete</li>
+            <li id="EditContext"> Edit</li>
+        </ul>
         <div class="modal fade" id="myModalSetter">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -307,7 +311,7 @@
                                                 $('#DeleteModalBody').html(result);
                                                 $("#myModaldeletor").modal("show");
                                             }
-                                           
+
                                         },
                                         error: function (xhr, status) {
                                             alert(status);
@@ -325,7 +329,7 @@
                                     window.location.href = '@Url.Action("EditMDR", "MDR")/' + item.id;
                                 }
                             },
-                           
+
 
                         ]
                     }
@@ -337,7 +341,43 @@
             grid.hideColumn("order");
 
             //$("#grid").data("kendoGrid").wrapper.find(".k-grid-header-wrap").off("scroll.kendoGrid");
+            $("#context-menu").kendoContextMenu({
+            target: "#grid",
+            filter: "tr[role='row']",
+            select: function (e) {
+                var grid = $("#grid").data("kendoGrid");
+                var model = grid.dataItem(e.target);
+                var item = e.item.id;
+                console.log(item);
+               // console.log(e.target);
+                switch (item) {
+                    case "Edit":
+                        window.location.href = '@Url.Action("EditRevision", "Revision")/' + model.id;
+                        break;
+                    case "Delete":
+                        url = "/DMSArea/Revision/DeleteRevision";
+                        console.log("here");
+                        $.ajax({
+                            url: url,
+                            data: { id: model.id },
+                            type: 'Get',
+                            success: function (result) {
+                                if (result === "bad") {
+                                    alert("Revision with existed Transmittal Number cannot be deleted");
+                                } else {
+                                    $('#DeleteModalBody').html(result);
+                                    $("#myModaldeletor").modal("show");
+                                }
+                            },
+                            error: function (xhr, status) {
+                                alert(status);
+                            }
+                        });
+                        break;
 
+                };
+            }
+        });
         });
 
 
