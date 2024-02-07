@@ -115,8 +115,8 @@
                     <label asp-for="Company" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Company" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
-                            <option value="" selected='@(Model == null || (Model!= null && Model.Company == null))"' disabled hidden>Select company</option>
-                            <option data-tokens="Daryapala Energy" value="Daryapala Energy" selected='@(Model != null && Model.Company == "Daryapala Energy")'>Daryapala Energy</option>
+                            <option value="" selected disabled hidden>Select company</option>
+                            <option data-tokens="Daryapala Energy" value="Daryapala Energy">Daryapala Energy</option>
 
                         </select>
                         <span asp-validation-for="Company" class="text-danger"></span>
@@ -201,10 +201,10 @@
                 <div>
                     <label asp-for="StartUpRequest" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="StartUpRequest" class="form-control selectpicker custominput" id="select-StartUpRequest" data-live-search="true" style="direction: ltr">
-                            <option value="" selected='@(Model == null || (Model!= null && Model.StartUpRequest == null))' disabled hidden>Select StartUpRequest</option>
-                            <option data-tokens="موقت" value="موقت" selected='@(Model != null && Model.StartUpRequest == "موقت")'>موقت</option>
-                            <option data-tokens="دائم" value="دائم" selected='@(Model != null && Model.StartUpRequest == "دائم")'>دائم</option>
+                        <select asp-for="StartUpRequest" class="form-control selectpicker custominput"  data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden>Select StartUpRequest</option>
+                            <option data-tokens="موقت" value="موقت" >موقت</option>
+                            <option data-tokens="دائم" value="دائم">دائم</option>
                         </select>
                     </div>
                     <div>   </div>
@@ -216,10 +216,10 @@
                     <label asp-for="Status" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Status" class="form-control selectpicker custominput" id="select-Company" data-live-search="true">
-                            <option value="" selected='@(Model == null || (Model!= null && Model.Status == null)))' disabled hidden>Select Status</option>
-                            <option data-tokens="قطعی" value="قطعی" selected='@(Model != null && Model.Status == "قطعی")'>قطعی</option>
-                            <option data-tokens="خاتمه یافته" value="خاتمه یافته" selected='@(Model != null && Model.Status == "خاتمه یافته")'>خاتمه یافته</option>
-                            <option data-tokens="کاریابی" value="کاریابی" selected='@(Model != null && Model.Status == "کاریابی")'>کاریابی</option>
+                            <option  selected value="" disabled hidden>Select Status</option>
+                            <option data-tokens="قطعی" value="قطعی">قطعی</option>
+                            <option data-tokens="خاتمه یافته" value="خاتمه یافته" >خاتمه یافته</option>
+                            <option data-tokens="کاریابی" value="کاریابی">کاریابی</option>
                         </select>
                         <div>   </div>
                     </div>

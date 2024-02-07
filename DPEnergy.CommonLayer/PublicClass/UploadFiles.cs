@@ -18,7 +18,42 @@ namespace DPEnergy.CommonLayer.PublicClass
         {
             _appEnvironment = appEnvironment;
         }
+        public Tuple<bool, string> UploadNezamvazife(IEnumerable<IFormFile> files, string uploadPath, string name)
+        {
+            var result = false;
+            var upload = Path.Combine(_appEnvironment.WebRootPath, uploadPath , name);
 
+
+            if (File.Exists(upload))
+            {
+                result = true;
+                return Tuple.Create(result, Path.Combine("wwwroot", uploadPath));
+            }
+
+            foreach (var item in files)
+            {
+
+                using (var fs = new FileStream(upload, FileMode.Create))
+                {
+                    item.CopyTo(fs);
+                }
+
+            }
+            return Tuple.Create(result, Path.Combine(uploadPath, name)) ;
+        }
+        public bool DeleteNezamVazife(string uploadPath, string name)
+        {
+            var upload = Path.Combine(_appEnvironment.WebRootPath, uploadPath);
+            var filePath = Path.Combine(upload, name);
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                return true;
+            }
+
+            return false;
+        }
         public string UploadFileFunc(IEnumerable<IFormFile> files, string uploadPath)
         {
             var upload = Path.Combine(_appEnvironment.WebRootPath, uploadPath);

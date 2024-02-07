@@ -8,6 +8,8 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation
     public class D_PhaseViewModel
     {
         public string Id { get; set; }
+        [Display(Name = "Project Code")]
+        public string ProjectCode { get; set; }
 
         [Display(Name = "Phase")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]

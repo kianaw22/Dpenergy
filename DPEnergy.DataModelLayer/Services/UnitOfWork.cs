@@ -3,6 +3,7 @@ using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
+using DPEnergy.DataModelLayer.Entities.Personel;
 using DPEnergy.DataModelLayer.Entities.Reporrts;
 using DPEnergy.DataModelLayer.Entities.User;
 using DPEnergy.DataModelLayer.Repository;
@@ -67,8 +68,44 @@ namespace DPEnergy.DataModelLayer.Services
         private GenericClass<D_RetReplysheetStage> _retreplysheetstage;
         private GenericClass<Reports> _reports;
         private GenericClass<D_UserProject> _userproject;
+        private GenericClass<P_ContactInf>_contactinf;
+        private GenericClass<P_VaziatKhedmat> _vaziatkhedmat;
+        private GenericClass<P_BankAccountDetails> _bankaccountdetails;
         //کاربران
 
+        public GenericClass<P_ContactInf> ContactInfUW
+        {
+            get
+            {
+                if (_contactinf == null)
+                {
+                    _contactinf = new GenericClass<P_ContactInf>(_context);
+                }
+                return _contactinf;
+            }
+        }
+        public GenericClass<P_VaziatKhedmat> VaziatKhedmatUW
+        {
+            get
+            {
+                if (_vaziatkhedmat == null)
+                {
+                    _vaziatkhedmat = new GenericClass<P_VaziatKhedmat>(_context);
+                }
+                return _vaziatkhedmat;
+            }
+        }
+        public GenericClass<P_BankAccountDetails> BankAccountDetailsUW
+        {
+            get
+            {
+                if (_bankaccountdetails == null)
+                {
+                    _bankaccountdetails = new GenericClass<P_BankAccountDetails>(_context);
+                }
+                return _bankaccountdetails;
+            }
+        }
         public GenericClass<D_UserProject> UserProjectUW
         {
             get

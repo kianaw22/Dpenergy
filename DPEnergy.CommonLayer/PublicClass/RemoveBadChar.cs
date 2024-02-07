@@ -12,7 +12,7 @@ namespace DPEnergy.CommonLayer.PublicClass
         public static string RemoveInvalidJsonCharacters(string input)
         {
             // Remove characters that are not valid in JSON and replace them with spaces
-            string sanitizedInput = Regex.Replace(input, @"[^\x20-\x7E]", "");
+            string sanitizedInput = Regex.Replace(input, @"[^\x20-\x7E\u0600-\u06FF\uFB8A\u067E\u0686\u06AF\u200C\u200F]+", "");
             return sanitizedInput;
         }
         public static void SanitizeStringProperties(object model)

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,6 +12,7 @@ using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Repository;
 using DPEnergy.DataModelLayer.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
@@ -24,23 +26,27 @@ namespace DPEnergy
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
-
+        public IWebHostEnvironment Environment { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //handle timeout
+
             //DataBaseService
             services.AddDbContext<ApplicationDbContext>(option =>
             {
                 option.EnableDetailedErrors(true);
                 option.UseSqlServer(Configuration.GetConnectionString("DpenergyConnectionString"),
                    datamodel => datamodel.MigrationsAssembly("DPEnergy.DataModelLayer")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); ;
-               
+
             });
 
             //Identity Service
@@ -51,10 +57,12 @@ namespace DPEnergy
 
             services.Configure<KestrelServerOptions>(options =>
             {
+
                 options.AllowSynchronousIO = true;
             });
             services.Configure<IISServerOptions>(options =>
             {
+
                 options.AllowSynchronousIO = true;
             });
             services.AddSignalR();
@@ -67,6 +75,21 @@ namespace DPEnergy
 
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "AspNetCore.Identity.Application";
+                options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                options.SlidingExpiration = true;
+                options.Cookie.IsEssential = true;
+            });
+            services.AddDataProtection()
+                .SetApplicationName($"dpenergy-{Environment.EnvironmentName}")
+                .PersistKeysToFileSystem(new DirectoryInfo($@"{Environment.ContentRootPath}\keys"));
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(1);
+            });
 
         }
 
@@ -85,10 +108,11 @@ namespace DPEnergy
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseRouting();
             app.UseAuthentication(); // Access to pages 
             app.UseAuthorization();  // Access to Information
+
 
             app.UseEndpoints(endpoints =>
             {

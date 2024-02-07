@@ -4,6 +4,7 @@ using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
+using DPEnergy.DataModelLayer.Entities.Personel;
 using DPEnergy.DataModelLayer.Entities.Reporrts;
 using DPEnergy.DataModelLayer.Entities.User;
 using DPEnergy.DataModelLayer.ViewModels;
@@ -11,6 +12,7 @@ using DPEnergy.DataModelLayer.ViewModels.Admin;
 using DPEnergy.DataModelLayer.ViewModels.DMS;
 using DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.ViewModels.DMS.Stackholders;
+using DPEnergy.DataModelLayer.ViewModels.Personel;
 using DPEnergy.DataModelLayer.ViewModels.Reports;
 using DPEnergy.DataModelLayer.ViewModels.User;
 using System;
@@ -65,6 +67,9 @@ namespace DPEnergy.AutoMapper
             CreateMap<D_RetReplysheetStage, D_RetReplysheetStageViewModel>().ReverseMap();
             CreateMap<Reports, ReportsViewModel>().ReverseMap();
             CreateMap<D_UserProject, D_UserProjectViewModel>().ReverseMap();
+            CreateMap<P_BankAccountDetails, P_BankAccountDetailsViewModel>().ReverseMap();
+            CreateMap<P_ContactInf, P_ContactInfViewModel>().ReverseMap();
+            CreateMap<P_VaziatKhedmat, P_VaziatKhedmatViewModel>().ReverseMap();
 
         }
     }

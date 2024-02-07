@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
+using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.DMS.Stackholders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
@@ -16,10 +19,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
     {
         private readonly IUnitOfWork _context;
         private readonly IMapper _mapper;
-        public ProjectMembersController(IUnitOfWork uow, IMapper mapper)
+        private readonly UserManager<A_UserManager> _userManager;
+        public ProjectMembersController(IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager)
         {
             _context = uow;
             _mapper = mapper;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -39,6 +44,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
             FillCombo();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
+                model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 model.CreationDate = DateTime.Now;
                 _context.ProjectMembersUW.Create(_mapper.Map<D_ProjectMembers>(model));
                 _context.save();
@@ -53,7 +60,9 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
             FillCombo();
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+
             }
             var proj = _context.ProjectMembersUW.GetById(Id);
             var mapproj = _mapper.Map<D_ProjectMembersViewModel>(proj);
@@ -66,8 +75,10 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         {
             FillCombo();
             model.ModificationDate = DateTime.Now;
+            model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 var projmapper = _mapper.Map<D_ProjectMembers>(model);
                 _context.ProjectMembersUW.Update(projmapper);
                 _context.save();
@@ -80,12 +91,15 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+
             }
             var proj = _context.ProjectMembersUW.GetById(Id);
             if (proj == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No data found for the selected row id.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             return PartialView("_deleteProjectMembers", proj);
         }
@@ -95,7 +109,9 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
+
             }
             _context.ProjectMembersUW.DeleteById(Id);
             _context.save();

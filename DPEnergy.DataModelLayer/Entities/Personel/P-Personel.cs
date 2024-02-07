@@ -19,17 +19,17 @@ namespace DPEnergy.DataModelLayer.Entities
         public string SodurPlace { get; set; }
         public string Mellicode { get; set; }
         public string BirthPlace { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public string MaritalStatus { get; set; }
         public string Department { get; set; }
-        public DateTime StartWorkDate { get; set; }
+        public DateTime? StartWorkDate { get; set; }
         public string ContractType { get; set; }
         public string Company { get; set; }
         public string WorkPlace { get; set; }
 
         public string VaziatEshteqal { get; set; }
         public string JobCategory { get; set; }
-        public DateTime TasfieDate { get; set; }
+        public DateTime? TasfieDate { get; set; }
         public string ElatTarkKar { get; set; }
         public string Cover { get; set; }
         public string Moaref { get; set; }
@@ -47,9 +47,10 @@ namespace DPEnergy.DataModelLayer.Entities
         public string MelliScanPath { get; set; }
         public string PersonalImagePath { get; set; }
         public string SignaturePath { get; set; }
-        public DateTime CreationDate { get; set; }
-        public DateTime ModificationDate { get; set; }
+        public DateTime? CreationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
         public string Creator { get; set; }
         public string Modifier { get; set; }
+         public string Note { get; set; }
     }
 }

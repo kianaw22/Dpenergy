@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
@@ -41,10 +42,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         [ValidateAntiForgeryToken]
         public IActionResult AddPosition(D_PositionViewModel model)
         {
+            model.CreationDate = DateTime.Now;
+            model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
             {
-                model.CreationDate = DateTime.Now;
-                model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
+                
+                JsonHelper.SanitizeStringProperties(model);
                 _context.PositionManagerUW.Create(_mapper.Map<D_Position>(model));
                 _context.save();
 
@@ -57,7 +60,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.PositionManagerUW.GetById(Id);
             var mapproj = _mapper.Map<D_PositionViewModel>(proj);
@@ -69,10 +73,10 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         public IActionResult EditPosition(D_PositionViewModel model)
         {
             model.ModificationDate = DateTime.Now;
-            
             model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
             {
+
                 var projmapper = _mapper.Map<D_Position>(model);
                 _context.PositionManagerUW.Update(projmapper);
                 _context.save();
@@ -85,12 +89,14 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             var proj = _context.PositionManagerUW.GetById(Id);
             if (proj == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No data found for the selected row id.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             return PartialView("_deletePosition", proj);
         }
@@ -100,7 +106,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
         {
             if (Id == null)
             {
-                return RedirectToAction("ErrorView", "Home");
+                var errorMessage = "No id found for the selected row.";
+                return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
             _context.PositionManagerUW.DeleteById(Id);
             _context.save();

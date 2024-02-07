@@ -1,0 +1,155 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.Personel.P_ContactInfViewModel
+@{
+    ViewData["Title"] = "AddContactnf";
+    List<P_Personel> ListPersonel = ViewBag.personellist;
+}
+
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a asp-controller="Contactnf" asp-action="index"><i class="icon-person position-left"></i> لیست اظلاعات حساب بانکی</a></li>
+        <li class="active">اضافه کردن اطلاعات تماس</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="icon-accessibility2"></i>
+            فرم ثبت اطلاعات تماس
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+        <form asp-controller="ContactInf" asp-action="AddContactInf" method="post">
+            <div class="col-md-6 col-md-offset-3">
+
+                <div>
+                    <!--PersonelCode-->
+                    <label asp-for="PersonelCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="PersonelCode" asp-items="@(new SelectList(from x in ListPersonel select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="personel-code" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Personel</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+                    <!--FirstName-->
+                    <div>
+                        <label asp-for="FirstName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="FirstName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--LastName-->
+                    <div>
+                        <label asp-for="LastName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--BankAccountNumber-->
+                    <div>
+                        <label asp-for="HomePhone" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="HomePhone" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="HomePhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--BankName-->
+                    <div>
+                        <label asp-for="MobilePhone" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="MobilePhone" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="MobilePhone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!--CardNumber-->
+                    <div>
+                        <label asp-for="Address" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="Address" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--PropertyType-->
+                    <div>
+                        <label asp-for="PropertyType" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <select asp-for="PropertyType" class="form-control selectpicker custominput" id="select-ContractType" data-live-search="true" style="direction: rtl">
+                                <option value="" selected disabled hidden style="direction: rtl">     نوع ملک را انتخاب کنید</option>
+                                <option data-tokens="مالک" >مالک</option>
+                                <option data-tokens="استیجاری">استیجاری</option>
+                                <option data-tokens="مجهول" >مجهول</option>
+                            </select>
+                            <div>   </div>
+                            <span asp-validation-for="PropertyType" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--IntroducedName-->
+                    <div>
+                        <label asp-for="IntroducedName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="IntroducedName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="IntroducedName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--IntroducedPhone-->
+                    <div>
+                        <label asp-for="IntroducedPhone" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="IntroducedPhone" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="IntroducedPhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--IntroducedAddress-->
+                    <div>
+                        <label asp-for="IntroducedAddress" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="IntroducedAddress" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="IntroducedAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 form-group" style="margin-top:15px;">
+                        <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                               value="ثبت" class="btn pull-right" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+@section PersonelScripts{
+
+    <script>
+        $('#personel-code').change(function () {
+            var personelcode = $(this).val();
+            console.log(personelcode);
+            $.ajax({
+                url: "/PersonelArea/ContactInf/GetName",
+                type: 'GET',
+                data: {
+                    personelcode: personelcode
+
+                },
+                success: function (data) {
+
+                    $('#FirstName').val(data.firstname);
+                    $('#LastName').val(data.lastname);
+
+                },
+                error: function () {
+                    console.log('Error retrieving name and family');
+                }
+            });
+        });
+    </script>
+
+}
+
+
+
+

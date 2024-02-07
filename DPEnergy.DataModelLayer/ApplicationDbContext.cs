@@ -3,6 +3,7 @@ using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
+using DPEnergy.DataModelLayer.Entities.Personel;
 using DPEnergy.DataModelLayer.Entities.Reporrts;
 using DPEnergy.DataModelLayer.Entities.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -61,11 +62,29 @@ namespace DPEnergy.DataModelLayer
        public DbSet<D_RevisionCode> D_RevisionCode { get; set; }
         public DbSet<Reports> Reports { get; set; }
       public DbSet<D_UserProject> D_UserProject { get; set; }
+        public DbSet<P_ContactInf> P_ContactInf { get; set; }
+        public DbSet<P_VaziatKhedmat> P_VaziatKhedmat { get; set; }
+        public DbSet<P_BankAccountDetails> P_BankAccountDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.Entity<D_UserProject>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_BankAccountDetails>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_VaziatKhedmat>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_ContactInf>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
 

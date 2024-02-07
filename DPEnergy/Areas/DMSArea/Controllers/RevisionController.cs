@@ -57,7 +57,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         }
         public IActionResult Index()
         {
-            var model = _context.RevisionUW.Get();
+            var model = _context.RevisionUW.Get().OrderBy(revision => revision.CreationDate);
             return View(model);
         }
         [HttpGet]
@@ -136,7 +136,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             {
                 var errorMessage = "No project found for the specified project code.";
                 return View("~/Views/Shared/Error.cshtml" ,errorMessage );
-            }
+             }
 
             rev.ModificationDate = DateTime.Now;
             rev.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
@@ -201,14 +201,14 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             return RedirectToAction("Index");
 
         }
-        public IActionResult GetProgress(string stage)
+        public IActionResult GetProgress(string stage , string projectcode)
         {
             if (stage == null)
             {
                 var errorMessage = "stage cannot be null";
                 return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
-            var data = _context.ProgressManagerUW.Get(x => x.Stage == stage).ToList()[0].Percent;
+            var data = _context.ProgressManagerUW.Get(x => x.Stage == stage && x.ProjectCode ==projectcode).ToList()[0].Percent;
             return Json(data);
         }
         [HttpGet]

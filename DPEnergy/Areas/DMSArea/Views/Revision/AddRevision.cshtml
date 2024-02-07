@@ -591,13 +591,14 @@
         // Attach an event listener to the client number selection field
         $('#stage').change(function () {
             var stage = $(this).val();
-
+            var projectcode = $("#pcode").val().trim();
             // Send an AJAX request to the server
             $.ajax({
                 url: "/DMSArea/Revision/GetProgress",
                 type: 'GET',
                 data: {
-                    stage: stage
+                    stage: stage,
+                    projectcode: projectcode
                 },
                 success: function (data) {
 

@@ -1,0 +1,215 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.Personel.P_BankAccountDetailsViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "AddBankAccountDetails";
+    List<P_Personel> ListPersonel = ViewBag.personellist;
+}
+
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a asp-controller="BankAccountDetails" asp-action="index"><i class="icon-person position-left"></i> لیست اظلاعات حساب بانکی</a></li>
+        <li class="active">ویرایش کردن حساب</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="icon-accessibility2"></i>
+            فرم ویرایش حساب
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+        <form asp-controller="BankAccountDetails" asp-action="EditBankAccountDetails" method="post">
+            <div class="col-md-6 col-md-offset-3">
+
+                <div>
+                    <!--PersonelCode-->
+                    <label asp-for="PersonelCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="PersonelCode" asp-items="@(new SelectList(from x in ListPersonel select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Personel</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+                    <!--FirstName-->
+                    <div>
+                        <label asp-for="FirstName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="FirstName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--LastName-->
+                    <div>
+                        <label asp-for="LastName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--BankAccountNumber-->
+                    <div>
+                        <label asp-for="BankAccountNumber" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="BankAccountNumber" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="BankAccountNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--BankName-->
+                    <div>
+                        <label asp-for="BankName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="BankName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="BankName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--Accounttype-->
+                    <div>
+                        <label asp-for="Accounttype" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <select asp-for="Accounttype" class="form-control selectpicker custominput" id="select-ContractType" data-live-search="true" style="direction: rtl">
+                                <option value="" selected disabled hidden style="direction: rtl">     نوع حساب را انتخاب کنید</option>
+                                <option data-tokens="جاری" selected="@(Model.Accounttype == "جاری")">جاری</option>
+                                <option data-tokens="سپرده کوتاه مدت" selected="@(Model.Accounttype == "سپرده کوتاه مدت")"> سپرده کوتاه مدت</option>
+                                <option data-tokens="قرض الحسنه" selected="@(Model.Accounttype == "قرض الحسنه")">قرض الحسنه</option>
+                                <option data-tokens="مجهول" selected="@(Model.Accounttype == "مجهول")">مجهول</option>
+                            </select>
+                            <div>   </div>
+                            <span asp-validation-for="Accounttype" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--CardNumber-->
+                    <div>
+                        <label asp-for="CardNumber" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="CardNumber" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="CardNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--BankAccountNumber-->
+                    <div>
+                        <label asp-for="ExpirationDate" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="input-group col-md-9 col-xs-12" style="padding-left:9px; padding-right:9px;">
+                            <div class="input-group-addon"
+                                 style="border:1px solid gray; padding:6px">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </div>
+                            <input asp-for="ExpirationDate" id="expirationdatee" name="expirationdatee" type="text"
+                                   value="@(Model.ExpirationDate.HasValue ? ConvertDateTime.ConvertMiladiToShamsi(Model.ExpirationDate, "yyyy/MM/dd") : string.Empty)"
+                                   class="form-control custominput datetimepicker">
+
+                        </div>
+                        <span asp-validation-for="ExpirationDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
+                    </div>
+
+                    <!--Creation Date -->
+                    <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+                    <!--Creator-->
+                    <input asp-for="Creator" type="hidden" class="form-control custominput" />
+
+                    <!--ModificationDate -->
+                    <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+                    <!--Modifier-->
+                    <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+                    <div class="col-xs-12 form-group" style="margin-top:15px;">
+                        <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                               value="ثبت" class="btn pull-right" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+@section PersonelScripts{
+
+    <script>
+        $(document).ready(function () {
+            $('.datetimepicker').persianDatepicker({
+                "inline": false,
+                "format": "L",
+                "initialValue": false,
+                "minDate": 0,
+                "maxDate": 2000000000000,
+                "autoClose": true,
+
+                "calendar": {
+                    "persian": {
+                        "locale": "fa",
+                        "showHint": true,
+                        "leapYearMode": "algorithmic"
+                    },
+                    "gregorian": {
+                        "locale": "en",
+                        "showHint": true
+                    }
+                },
+                "navigator": {
+                    "enabled": true,
+                    "scroll": {
+                        "enabled": true
+                    },
+                    "text": {
+                        "btnNextText": "<",
+                        "btnPrevText": ">"
+                    }
+                },
+                "toolbox": {
+                    "enabled": true,
+                    "calendarSwitch": {
+                        "enabled": true,
+                        "format": "MMMM"
+                    },
+                    "todayButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "امروز",
+                            "en": "Today"
+                        }
+                    },
+                    "submitButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "تایید",
+                            "en": "Submit"
+                        }
+                    },
+                    "text": {
+                        "btnToday": "امروز"
+                    }
+                },
+
+
+            });
+        });
+    </script>
+    <script>
+        // Attach an event listener to the client number selection field
+        $('#personel-code').change(function () {
+            var personelcode = $(this).val();
+            console.log(personelcode);
+            $.ajax({
+                url: "/PersonelArea/BankAccountDetails/GetName",
+                type: 'GET',
+                data: {
+                    personelcode: personelcode
+
+                },
+                success: function (data) {
+
+                    $('#FirstName').val(data.firstname);
+                    $('#LastName').val(data.lastname);
+
+                },
+                error: function () {
+                    console.log('Error retrieving name and family');
+                }
+            });
+        });
+    </script>
+
+}
+

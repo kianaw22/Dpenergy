@@ -52,20 +52,20 @@ namespace DPEnergy.DataModelLayer.Entities.DMS
         public string MeetingHeld { get; set; }
         public string DpDicipline { get; set; }
         public string ClientDicipline { get; set; }
-        public bool CheckList { get; set; }
-        public bool IncomingTransmittalCheck { get; set; }
+        public bool? CheckList { get; set; }
+        public bool? IncomingTransmittalCheck { get; set; }
         public string Creator { get; set; }
         public DateTime? CreationDate { get; set; }
         public string Modifier { get; set; }
         public DateTime? ModificationDate { get; set; }
-        public bool CD { get; set; }
-        public bool Print { get; set; }
-        public bool Email { get; set; }
-        public bool Other { get; set; }
-        public bool Original { get; set; }
-        public bool File { get; set; }
+        public bool? CD { get; set; }
+        public bool? Print { get; set; }
+        public bool? Email { get; set; }
+        public bool? Other { get; set; }
+        public bool? Original { get; set; }
+        public bool? File { get; set; }
 
-        public bool Consideration { get; set; }
+        public bool? Consideration { get; set; }
         public string Attachment { get; set; }
 
 

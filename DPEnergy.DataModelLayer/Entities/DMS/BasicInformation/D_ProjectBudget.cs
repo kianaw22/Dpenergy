@@ -16,9 +16,9 @@ namespace DPEnergy.DataModelLayer.Entities.DMS.BasicInformation
         public string TotalBudget { get; set; }
         public string OverTimeOrDeduction {get;set;}
         public string Creator { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; }
         public string Modifier { get; set; }
-        public DateTime ModificationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
 
     }
 }

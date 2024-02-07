@@ -261,8 +261,12 @@
                 <div>
                     <label asp-for="Active" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <input asp-for="Active" type="text" class="form-control custominput" placeholder="Active ..." autocomplete="off" />
-                        <span asp-validation-for="Active" class="text-danger"></span>
+                        <select asp-for="Active" class="form-control selectpicker custominput" id="select-ContractType" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">     نوع ملک را انتخاب کنید</option>
+                            <option data-tokens="مالک" selected="@(Model.Active == "Active")">مالک</option>
+                            <option data-tokens="مجهول" selected="@(Model.Active == "Deactive")">مجهول</option>
+                        </select>
+                        <div>   </div>
                     </div>
 
                 </div>

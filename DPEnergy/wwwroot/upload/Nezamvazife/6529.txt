@@ -1,0 +1,18 @@
+ fmt.Scanf("%s", &name)
+    fmt.Scanf("%d", &alphabet_count)
+    fmt.Scanf("%g", &float_value)
+    fmt.Scanf("%t", &bool_value)
+
+fmt.Scan(&a , &b)  space or next line 
+
+scanner := bufio.NewScanner(os.Stdin)
+scanner.Scan()
+scanner.text()
+
+type tuple struct{
+	first int 
+	second string 
+}
+
+nei := make(map[string][]int)  map a string to a slice of int 
+names := make([]string, 0)

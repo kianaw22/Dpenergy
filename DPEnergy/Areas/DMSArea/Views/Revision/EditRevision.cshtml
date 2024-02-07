@@ -20,7 +20,7 @@
         border-radius: 4px;
         -webkit-appearance: none;
         -moz-appearance: none;
-        appearance: none;
+     
         outline: none;
         cursor: pointer;
     }
@@ -449,6 +449,16 @@
             <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
             <!--Modifier-->
             <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+            <input asp-for="TransmittalNumber" type="hidden" class="form-control custominput" />
+            <input asp-for="TransmittalDate" type="hidden" class="form-control custominput" />
+            <input asp-for="TransmittalCreatedBy" type="hidden" class="form-control custominput" />
+            <input asp-for="IssuedBy" type="hidden" class="form-control custominput" />
+            <input asp-for="Reciever" type="hidden" class="form-control custominput" />
+            <input asp-for="Client" type="hidden" class="form-control custominput" />
+            <input asp-for="NumberofCopies" type="hidden" class="form-control custominput" />
+            <input asp-for="SentType" type="hidden" class="form-control custominput" />
+            <input asp-for="Consultant" type="hidden" class="form-control custominput" />
+            <input asp-for="RemarksTransmittal" type="hidden" class="form-control custominput" />
             <div class="col-xs-12 form-group" style="margin-top:15px; text-align:right ">
                 <input type="submit" name="buttonId" value="Save" id="btn1" class="btn btn-primary btn" />
                 <!-- <input type="submit" name="buttonId" value="Save and Next Item" id="btn2" class="btn btn-primary btn" /> -->
@@ -459,7 +469,7 @@
     </div>
 </div>
 
-</div>
+
 @section DMSScripts{
     <script>
         var UploadFile = function () {

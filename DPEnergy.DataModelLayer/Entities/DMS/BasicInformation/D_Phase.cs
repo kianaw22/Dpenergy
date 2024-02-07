@@ -9,6 +9,7 @@ namespace DPEnergy.DataModelLayer.Entities.DMS.BasicInformation
     {
         [Key]
         public string Id { get; set; }
+        public string ProjectCode { get; set; }
         public string Phase { get; set; }
         public string Description { get; set; }
         public int? Order { get; set; }

@@ -14,5 +14,7 @@ namespace DPEnergy.CommonLayer.Services
         public string UploadReport(IEnumerable<IFormFile> files, string uploadPath, string projectcode);
         public Tuple<bool, string> UploadRevAttchment(IEnumerable<IFormFile> files, string uploadPath, string projectcode, string name);
         public bool DeleteFile(string uploadPath, string projectcode, string name);
+        public Tuple<bool, string> UploadNezamvazife(IEnumerable<IFormFile> files, string uploadPath, string name);
+        public bool DeleteNezamVazife(string uploadPath, string name); 
     }
 }

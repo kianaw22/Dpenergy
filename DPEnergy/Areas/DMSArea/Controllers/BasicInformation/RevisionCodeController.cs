@@ -74,6 +74,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             FillCombo();
             JsonHelper.SanitizeStringProperties(model);
             model.ModificationDate = DateTime.Now;
+            model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
             {
                 var projmapper = _mapper.Map<D_RevisionCode>(model);

@@ -64,13 +64,13 @@
             var myobj = '@Html.Raw(Json.Serialize(Model))';
             var dpjson = JSON.parse(myobj);
             var seriesData = [{
-                year: "2000",
-                sold: 100,
-                produced: 200
+                year: "2023",
+                DocumentNumber: 100,
+                WF: 200
             }, {
-                year: "2001",
-                sold: 250,
-                produced: 280
+                year: "2022",
+                DocumentNumber: 250,
+                WF: 280
             }];
 
             $("#chart").kendoChart({
@@ -78,11 +78,11 @@
                     data: seriesData
                 },
                 series: [{
-                    name: "Sold",
-                    field: "sold"
+                    name: "DocumentNumber",
+                    field: "DocumentNumber"
                 }, {
-                    name: "Produced",
-                    field: "produced"
+                    name: "WF",
+                    field: "WF"
                 }],
                 categoryAxis: {
                     field: "year"
@@ -95,7 +95,7 @@
         $("#donutchart").kendoChart({
             title: {
                 position: "bottom",
-                text: "Share of Internet Population Growth"
+                text: "Progress of Documents"
             },
             legend: {
                 visible: false
@@ -108,56 +108,56 @@
                 startAngle: 150
             },
             series: [{
-                name: "2011",
+                name: "2023",
                 data: [{
-                    category: "Asia",
+                    category: "Mechanical",
                     value: 30.8,
                     color: "#9de219"
                 }, {
-                    category: "Europe",
+                    category: "Project Control",
                     value: 21.1,
                     color: "#90cc38"
                 }, {
-                    category: "Latin America",
+                    category: "Electrical",
                     value: 16.3,
                     color: "#068c35"
                 }, {
-                    category: "Africa",
+                    category: "Instrument",
                     value: 17.6,
                     color: "#006634"
                 }, {
-                    category: "Middle East",
+                    category: "Piping",
                     value: 9.2,
                     color: "#004d38"
                 }, {
-                    category: "North America",
+                    category: "Civil Engineering",
                     value: 4.6,
                     color: "#033939"
                 }]
             }, {
-                name: "2012",
+                name: "2022",
                 data: [{
-                    category: "Asia",
+                    category: "Mechanical",
                     value: 53.8,
                     color: "#9de219"
                 }, {
-                    category: "Europe",
+                    category: "Project Control",
                     value: 16.1,
                     color: "#90cc38"
                 }, {
-                    category: "Latin America",
+                    category: "Electrical",
                     value: 11.3,
                     color: "#068c35"
                 }, {
-                    category: "Africa",
+                    category: "Instrument",
                     value: 9.6,
                     color: "#006634"
                 }, {
-                    category: "Middle East",
+                    category: "Piping",
                     value: 5.2,
                     color: "#004d38"
                 }, {
-                    category: "North America",
+                    category: "Civil Engineering",
                     value: 3.6,
                     color: "#033939"
                 }],
@@ -218,7 +218,7 @@
 
         $("#piechart").kendoChart({
             title: {
-                text: "Spain Electricity Production"
+                text: "Type of Documents in Approval"
             },
             legend: {
                 position: "bottom"
@@ -232,19 +232,19 @@
             series: [{
                 type: "pie",
                 data: [{
-                    category: "Hydro",
+                    category: "NotRevised",
                     value: 22,
                     color: "#5673F5"
                 }, {
-                    category: "Solar",
+                    category: "Aprroved",
                     color: "#a0b0c0",
                     value: 2
                 }, {
-                    category: "Nuclear",
+                    category: "Commented",
                     color: "#9920A3",
                     value: 49
                 }, {
-                    category: "Wind",
+                    category: "Issued",
                     color: "#F445B4",
                     value: 27
                 }]
@@ -254,7 +254,7 @@
 
         $("#linechart").kendoChart({
             title: {
-                text: "Internet Users"
+                text: "Document Progress"
             },
             legend: {
                 position: "bottom"
@@ -263,11 +263,11 @@
                 type: "line"
             },
             series: [{
-                name: "World",
+                name: "WF",
                 data: [15.7, 16.7, 20, 23.5, 26.6],
                 color: "#652E2E"
             }, {
-                name: "United States",
+                name: "Progress",
                 data: [67.96, 68.93, 75, 74, 78],
                 color: "#F60909"
                     
@@ -278,13 +278,13 @@
                 }
             },
             categoryAxis: {
-                categories: [2005, 2006, 2007, 2008, 2009]
+                categories: [ 2018,2019, 2021, 2022, 2023]
             }
         });
 
         $("#areachart").kendoChart({
             title: {
-                text: "Internet Users"
+                text: "Document Progress"
             },
             legend: {
                 position: "bottom"
@@ -293,11 +293,11 @@
                 type: "area"
             },
             series: [{
-                name: "World",
+                name: "WF",
                 data: [15.7, 16.7, 20, 23.5, 26.6],
                 color: "#EEF556"
             }, {
-                name: "United States",
+                name: "progeress",
                 data: [67.96, 68.93, 75, 74, 78],
                 color: "#D39B05"
             }],

@@ -10,23 +10,23 @@ namespace DPEnergy.DataModelLayer.ViewModels
 
         [Display(Name = "کد پرسنلی")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} وارد نشده است.")]
-        [StringLength(maximumLength: 10, MinimumLength = 2, ErrorMessage = "{0} باید حداقل 4 کاراکنر باشد.")]
+      //  [StringLength(maximumLength: 10, MinimumLength = 2, ErrorMessage = "{0} باید حداقل 4 کاراکنر باشد.")]
         public string PersonelCode { get; set; }
 
         [Display(Name = "نام")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} وارد نشده است.")]
-        [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "{0} باید حداقل 2 و حداکثر 100 کاراکتر باشد.")]
+       // [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "{0} باید حداقل 2 و حداکثر 100 کاراکتر باشد.")]
         [RegularExpression(@"^[^\\/:*;,<>\.\)\(]+$", ErrorMessage = "از کاراکترهای غیرمجاز استفاده نکنید.")]
         public string FirstName { get; set; }
 
         [Display(Name = " نام خانوادگی")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} وارد نشده است.")]
-        [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "{0} باید حداقل 2 و حداکثر 100 کاراکتر باشد.")]
+       // [StringLength(maximumLength: 100, MinimumLength = 2, ErrorMessage = "{0} باید حداقل 2 و حداکثر 100 کاراکتر باشد.")]
         [RegularExpression(@"^[^\\/:*;,<>\.\)\(]+$", ErrorMessage = "از کاراکترهای غیرمجاز استفاده نکنید.")]
         public string LastName { get; set; }
 
         [Display(Name = "کد حسابداری")]
-        [StringLength(maximumLength: 6, MinimumLength = 6, ErrorMessage = "{0} باید حداقل 4 کاراکنر باشد.")]
+     
         public string HesabDariCode { get; set; }
 
         [Display(Name = "نام پدر")]
@@ -132,5 +132,7 @@ namespace DPEnergy.DataModelLayer.ViewModels
         public string Creator { get; set; }
         [Display(Name = "اصلاح کننده")]
         public string Modifier { get; set; }
+        [Display(Name = "یادداشت")]
+        public string Note { get; set; }
     }
 }

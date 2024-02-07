@@ -25,7 +25,7 @@
 
 
     <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray; background-color:#dae7f4;">
-        <form asp-controller="UserProject" asp-action="AddUserProject" method="post" enctype="multipart/form-data">
+        <form asp-controller="UserProject" asp-action="EditUserProject" method="post" enctype="multipart/form-data">
 
             <div class="col-md-6 col-md-offset-3">
                 <!--Name-->
@@ -42,18 +42,18 @@
                 </div>
                 <!--Project-->
                 <div>
-                    <label asp-for="ProjectId" class="control-label col-md-3 col-xs-12"></label>
+                    <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="ProjectId" sp-items="@(new SelectList(from x in ListProject select new { Value = x.ProjectCode ,Text = x.ProjectCode + " - " + x.Title}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                        <select asp-for="ProjectCode" asp-items="@(new SelectList(from x in ListProject select new { Value = x.ProjectCode ,Text = x.ProjectCode + " - " + x.Title}, "Value","Text"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
                         </select>
-                        <span asp-validation-for="ProjectId" class="text-danger"></span>
+                        <span asp-validation-for="ProjectCode" class="text-danger"></span>
                         <div>   </div>
                     </div>
 
                 </div>
                 <!--Project Code -->
-                <input asp-for="ProjectCode" type="hidden" class="form-control custominput" />
+                <input asp-for="ProjectId" type="hidden" class="form-control custominput" />
                 <!--ProjectTitle -->
                 <input asp-for="ProjectTitle" type="hidden" class="form-control custominput" />
                 <!--UserNAme -->

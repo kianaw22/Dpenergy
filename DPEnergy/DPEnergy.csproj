@@ -6,9 +6,21 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\reports\NewFolder\**" />
+    <Compile Remove="wwwroot\upload\LetterAttachment\**" />
+    <Compile Remove="wwwroot\upload\NewFolder1\**" />
+    <Compile Remove="wwwroot\upload\NewFolder\**" />
     <Content Remove="wwwroot\reports\NewFolder\**" />
+    <Content Remove="wwwroot\upload\LetterAttachment\**" />
+    <Content Remove="wwwroot\upload\NewFolder1\**" />
+    <Content Remove="wwwroot\upload\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\reports\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\upload\LetterAttachment\**" />
+    <EmbeddedResource Remove="wwwroot\upload\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\upload\NewFolder\**" />
     <None Remove="wwwroot\reports\NewFolder\**" />
+    <None Remove="wwwroot\upload\LetterAttachment\**" />
+    <None Remove="wwwroot\upload\NewFolder1\**" />
+    <None Remove="wwwroot\upload\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +57,8 @@
     <Folder Include="wwwroot\lib\bootstrap-select\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\automationform\icons\" />
     <Folder Include="wwwroot\lib\ckeditor\plugins\defaultform\icons\" />
+    <Folder Include="wwwroot\lib\PersianDatePicker\css\" />
+    <Folder Include="wwwroot\lib\PersianDatePicker\js\" />
     <Folder Include="wwwroot\Panel\assets\js\charts\google\bars\" />
     <Folder Include="wwwroot\Panel\assets\js\charts\google\bubbles\" />
     <Folder Include="wwwroot\Panel\assets\js\charts\google\lines\" />
@@ -54,8 +68,6 @@
     <Folder Include="wwwroot\Panel\assets\js\plugins\buttons\" />
     <Folder Include="wwwroot\upload\atachments\Melliscan\" />
     <Folder Include="wwwroot\upload\atachments\Shenasname-scan\" />
-    <Folder Include="wwwroot\upload\LetterAttachment\" />
-    <Folder Include="wwwroot\upload\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -44,12 +44,16 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             if (ModelState.IsValid)
             {
                 JsonHelper.SanitizeStringProperties(model);
+                model.ProjectCode = _context.projectManagerUW.GetById(model.ProjectId).ProjectCode;
                 model.UserName = _context.UserManagerUW.GetById(model.UserId).UserName;
                 model.CreationDate = DateTime.Now;
             
-                var p = _context.projectManagerUW.GetById(model.ProjectId);
-                model.ProjectCode = p.ProjectCode;
-                model.ProjectTitle = p.Title;
+                var p = _context.projectManagerUW.Get(x => x.ProjectCode == model.ProjectCode);
+                if (p != null && p.Any()){
+                    var pp  = p.ToList()[0];
+                    model.ProjectTitle = pp.Title;
+                }
+               
                 model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                 _context.UserProjectUW.Create(_mapper.Map<D_UserProject>(model));
                 _context.save();
@@ -78,6 +82,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         {
             FillCombo();
             model.ModificationDate = DateTime.Now;
+            model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
             {
                 JsonHelper.SanitizeStringProperties(model);
@@ -91,9 +96,9 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             return View(model);
         }
         [HttpGet]
-        public IActionResult DeleteUserProject(int Id)
+        public IActionResult DeleteUserProject(string Id)
         {
-            if (Id == 0)
+            if (Id ==null)
             {
                 var errorMessage = "No id found for the selected row.";
                 return View("~/Views/Shared/Error.cshtml", errorMessage);
@@ -107,9 +112,9 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteUserProjectPost(int Id)
+        public IActionResult DeleteUserProjectPost(string Id)
         {
-            if (Id == 0)
+            if (Id == null)
             {
                 var errorMessage = "No id found for the selected row.";
                 return View("~/Views/Shared/Error.cshtml", errorMessage);

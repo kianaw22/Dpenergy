@@ -57,7 +57,7 @@
                 <div>
                     <label asp-for="StageDescription" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="Stage" asp-items="@(new SelectList(ListStage,"Description","Description"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                        <select asp-for="StageDescription" asp-items="@(new SelectList(ListStage,"Description","Description"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Stage</option>
                         </select>
                         <span asp-validation-for="StageDescription" class="text-danger"></span>

@@ -61,19 +61,11 @@
 @section PersonelScripts {
     <script src="~/js/modal/modal.js"></script>
     <script>
-        // $(document).ready(function() {});
-        //$(document).ready(() => {$("#numSlider").kendoRangeSlider();});
+      
         $(document).ready(function () {
            var myobj = '@Html.Raw(Json.Serialize(Model))';
-           var dpjson = JSON.parse(myobj);
-           // var myObject = json.MyObject;
-           console.log(myobj);
-           console.log('-------------');
-          console.log(dpjson);
-           //console.log('-------------');
-           //console.log(myObject);
-           //console.log('-------------');
-            //Gride
+           var dpjson = JSON.parse(myobj);        
+  
             $("#grid").kendoGrid({
                 dataSource: {
                     data: dpjson,

@@ -77,7 +77,7 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
        
      
         public float? Progress { get; set; }
-        [Display(Name = "Classifi cation")]
+        [Display(Name = "Classification")]
    
         public string Classification { get; set; }
         [Display(Name = "CheckList")]

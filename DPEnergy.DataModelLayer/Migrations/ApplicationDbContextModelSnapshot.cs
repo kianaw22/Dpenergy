@@ -273,7 +273,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
@@ -282,7 +282,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Dicipline")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modifier")
@@ -413,7 +413,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
@@ -422,7 +422,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Dicipline")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modifier")
@@ -495,6 +495,9 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Phase")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProjectCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("D_Phase");
@@ -553,10 +556,10 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Company")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CompletionDate")
+                    b.Property<DateTime?>("CompletionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ContractDate")
+                    b.Property<DateTime?>("ContractDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Contractor")
@@ -565,7 +568,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("ContractorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
@@ -595,7 +598,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<bool>("MTO")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modifier")
@@ -622,7 +625,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("ProjectType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("StartUpRequest")
@@ -657,7 +660,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
@@ -669,7 +672,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("DepartmentalBudget")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modifier")
@@ -1139,10 +1142,10 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Attachment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("CD")
+                    b.Property<bool?>("CD")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("CheckList")
+                    b.Property<bool?>("CheckList")
                         .HasColumnType("bit");
 
                     b.Property<string>("Classification")
@@ -1169,7 +1172,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Company")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Consideration")
+                    b.Property<bool?>("Consideration")
                         .HasColumnType("bit");
 
                     b.Property<string>("Consultant")
@@ -1202,13 +1205,13 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("DpNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Email")
+                    b.Property<bool?>("Email")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("File")
+                    b.Property<bool?>("File")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IncomingTransmittalCheck")
+                    b.Property<bool?>("IncomingTransmittalCheck")
                         .HasColumnType("bit");
 
                     b.Property<string>("IssuedBy")
@@ -1226,10 +1229,10 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("NumberofCopies")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Original")
+                    b.Property<bool?>("Original")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Other")
+                    b.Property<bool?>("Other")
                         .HasColumnType("bit");
 
                     b.Property<string>("Page")
@@ -1238,7 +1241,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("PreparedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Print")
+                    b.Property<bool?>("Print")
                         .HasColumnType("bit");
 
                     b.Property<float?>("Progress")
@@ -1457,7 +1460,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("BirthPlace")
@@ -1475,7 +1478,7 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Cover")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreationDate")
+                    b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Creator")
@@ -1523,10 +1526,13 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("Moaref")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Modifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Overtime")
@@ -1565,10 +1571,10 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.Property<string>("SpecialDrug")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartWorkDate")
+                    b.Property<DateTime?>("StartWorkDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("TasfieDate")
+                    b.Property<DateTime?>("TasfieDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("VaziatEshteqal")
@@ -1609,6 +1615,153 @@ namespace DPEnergy.DataModelLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("P_WorkPlace");
+                });
+
+            modelBuilder.Entity("DPEnergy.DataModelLayer.Entities.Personel.P_BankAccountDetails", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Accounttype")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankAccountNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonelCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("P_BankAccountDetails");
+                });
+
+            modelBuilder.Entity("DPEnergy.DataModelLayer.Entities.Personel.P_ContactInf", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IntroducedAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IntroducedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IntroducedPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MobilePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonelCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PropertyType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("P_ContactInf");
+                });
+
+            modelBuilder.Entity("DPEnergy.DataModelLayer.Entities.Personel.P_VaziatKhedmat", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Attachment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Creator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Modifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrganName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonelCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("VaziatNezamVazife")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("P_VaziatKhedmat");
                 });
 
             modelBuilder.Entity("DPEnergy.DataModelLayer.Entities.Reporrts.Reports", b =>

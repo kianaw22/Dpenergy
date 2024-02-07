@@ -3,6 +3,7 @@ using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
+using DPEnergy.DataModelLayer.Entities.Personel;
 using DPEnergy.DataModelLayer.Entities.Reporrts;
 using DPEnergy.DataModelLayer.Entities.User;
 using DPEnergy.DataModelLayer.Repository;
@@ -62,7 +63,9 @@ namespace DPEnergy.DataModelLayer.Services
         public GenericClass<D_RetReplysheetStage> RetReplySheetStageUW { get; }
         public GenericClass<Reports> ReportsUW { get; }
         public GenericClass<D_UserProject> UserProjectUW { get; }
-
+        public GenericClass<P_ContactInf> ContactInfUW { get; }
+        public GenericClass<P_VaziatKhedmat> VaziatKhedmatUW { get; }
+        public GenericClass<P_BankAccountDetails> BankAccountDetailsUW { get; }
         void save();
         void Dispose();
     }

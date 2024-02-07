@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_ContactInf
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از اطلاعات تماس حذف پرسنل
+    <span style="font-weight:bold;">@Model.FirstName @Model.LastName</span>
+    با شماره پرسنلی
+    <span style="font-weight:bold;">@Model.PersonelCode</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

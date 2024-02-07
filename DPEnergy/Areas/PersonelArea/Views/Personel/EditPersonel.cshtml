@@ -81,8 +81,8 @@
                         <!--<input asp-for="Gender" type="text" class="form-control custominput" placeholder="جنسیت ..." autocomplete="off" />-->
                         <select asp-for="Gender" class="form-control selectpicker custominput" id="select-Gender" data-live-search="true" style="direction: rtl">
                             <option value="" selected disabled hidden style="direction: rtl">     جنسیت را انتخاب کنید</option>
-                            <option data-tokens="زن">  زن</option>
-                            <option data-tokens="مرد">  مرد</option>
+                            <option data-tokens="زن" selected="@Html.Raw((Model.Gender == "زن") ? "selected" : "")">  زن</option>
+                            <option data-tokens="مرد" selected="@Html.Raw((Model.Gender == "مرد") ? "selected" : "")">  مرد</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="Gender" class="text-danger"></span>
@@ -149,8 +149,9 @@
                              style="border:1px solid gray; padding:6px">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
-                        <input asp-for="BirthDate" id="birthdayDateuser" value="@ConvertDateTime.ConvertMiladiToShamsi(@Model.BirthDate,"yyyy/MM/dd")" name="birthdayDateuser" type="text" class="form-control custominput" data-mddatetimepicker="true" data-placement="right" data-mdpersiandatetimepicker="" data-trigger="focus" data-enabletimepicker="false" data-mdpersiandatetimepickerselecteddatetime="{&quot;Year&quot;:1399,&quot;Month&quot;:1,&quot;Day&quot;:13,&quot;Hour&quot;:0,&quot;Minute&quot;:0,&quot;Second&quot;:0}" data-mdpersiandatetimepickershowing="true" aria-describedby="popover265350">
-
+                        <input asp-for="BirthDate" id="birthdayDateuser"
+                               value="@(Model.BirthDate.HasValue ? ConvertDateTime.ConvertMiladiToShamsi(Model.BirthDate, "yyyy/MM/dd") : string.Empty)"
+                               name="birthdayDateuser" type="text" class="form-control custominput datetimepicker">
                     </div>
                     <span asp-validation-for="BirthDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
                 </div>
@@ -159,9 +160,10 @@
                     <label asp-for="MaritalStatus" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="MaritalStatus" class="form-control selectpicker custominput" id="select-MaritalStatus" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     وضعیت تولد را انتخاب کنید</option>
-                            <option data-tokens="زن">  زن</option>
-                            <option data-tokens="مرد">  مرد</option>
+                            <option value="" selected disabled hidden style="direction: rtl">     وضعیت تاهل را انتخاب کنید</option>
+                            <option data-tokens="مجرد" selected="@Html.Raw((Model.MaritalStatus == "مجرد") ? "selected" : "")">  مجرد</option>
+                            <option data-tokens="متاهل" selected="@Html.Raw((Model.MaritalStatus == "متاهل") ? "selected" : "")">  متاهل</option>
+                            <option data-tokens="معیل" selected="@Html.Raw((Model.MaritalStatus == "معیل") ? "selected" : "")">  معیل</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="MaritalStatus" class="text-danger"></span>
@@ -186,7 +188,9 @@
                              style="border:1px solid gray; padding:6px">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
-                        <input asp-for="StartWorkDate" id="startofwork" value="@ConvertDateTime.ConvertMiladiToShamsi(@Model.StartWorkDate,"yyyy/MM/dd")" name="startofwork" type="text" class="form-control custominput" data-mddatetimepicker="true" data-placement="right" data-mdpersiandatetimepicker="" data-trigger="focus" data-enabletimepicker="false" data-mdpersiandatetimepickerselecteddatetime="{&quot;Year&quot;:1399,&quot;Month&quot;:1,&quot;Day&quot;:13,&quot;Hour&quot;:0,&quot;Minute&quot;:0,&quot;Second&quot;:0}" data-mdpersiandatetimepickershowing="true" aria-describedby="popover265350">
+                        <input asp-for="StartWorkDate" id="startofwork"
+                               value="@(Model.StartWorkDate.HasValue ? ConvertDateTime.ConvertMiladiToShamsi(Model.StartWorkDate, "yyyy/MM/dd") : null)"
+                               name="startofwork" type="text" class="form-control custominput datetimepicker">
 
                     </div>
                     <span asp-validation-for="StartWorkDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
@@ -197,11 +201,11 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="ContractType" class="form-control selectpicker custominput" id="select-ContractType" data-live-search="true" style="direction: rtl">
                             <option value="" selected disabled hidden style="direction: rtl">     نوع قرارداد را انتخاب کنید</option>
-                            <option data-tokens="پاره وقت">  پاره وقت</option>
-                            <option data-tokens="تمام وقت">  تمام وقت</option>
-                            <option data-tokens="کار آموز"> کار آموز</option>
-                            <option data-tokens="پکیج"> پکیج</option>
-                            <option data-tokens="سایت پروژه"> سایت پروژه</option>
+                            <option data-tokens="پاره وقت" selected="@Html.Raw((Model.ContractType == "پاره وقت") ? "selected" : "")">  پاره وقت</option>
+                            <option data-tokens="تمام وقت" selected="@Html.Raw((Model.ContractType == "تمام وقت") ? "selected" : "")">  تمام وقت</option>
+                            <option data-tokens="کار آموز" selected="@Html.Raw((Model.ContractType == "کار آموز") ? "selected" : "")"> کار آموز</option>
+                            <option data-tokens="پکیج" selected="@Html.Raw((Model.ContractType == "پکیج") ? "selected" : "")"> پکیج</option>
+                            <option data-tokens="سایت پروژه" selected="@Html.Raw((Model.ContractType == "سایت پروژه") ? "selected" : "")"> سایت پروژه</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="ContractType" class="text-danger"></span>
@@ -238,13 +242,13 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="VaziatEshteqal" class="form-control selectpicker custominput" id="select-VaziatEshteqal" data-live-search="true" style="direction: rtl">
                             <option value="" selected disabled hidden style="direction: rtl">     وضعیت اشتغال را انتخاب کنید</option>
-                            <option data-tokens="بازنشسته">  بازنشسته</option>
-                            <option data-tokens="مردسوری">  سوری</option>
-                            <option data-tokens="تسویه حساب">  تسویه حساب</option>
-                            <option data-tokens="بلاتکلیف">  بلاتکلیف</option>
-                            <option data-tokens="شاغل">  شاغل</option>
-                            <option data-tokens="کارآموز">  کارآموز</option>
-                            <option data-tokens="مرخصی بدون حقوق">  مرخصی بدون حقوق</option>
+                            <option data-tokens="بازنشسته" selected="@Html.Raw((Model.VaziatEshteqal == "بازنشسته") ? "selected" : "")">  بازنشسته</option>
+                            <option data-tokens="مردسوری" selected="@Html.Raw((Model.VaziatEshteqal == "مردسوری") ? "selected" : "")">  سوری</option>
+                            <option data-tokens="تسویه حساب" selected="@Html.Raw((Model.VaziatEshteqal == "تسویه حساب") ? "selected" : "")">  تسویه حساب</option>
+                            <option data-tokens="بلاتکلیف" selected="@Html.Raw((Model.VaziatEshteqal == "بلاتکلیف") ? "selected" : "")">  بلاتکلیف</option>
+                            <option data-tokens="شاغل" selected="@Html.Raw((Model.VaziatEshteqal == "شاغل") ? "selected" : "")">  شاغل</option>
+                            <option data-tokens="کارآموز" selected="@Html.Raw((Model.VaziatEshteqal == "کارآموز") ? "selected" : "")">  کارآموز</option>
+                            <option data-tokens="مرخصی بدون حقوق" selected="@Html.Raw((Model.VaziatEshteqal == "مرخصی بدون حقوق") ? "selected" : "")">  مرخصی بدون حقوق</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="VaziatEshteqal" class="text-danger"></span>
@@ -270,7 +274,9 @@
                              style="border:1px solid gray; padding:6px">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
-                        <input asp-for="TasfieDate" id="tasfiehdate" value="@ConvertDateTime.ConvertMiladiToShamsi(@Model.TasfieDate,"yyyy/MM/dd")" name="tasfiehdate" type="text" class="form-control custominput" data-mddatetimepicker="true" data-placement="right" data-mdpersiandatetimepicker="" data-trigger="focus" data-enabletimepicker="false" data-mdpersiandatetimepickerselecteddatetime="{&quot;Year&quot;:1399,&quot;Month&quot;:1,&quot;Day&quot;:13,&quot;Hour&quot;:0,&quot;Minute&quot;:0,&quot;Second&quot;:0}" data-mdpersiandatetimepickershowing="true" aria-describedby="popover265350">
+                        <input asp-for="TasfieDate" id="tasfiehdate"
+                               value="@(Model.TasfieDate.HasValue ? ConvertDateTime.ConvertMiladiToShamsi(Model.TasfieDate, "yyyy/MM/dd") : string.Empty)"
+                               name="tasfiehdate" type="text" class="form-control custominput datetimepicker">
 
                     </div>
                     <span asp-validation-for="TasfieDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
@@ -304,8 +310,8 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Cover" class="form-control selectpicker custominput" id="select-Cover" data-live-search="true" style="direction: rtl">
                             <option value="" selected disabled hidden style="direction: rtl">     کاور را انتخاب کنید</option>
-                            <option data-tokens="بله">  بله</option>
-                            <option data-tokens="خیر">  خیر</option>
+                            <option data-tokens="بله" selected="@Html.Raw((Model.Cover == "بله") ? "selected" : "")">  بله</option>
+                            <option data-tokens="خیر" selected="@Html.Raw((Model.Cover == "خیر") ? "selected" : "")">  خیر</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="Cover" class="text-danger"></span>
@@ -365,14 +371,14 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="BloodType" class="form-control selectpicker custominput" id="select-BloodType" data-live-search="true" style="direction: rtl">
                             <option value="" selected disabled hidden style="direction: rtl">     گروه خونی را انتخاب کنید</option>
-                            <option data-tokens="A+">  A+</option>
-                            <option data-tokens="A-">  A-</option>
-                            <option data-tokens="B-">  B-</option>
-                            <option data-tokens="B+">  B+</option>
-                            <option data-tokens="AB-">  AB-</option>
-                            <option data-tokens="AB+">  AB+</option>
-                            <option data-tokens="O+">  O+</option>
-                            <option data-tokens="O-">  O-</option>
+                            <option data-tokens="A+" selected="@Html.Raw((Model.BloodType == "A+") ? "selected" : "")">A+</option>
+                            <option data-tokens="A-" selected="@Html.Raw((Model.BloodType == "A-") ? "selected" : "")">A-</option>
+                            <option data-tokens="B-" selected="@Html.Raw((Model.BloodType == "B-") ? "selected" : "")">B-</option>
+                            <option data-tokens="B+" selected="@Html.Raw((Model.BloodType == "B+") ? "selected" : "")">B+</option>
+                            <option data-tokens="AB-" selected="@Html.Raw((Model.BloodType == "AB-") ? "selected" : "")">AB-</option>
+                            <option data-tokens="AB+" selected="@Html.Raw((Model.BloodType == "AB+") ? "selected" : "")">AB+</option>
+                            <option data-tokens="O+" selected="@Html.Raw((Model.BloodType == "O+") ? "selected" : "")">O+</option>
+                            <option data-tokens="O-" selected="@Html.Raw((Model.BloodType == "O-") ? "selected" : "")">O-</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="BloodType" class="text-danger"></span>
@@ -530,19 +536,98 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 form-group" style="margin-top:15px;color:black">
-                    <input type="submit" style="border:1px solid gray; border-radius:3px;background-color:lightsteelblue"
-                           value="ویرایش اطلاعات" class="btn pull-right" />
 
+            </div>
+            <div class="col-md-12">
+                <label asp-for="Note" class="control-label col-md-1 col-xs-12"></label>
+                <div class="col-md-11 col-xs-12">
+                    <textarea asp-for="Note" type="text" class="form-control custominput" placeholder="یادداشت ..." autocomplete="off">
+                        </textarea>
+                    <span asp-validation-for="Note" class="text-danger"></span>
                 </div>
             </div>
+            <!--Creation Date -->
+            <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+            <!--Creator-->
+            <input asp-for="Creator" type="hidden" class="form-control custominput" />
 
+            <!--ModificationDate -->
+            <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+            <!--Modifier-->
+            <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+
+            <div class="col-md-12 col-xs-12  form-group" style="margin-top:15px;color:black">
+                <input type="submit" style="border:1px solid gray; border-radius:3px;background-color:lightsteelblue"
+                       value="ویرایش اطلاعات" class="btn pull-right" />
+
+            </div>
         </form>
     </div>
 
 
 </div>
 @section PersonelScripts{
+    <script>
+        $(document).ready(function () {
+            $('.datetimepicker').persianDatepicker({
+                "inline": false,
+                "format": "L",
+                "initialValue": false,
+                "minDate": 0,
+                "maxDate": 2000000000000,
+                "autoClose": true,
+                "position": "auto",
+                "calendar": {
+                    "persian": {
+                        "locale": "fa",
+                        "showHint": true,
+                        "leapYearMode": "algorithmic"
+                    },
+                    "gregorian": {
+                        "locale": "en",
+                        "showHint": true
+                    }
+                },
+                "navigator": {
+                    "enabled": true,
+                    "scroll": {
+                        "enabled": true
+                    },
+                    "text": {
+                        "btnNextText": "<",
+                        "btnPrevText": ">"
+                    }
+                },
+                "toolbox": {
+                    "enabled": true,
+                    "calendarSwitch": {
+                        "enabled": true,
+                        "format": "MMMM"
+                    },
+                    "todayButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "امروز",
+                            "en": "Today"
+                        }
+                    },
+                    "submitButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "تایید",
+                            "en": "Submit"
+                        }
+                    },
+                    "text": {
+                        "btnToday": "امروز"
+                    }
+                },
+
+
+            });
+        });
+    </script>
+
     <script>
         $("#ShenasnameScanPath").change(function () {
             var filename = this.files[0].name;

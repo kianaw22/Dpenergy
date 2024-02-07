@@ -114,7 +114,7 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Company" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">   Select company</option>
-                            <option value="Daryapala Energy" data-tokens="Daryapala Energy" selected="@((Model.Activation == "Daryapala Energy") ? "selected" : null)">Daryapala Energy</option>
+                            <option value="Daryapala Energy" data-tokens="Daryapala Energy" >Daryapala Energy</option>
 
                         </select>
                         <span asp-validation-for="Company" class="text-danger"></span>
@@ -178,8 +178,8 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Activation" class="form-control selectpicker custominput" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">   Select Activation</option>
-                            <option value="Active" data-tokens="Active" selected="@((Model.Activation == "Active") ? "selected" : null)">Active</option>
-                            <option value="Deactive" data-tokens="Deactive" selected="@((Model.Activation == "Deactive") ? "selected" : null)">Deactive</option>
+                            <option value="Active" data-tokens="Active"  selected="@(Model.StartUpRequest == "Active")">Active</option>
+                            <option value="Deactive" data-tokens="Deactive"  selected="@(Model.StartUpRequest == "Deactive")">Deactive</option>
                         </select>
                         <div>   </div>
                     </div>
@@ -201,8 +201,8 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="StartUpRequest" class="form-control selectpicker custominput" id="select-StartUpRequest" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">   Select StartUpRequest</option>
-                            <option value="موقت" data-tokens="موقت" selected="@Html.Raw((Model.StartUpRequest == "موقت") ? "selected" : "")">موقت</option>
-                            <option value="دائم" data-tokens="دائم" selected="@Html.Raw((Model.StartUpRequest == "دائم") ? "selected" : "")">دائم</option>
+                            <option value="موقت" data-tokens="موقت"  selected="@(Model.StartUpRequest == "موقت")" >موقت</option>
+                            <option value="دائم" data-tokens="دائم"  selected="@(Model.StartUpRequest == "دائم")" >دائم</option>
                         </select>
                     </div>
                     <div>   </div>
@@ -214,9 +214,9 @@
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Status" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: ltr">
                             <option value="" selected disabled hidden style="direction: ltr">Select Status</option>
-                            <option value="قطعی" data-tokens="قطعی" selected="@Html.Raw((Model.Status == "قطعی") ? "selected" : null)">قطعی</option>
-                            <option value="خاتمه یافته" data-tokens="خاتمه یافته" selected="@Html.Raw((Model.Status == "خاتمه یافته") ? "selected" : null)">خاتمه یافته</option>
-                            <option value="کاریابی" data-tokens="کاریابی" selected="@Html.Raw((Model.Status == "کاریابی") ? "selected" : null)">کاریابی</option>
+                            <option value="قطعی" data-tokens="قطعی"  selected="@(Model.StartUpRequest == "قطعی")">قطعی</option>
+                            <option value="خاتمه یافته" data-tokens="خاتمه یافته" selected="@(Model.StartUpRequest == "خاتمه یافته")" >خاتمه یافته</option>
+                            <option value="کاریابی" data-tokens="کاریابی" selected="@(Model.StartUpRequest == "کاریابی")">کاریابی</option>
                         </select>
                         <div>   </div>
                     </div>
