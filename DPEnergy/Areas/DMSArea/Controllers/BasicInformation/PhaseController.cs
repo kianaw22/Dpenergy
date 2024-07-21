@@ -10,12 +10,14 @@ using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels;
 using DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class PhaseController : Controller
     {
         private readonly IUnitOfWork _context;
@@ -35,12 +37,14 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         [HttpGet]
         public IActionResult AddPhase()
         {
+            FillCombo();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddPhase(D_PhaseViewModel model)
         {
+            FillCombo();
             model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             model.CreationDate = DateTime.Now;
             if (ModelState.IsValid)
@@ -56,6 +60,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         [HttpGet]
         public IActionResult EditPhase(String Id)
         {
+            FillCombo();
             if (Id == null)
             {
                 var errorMessage = "No id found for the selected row.";
@@ -70,6 +75,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         [ValidateAntiForgeryToken]
         public IActionResult EditPhase(D_PhaseViewModel model)
         {
+            FillCombo();
             model.ModificationDate = DateTime.Now;
             model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
@@ -110,6 +116,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
             _context.PhaseManagerUW.DeleteById(Id);
             _context.save();
             return RedirectToAction("Index");
+
+        }
+        public void FillCombo()
+        {
+            List<D_Project> ListProject = _context.projectManagerUW.Get().ToList();
+            ViewBag.projectlist = ListProject;
 
         }
     }

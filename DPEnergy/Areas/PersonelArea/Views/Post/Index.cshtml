@@ -68,7 +68,7 @@
             $("#grid").kendoGrid({
                 dataSource: {
                     data: dpjson,
-                    pageSize: 5
+                    pageSize: dpjson.length
                 },
                 height: 550,
                 filterable: true,
@@ -85,9 +85,12 @@
                     field: "id",
                     title: "id"
                 }, {
-                        field: "postName",
+                    field: "personelCode",
+                    title: "کد پرسنلی"
+                },  {
+                    field: "postName",
                     title: "سمت"
-                },
+                 },
 
 
                     {

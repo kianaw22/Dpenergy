@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_Takafol
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    حذف فرد تحت تکفل 
+    <span style="font-weight:bold;">@Model.FirstName @Model.LastName</span>
+    با نام
+    <span style="font-weight:bold;">@Model.Name</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

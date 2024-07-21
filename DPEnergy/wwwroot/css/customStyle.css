@@ -33,7 +33,7 @@ body {
     border: 1px solid gray;
     border-radius: 3px;
     color: black !important;
-    background-color: #9ce5f2;
+    background-color: #9ce5f2 !important;
 }
 
 .customYellow1 {

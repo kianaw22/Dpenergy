@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.CommonLayer.Services;
+using DPEnergy.DataModelLayer;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.DMS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,19 +20,23 @@ using Newtonsoft.Json;
 namespace DPEnergy.Areas.DMSArea.Controllers
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class RevisionController : Controller
     {
         private readonly IUnitOfWork _context;
         private readonly IMapper _mapper;
         private readonly UserManager<A_UserManager> _userManager;
         private readonly IUploadFiles _upload;
-        public RevisionController(IUploadFiles upload,IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager)
+        private readonly ApplicationDbContext _dbcontext;
+        public RevisionController(IUploadFiles upload,IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager , ApplicationDbContext dbcontext )
         {
+            _dbcontext = dbcontext;
             _context = uow;
             _mapper = mapper;
             _userManager = userManager;
             _upload = upload;
         }
+ 
         public IActionResult UploadRevAttach(IEnumerable<IFormFile> filearray, string path, string projectcode
             , string name )
         {
@@ -43,9 +49,22 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             return Json(new { status = "success" , mypath =   result.Item2.Replace("\\" , "/")});
 
         }
-        public IActionResult DeleteRevAttach(IEnumerable<IFormFile> filearray, string path, string projectcode
-            , string name)
+       
+        public IActionResult DeleteRevAttach( string path, string projectcode
+            , string name , string id)
         {
+            if (id != null)
+            {
+                var record = _dbcontext.D_Revision.First(x => x.Id == id);
+                if (!string.IsNullOrEmpty(record.Attachment))
+                {
+
+                    record.Attachment = null;
+                    _context.RevisionUW.Update(record);
+                    _context.save();
+                }
+            }
+          
             var result = _upload.DeleteFile( path, projectcode, name);
             if (result == false)
             {
@@ -57,13 +76,19 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         }
         public IActionResult Index()
         {
-            var model = _context.RevisionUW.Get().OrderBy(revision => revision.CreationDate);
+            var userid = _userManager.GetUserId(HttpContext.User);
+            var projects = _context.UserProjectUW.Get().Where(x => x.UserId == userid).ToList();
+            var model = _context.RevisionUW.Get().OrderBy(x => x.CreationDate)
+                .Where(revision => projects.Any(p => p.ProjectCode == revision.ProjectCode));
             return View(model);
         }
         [HttpGet]
         public IActionResult SetProject()
         {
             FillCombo();
+            var userid = _userManager.GetUserId(HttpContext.User);
+            List<D_UserProject> ListProject = _context.UserProjectUW.Get(x => x.UserId == userid).ToList();
+            ViewBag.projectlist = ListProject;
             return PartialView("_setProject");
         }
         [HttpGet]
@@ -87,11 +112,15 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         {
             var projectcode = model.ProjectCode;
             FillRevcombo(projectcode);
+           
 
             if (buttonId == "Cancel")
             {
                 return RedirectToAction("Index");
             }
+
+            var stagename = _context.ProgressManagerUW.GetById(model.ProgressId).Stage;
+            model.StageName = stagename;
             if (ModelState.IsValid)
             {
                 JsonHelper.SanitizeStringProperties(model);
@@ -156,8 +185,11 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             {
                 return RedirectToAction("Index");
             }
+            
             if (ModelState.IsValid)
             {
+                var stagename = _context.ProgressManagerUW.GetById(model.ProgressId).Stage;
+                model.StageName = stagename;
                 JsonHelper.SanitizeStringProperties(model);
                 var projmapper = _mapper.Map<D_Revision>(model);
                 _context.RevisionUW.Update(projmapper);
@@ -196,6 +228,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                 var errorMessage = "No project id found to delete";
                 return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
+            var rev = _context.RevisionUW.GetById(Id);
+            if (rev.Attachment!= null)
+            {
+                _upload.DeleteFile(rev.Attachment, "", "");
+            }
+          
             _context.RevisionUW.DeleteById(Id);
             _context.save();
             return RedirectToAction("Index");
@@ -208,6 +246,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                 var errorMessage = "stage cannot be null";
                 return View("~/Views/Shared/Error.cshtml", errorMessage);
             }
+            
             var data = _context.ProgressManagerUW.Get(x => x.Stage == stage && x.ProjectCode ==projectcode).ToList()[0].Percent;
             return Json(data);
         }
@@ -240,7 +279,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         }
         public IActionResult RevHistoryGrid(string projectcode , string clientnumber)
         {
-            var model = _context.RevisionUW.Get(x => x.ProjectCode == projectcode && x.ClientNumber == clientnumber);
+            var model = _context.RevisionUW.Get(x => x.ProjectCode == projectcode && x.ClientNumber == clientnumber).
+                OrderByDescending(x=> x.Revision);
             return Json(model);
         }
         public void FillCombo()

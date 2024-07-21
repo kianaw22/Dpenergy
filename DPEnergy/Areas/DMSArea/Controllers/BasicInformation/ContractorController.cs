@@ -9,11 +9,13 @@ using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels;
 using DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class ContractorController : Controller
     {
         private readonly IUnitOfWork _context;

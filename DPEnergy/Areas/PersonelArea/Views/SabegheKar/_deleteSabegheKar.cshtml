@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_SabegheKar
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    از حذف سابقه کار پرسنل
+    <span style="font-weight:bold;">@Model.FirstName @Model.LastName</span>
+   در شرکت
+    <span style="font-weight:bold;">@Model.Company</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

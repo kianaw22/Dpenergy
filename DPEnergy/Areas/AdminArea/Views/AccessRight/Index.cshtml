@@ -68,7 +68,7 @@
             $("#grid").kendoGrid({
                 dataSource: {
                     data: dpjson,
-                    pageSize: 5
+                    pageSize: dpjson.length
                 },
                 height: 550,
                 filterable: true,
@@ -86,19 +86,19 @@
 
                    {
                        field: "id",
-                       width: "140px",
+                       width: "180px",
                        title: "User ID"
                    },{
                         field: "firstName",
-                        width: "140px",
+                        width: "180px",
                         title: "FirstName"
                     }, {
                         field: "lastName",
-                        width: "140px",
+                        width: "180px",
                         title: "LastName"
                     }, {
                         field: "personelCode",
-                        width: "140px",
+                        width: "180px",
                         title: "PersonelCode"
                     }, {
                         field: "userName",
@@ -113,7 +113,7 @@
                         {
 
                             name: "Access",
-                          
+                            className: "customBlue1",
                             title: "مدیریت دسترسی",
                             click: function (e) {
                                 // command button click handler

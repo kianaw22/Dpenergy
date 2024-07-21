@@ -47,7 +47,7 @@
                 <div>
                     <label asp-for="Title" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <input asp-for="Title" type="text" class="form-control custominput" placeholder="Title ..." autocomplete="off" />
+                        <input asp-for="Title" type="text" class="form-control custominput"  dir="auto" placeholder="Title ..." autocomplete="off" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
 
@@ -56,7 +56,7 @@
                 <div>
                     <label asp-for="PersianTitle" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <input asp-for="PersianTitle" type="text" class="form-control custominput" placeholder="PersianTitle ..." autocomplete="off" />
+                        <input asp-for="PersianTitle" type="text" class="form-control custominput" dir="auto"  placeholder="PersianTitle ..." autocomplete="off" />
                         <span asp-validation-for="PersianTitle" class="text-danger"></span>
                     </div>
 
@@ -251,7 +251,7 @@
                         </div>
                         <div class="form-check">
                             <input asp-for="TahieAsnadMonaqese" class="form-check-input" type="checkbox" value="false" id="check6" onchange="ck6(this.value)" />
-                            <label class="form-check-label" for="flexCheckDefault">  تهیه اسناد مناقضه </label>
+                            <label class="form-check-label" for="flexCheckDefault">  تهیه اسناد مناقصه </label>
                         </div>
                         <div class="form-check">
                             <input asp-for="NezaratAlie" class="form-check-input" type="checkbox" value="false" id="check7" onchange="ck7(this.value)" />
@@ -259,7 +259,7 @@
                         </div>
                         <div class="form-check">
                             <input asp-for="Karagahi" class="form-check-input" type="checkbox" value="false" id="check8" onchange="ck8(this.value)" />
-                            <label class="form-check-label" for="flexCheckDefault">  کارآگاهی </label>
+                            <label class="form-check-label" for="flexCheckDefault">  کارگاهی </label>
                         </div>
                         <div class="form-check">
                             <input asp-for="EPC" class="form-check-input" type="checkbox" value="false" id="check9" onchange="ck9(this.value)" />

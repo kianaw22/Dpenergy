@@ -2,6 +2,7 @@
 @using DPEnergy.CommonLayer.PublicClass
 @{
     ViewData["Title"] = "AddPhase";
+    List<D_Project> ListProject = ViewBag.projectlist;
 }
 <div class="content">
 
@@ -35,6 +36,7 @@
                     </div>
 
                 </div>
+
                 <!--Description-->
                 <div>
                     <label asp-for="Description" class="control-label col-md-3 col-xs-12"></label>
@@ -44,7 +46,18 @@
                     </div>
 
                 </div>
-         
+                <!--ProjectCode-->
+                <div>
+                    <label asp-for="ProjectCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="ProjectCode" asp-items="@(new SelectList(ListProject,"ProjectCode","ProjectCode"))" class="form-control selectpicker custominput" id="select-ProjectCode" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Project Code</option>
+                        </select>
+                        <span asp-validation-for="ProjectCode" class="text-danger"></span>
+                        <div>   </div>
+                    </div>
+
+                </div>
                 <!--Order-->
                 <div>
                     <label asp-for="Order" class="control-label col-md-3 col-xs-12"></label>

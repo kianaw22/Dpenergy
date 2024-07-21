@@ -1,0 +1,30 @@
+﻿@using Stimulsoft.Report.Mvc
+@{
+    ViewBag.Title = "ViewReportsPage";
+ 
+}
+   
+@Html.StiNetCoreViewer(new StiNetCoreViewerOptions()
+{
+
+    Actions =
+
+     {
+
+       GetReport = "ViewReports",
+
+       ViewerEvent = "ViewerEvent",
+
+       Interaction = "ViewerInteraction"
+        
+       
+
+
+     },
+    Server =
+    {
+        RouteTemplate = "/PersonelArea/Reports/{action}"+ ViewContext.RouteData.Values["reportpath"]
+    }
+
+
+})

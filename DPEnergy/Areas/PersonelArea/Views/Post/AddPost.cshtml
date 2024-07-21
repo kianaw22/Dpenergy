@@ -1,6 +1,8 @@
 ﻿@model DPEnergy.DataModelLayer.ViewModels.P_PostViewModel
+
 @{
     ViewData["Title"] = "AddPost";
+    List<P_Personel> ListPersonel = ViewBag.personellist;
 }
 
 <div class="content">
@@ -12,7 +14,7 @@
     </ul>
     <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
         <span style="font-weight:bold;">
-            <i class="icon-accessibility2"></i>
+            <i class="icon-plus2"></i>
             فرم ثبت سمت
         </span>
     </div>
@@ -23,6 +25,14 @@
 
         <form asp-controller="Post" asp-action="AddPost" method="post">
             <div class="col-md-6 col-md-offset-3">
+                <!--PersonelCode-->
+                <label asp-for="PersonelCode" class="control-label col-md-3 col-xs-12"></label>
+                <div class="col-md-9 col-xs-12">
+                    <select id="personel-code" asp-for="PersonelCode" asp-items="@(new SelectList(from x in ListPersonel select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="personel-code" data-live-search="true" style="direction: ltr">
+                        <option value="" selected disabled hidden style="direction: ltr">Select Personel</option>
+                    </select>
+                    <div>   </div>
+                </div>
                 <!--PostName-->
                 <div>
                     <label asp-for="PostName" class="control-label col-md-3 col-xs-12"></label>

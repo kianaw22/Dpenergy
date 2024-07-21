@@ -1,0 +1,14 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Reporrts.Reports
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal">
+  از حذف گزارش
+    <span style="font-weight:bold;">
+        @Model.ReportName
+    </span>
+   مطمئن هستید؟
+   
+</div>
+<input type="hidden" asp-for="Id" />

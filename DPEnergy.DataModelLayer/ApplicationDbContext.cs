@@ -6,6 +6,7 @@ using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
 using DPEnergy.DataModelLayer.Entities.Personel;
 using DPEnergy.DataModelLayer.Entities.Reporrts;
 using DPEnergy.DataModelLayer.Entities.User;
+using DPEnergy.DataModelLayer.ViewModels.Personel;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,7 @@ namespace DPEnergy.DataModelLayer
         {
 
         }
+        public DbSet<P_Takafol> P_Takafol { get; set; }
         public DbSet<P_Personel> P_Personel{ get; set; }
         public DbSet<P_City> P_City { get; set; }
         public DbSet<P_Department> P_Department { get; set; }
@@ -65,10 +67,85 @@ namespace DPEnergy.DataModelLayer
         public DbSet<P_ContactInf> P_ContactInf { get; set; }
         public DbSet<P_VaziatKhedmat> P_VaziatKhedmat { get; set; }
         public DbSet<P_BankAccountDetails> P_BankAccountDetails { get; set; }
+        public DbSet<P_SabegheKar> P_SabegheKar { get; set; }
+        public DbSet<P_Bime> P_Bime { get; set; }
+        public DbSet<P_Course> P_Course { get; set; }
+        public DbSet<P_MadrakTahsili> P_MadrakTahsili { get; set; }
+        public DbSet<P_LetterRequest> P_LetterRequest { get; set; }
+        public DbSet<P_FieldOfStudy> P_FieldOfStudy { get; set; }
+        public DbSet<P_InstitutionName> P_InstitutionName { get; set; }
+        public DbSet<P_InsuranceStatus> P_InsuranceStatus { get; set; }
+        public DbSet<P_MaritalStatus> P_MaritalStatus { get; set; }
+        public DbSet<P_PersonelStatus> P_PersonelStatus { get; set; }
+        public DbSet<P_DocumentType> P_DocumentType { get; set; }
+        public DbSet<P_AccountType> P_AccountType { get; set; }
+        public DbSet<P_ContractType> P_ContractType { get; set; }
+        public DbSet<P_EducationDegree> P_EducationDegree { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<P_DocumentType>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_AccountType>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_ContractType>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_EducationDegree>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_FieldOfStudy>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_FieldOfStudy>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_MadrakTahsili>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_LetterRequest>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_Course>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_Bime>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_SabegheKar>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
+            builder.Entity<P_Takafol>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+            });
             builder.Entity<D_UserProject>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();

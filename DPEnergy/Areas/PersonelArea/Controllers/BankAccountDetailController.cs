@@ -15,8 +15,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.PersonelArea
 {
-    [Authorize]
+    
     [Area("PersonelArea")]
+    [Authorize(Roles = "PersonelArea")]
     public class BankAccountDetailsController : Controller
     {
         private readonly IMapper _mapper;

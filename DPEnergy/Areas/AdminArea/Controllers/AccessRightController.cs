@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using DPEnergy.DataModelLayer.ViewModels;
 using DPEnergy.DataModelLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DPEnergy.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    [Authorize(Roles = "AdminArea")]
     public class AccessRightController : Controller
     {
         //دارای یک نکته مهم
@@ -21,18 +23,21 @@ namespace DPEnergy.Areas.AdminArea.Controllers
         private readonly UserManager<A_UserManager> _userManager;
         private readonly RoleManager<ApplicationRoles> _roleManager;
         private readonly IAccessRepository _getname;
+        private readonly SignInManager<A_UserManager> _signInManager;
 
         public AccessRightController(IUnitOfWork context,
                                     UserManager<A_UserManager> userManager,
                                     RoleManager<ApplicationRoles> roleManager,
                                     IRoleRepository irr,
-                                    IAccessRepository getname)
+                                    IAccessRepository getname,
+                                    SignInManager<A_UserManager> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _Irr = irr;
             _getname = getname;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -82,6 +87,7 @@ namespace DPEnergy.Areas.AdminArea.Controllers
                             await _userManager.AddToRoleAsync(user, approle.Name);
                         }
                     }
+                    await _signInManager.RefreshSignInAsync(user);
                 }
                 return Json(new { status = "success" });
 

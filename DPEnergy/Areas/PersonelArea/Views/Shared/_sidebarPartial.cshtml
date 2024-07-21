@@ -1,4 +1,9 @@
-﻿<div class="sidebar sidebar-main" style="background-color:#d4d1d1;">
+﻿@using DPEnergy.DataModelLayer.Entities.Admin
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<A_UserManager> UserManager
+
+
+<div class="sidebar sidebar-main" style="background-color:#d4d1d1;">
     <div class="sidebar-content">
 
         <!-- START - User menu -->
@@ -8,9 +13,9 @@
                     <a href="#" class="media-left">
                     </a>
                     <div class="media-body">
-                        <span class="media-heading text-semibold">سعید بحرانی فرد</span>
+                        <span class="media-heading text-semibold">@UserManager.GetUserName(User)</span>
                         <div class="text-size-mini text-muted">
-                            <i class="icon-pin text-size-small"></i> &nbsp;پنل کاربران ( مسئول مالی )
+                            <i class="icon-pin text-size-small"> کاربر آنلاین</i>
                         </div>
                     </div>
                 </div>
@@ -30,7 +35,7 @@
                                                                  title="صفحه اصلی"></i>
                     </li>
                     <li class="active">
-                        <a href="index.html">
+                        <a asp-controller="Home" asp-action="Index">
                             <i class="icon-home4"></i>
                             <span>پیشخوان</span>
                         </a>
@@ -44,35 +49,45 @@
 
                         <ul>
                             <li>
-                                <a  asp-controller="Personel"  asp-action="Index" ><i class="icon-person"></i> <span>تعریف پرسنل</span></a>
+                                <a asp-controller="Personel" asp-action="Index"><i class="icon-person"></i> <span>تعریف پرسنل</span></a>
 
                             </li>
                             <li>
-                                <a asp-controller="ContactInf"  asp-action="Index"><i class="icon-book"></i> <span>اطلاعات تماس</span></a>
+                                <a asp-controller="ContactInf" asp-action="Index"><i class="icon-phone"></i> <span>اطلاعات تماس</span></a>
 
                             </li>
                             <li>
-                                <a asp-controller="BankAccountDetails"  asp-action="Index"><i class="icon-envelop"></i> <span>اطلاعات حساب بانکی</span></a>
+                                <a asp-controller="BankAccountDetails" asp-action="Index"><i class="icon-coin-dollar"></i> <span>اطلاعات حساب بانکی</span></a>
                             </li>
                             <li>
-                                <a asp-controller="VaziatKhedmat"  asp-action="Index"><i class="icon-forrst2"></i> <span>وضعیت خدمت</span></a>
-                            
+                                <a asp-controller="VaziatKhedmat" asp-action="Index"><i class="icon-chess-king"></i> <span>وضعیت خدمت</span></a>
+
                             </li>
                             <li>
-                                <a href="#"><i class="icon-forrst"></i> <span>بیمه</span></a>
+                                <a asp-controller="Takafol" asp-action="Index"><i class="icon-forrst"></i> <span>افراد تحت تکفل-بیمه تکمیلی</span></a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon-notebook"></i> <span>یادداشت های رسیده</span></a>
+                                <a asp-controller="SabegheKar" asp-action="Index"><i class="icon-wrench"></i> <span>سابقه کار</span></a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon-book3"></i> <span>نامه های ارجاع داده شده</span></a>
+                                <a asp-controller="Bime" asp-action="Index"><i class="icon-home"></i> <span>بیمه</span></a>
+                            </li>
+                            <li>
+                                <a asp-controller="Course" asp-action="Index"><i class="icon-laptop"></i> <span>دوره های گذرانده شده</span></a>
+                            </li>
+                            <li>
+                                <a asp-controller="LetterRequest" asp-action="Index"><i class="icon-envelop"></i> <span>درخواست نامه </span></a>
+                            </li>
+                            <li>
+                                <a asp-controller="Madraktahsili" asp-action="Index"><i class="icon-clipboard2"></i> <span>مدرک تحصیلی  </span></a>
+                            </li>
+                            <li>
+                                <a asp-controller="Reports" asp-action="Index"><i class="icon-stack"></i> <span>گزارشات </span></a>
                             </li>
 
-                            <li>
-                                <a href="#"><i class="icon-reminder"></i> <span>نمایش یادآوری ها</span></a>
-                            </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="#"><i class="icon-info22"></i><span>اطلاعات اولیه</span></a>
 
@@ -101,76 +116,104 @@
                             <li>
                                 <a asp-controller="WorkPlace" asp-action="Index"><i class="icon-road"></i><span>محل کار </span></a>
                             </li>
+                            <li>
+                                <a asp-controller="FieldOfStudy" asp-action="Index"><i class="icon-road"></i><span>رشته تحصیلی </span></a>
+                            </li>
+                            <li>
+                                <a asp-controller="DocumentType" asp-action="Index"><i class="icon-road"></i><span>نوع مدرک </span></a>
+                            </li>
+                            <li>
+                                <a asp-controller="PersonelStatus" asp-action="Index"><i class="icon-road"></i><span> وضعیت شغلی پرسنل </span></a>
+                            </li>
                         </ul>
                     </li>
-
-                    <!-- END - مطالب و محتوا -->
-                    <!-- START - اسناد، پرونده ها و پروژه ها -->
                     <li>
-                        <a href="#"><i class="icon-forward"></i><span>عملیات</span></a>
+                        <a href="#"><i class="icon-forward"></i><span> زیر سایت ها</span></a>
 
                         <ul>
                             <li>
-                                <a href="#"><i class="icon-printer"></i><span>ایجاد نامه</span></a>
+                                <a href="@Url.Action("Index", "Home",new {Area = "DMSArea" })"><i class="icon-envelop"></i><span>DMS</span></a>
                             </li>
 
                             <li>
-                                <a href="#"><i class="icon-notebook"></i><span>ایجاد یادداشت</span></a>
+                                <a href="@Url.Action("Index", "Home",new {Area = "DabirArea" })"><i class="icon-notebook"></i><span>دبیرخانه</span></a>
                             </li>
 
                             <li>
-                                <a href="#"><i class="icon-reminder"></i><span>ثبت یادآوری</span></a>
+                                <a href="@Url.Action("Index", "Home",new {Area = "PersonelArea" })"><i class="icon-reminder"></i><span>پرسنلی </span></a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon-bubble7"></i><span>پیش نویس</span></a>
+                                <a href="@Url.Action("Index", "Home",new {Area = "TimeSheetArea" })"><i class="icon-bubble7"></i><span>تایم شیت</span></a>
                             </li>
                             <li>
-                                <a href="#"><i class="icon-codepen"></i><span>ثبت اسناد خارجه</span></a>
+                                <a href="@Url.Action("Index", "UserManager",new {Area = "AdminArea" })"><i class="icon-codepen"></i><span>ادمین</span></a>
                             </li>
                         </ul>
                     </li>
+                    <!--
+    <li>
+        <a href="#"><i class="icon-forward"></i><span>عملیات</span></a>
 
-                    <!-- END - اسناد، پرونده ها و پروژه ها -->
-                    <!-- START - مدیریت مالی -->
-                    <li>
-                        <a href="#"><i class="icon-paperplane"></i><span>خبرنامه</span></a>
+        <ul>
+            <li>
+                <a href="#"><i class="icon-printer"></i><span>ایجاد نامه</span></a>
+            </li>
 
-                        <ul>
-                            <li>
-                                <a href="#"><i class="icon-new"></i><span>اخبار و اطلاعیه ها</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END - مدیریت مالی -->
-                    <!-- START - مدیریت کاربران -->
-                    <li>
-                        <a href="#"><i class="icon-forward"></i><span>ارزشیابی پرسنل</span></a>
+            <li>
+                <a href="#"><i class="icon-notebook"></i><span>ایجاد یادداشت</span></a>
+            </li>
 
-                        <ul>
-                            <li>
-                                <a href="#"><i class="icon-point-up"></i><span>ثبت کارکرد روزانه</span></a>
-                            </li>
+            <li>
+                <a href="#"><i class="icon-reminder"></i><span>ثبت یادآوری</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="icon-bubble7"></i><span>پیش نویس</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="icon-codepen"></i><span>ثبت اسناد خارجه</span></a>
+            </li>
+        </ul>
+    </li>
 
-                            <li>
-                                <a href="#"><i class="icon-chart"></i><span>نمایش کارکرد پرسنل</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- END - مدیریت کاربران -->
-                    <!-- START - پیکربندی سیستم -->
-                    <li>
-                        <a href="#"><i class="icon-shrink5"></i><span>تنظیمات</span></a>
 
-                        <ul>
-                            <li>
-                                <a href="#"><i class="icon-key"></i><span>تغییر رمز عبور</span></a>
-                            </li>
+    <li>
+        <a href="#"><i class="icon-paperplane"></i><span>خبرنامه</span></a>
 
-                            <li>
-                                <a href="#"><i class="icon-user"></i><span>پروفایل</span></a>
-                            </li>
-                        </ul>
-                    </li>
+        <ul>
+            <li>
+                <a href="#"><i class="icon-new"></i><span>اخبار و اطلاعیه ها</span></a>
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="#"><i class="icon-forward"></i><span>ارزشیابی پرسنل</span></a>
+
+        <ul>
+            <li>
+                <a href="#"><i class="icon-point-up"></i><span>ثبت کارکرد روزانه</span></a>
+            </li>
+
+            <li>
+                <a href="#"><i class="icon-chart"></i><span>نمایش کارکرد پرسنل</span></a>
+            </li>
+        </ul>
+    </li>
+
+    <li>
+        <a href="#"><i class="icon-shrink5"></i><span>تنظیمات</span></a>
+
+        <ul>
+            <li>
+                <a href="#"><i class="icon-key"></i><span>تغییر رمز عبور</span></a>
+            </li>
+
+            <li>
+                <a href="#"><i class="icon-user"></i><span>پروفایل</span></a>
+            </li>
+        </ul>
+    </li>
+        -->
                     <!-- END - پیکربندی سیستم -->
 
                 </ul>

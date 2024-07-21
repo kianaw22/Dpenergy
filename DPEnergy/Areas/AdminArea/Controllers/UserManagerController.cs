@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DPEnergy.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
-    [Authorize]
+    [Authorize(Roles = "AdminArea")]
     public class UserManagerController : Controller
     {
         private readonly IUnitOfWork _context;

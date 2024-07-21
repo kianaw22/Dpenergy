@@ -10,13 +10,16 @@ using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.Personel;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.Personel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.DMSArea.Controllers
 {
+    
     [Area("PersonelArea")]
+    [Authorize(Roles = "PersonelArea")]
     public class VaziatKhedmatController : Controller
     {
         private readonly IMapper _mapper;
@@ -149,6 +152,8 @@ namespace DPEnergy.Areas.DMSArea.Controllers
             {
                 return RedirectToAction("ErrorView", "Home");
             }
+            var obj = _context.VaziatKhedmatUW.GetById(Id);
+            _upload.DeleteFile(obj.Attachment,"","");
             _context.VaziatKhedmatUW.DeleteById(Id);
             _context.save();
             return RedirectToAction("Index");

@@ -1,0 +1,203 @@
+﻿@model IEnumerable<DPEnergy.DataModelLayer.Entities.Personel.P_Course>
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="content">
+
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a href="#"><i class="position-left"></i> مشخصات پرسنل</a></li>
+        <li class="active">دوره های گذرانده شده</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon glyphicon-list"></i>
+            لیست دوره ها
+        </span>
+    </div>
+    <div style="margin-bottom:5px;">
+        <a class="btn customGreen1" asp-controller="Course" asp-action="AddCourse">
+            <i class="glyphicon glyphicon-plus"></i>
+            افزودن دوره های گذرانده شده
+        </a>
+    </div>
+
+    <div>
+        <!--<div class="table-responsive"></div> -->
+        <div class="k-rtl">
+            <div id="grid"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="myModaldeletor">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-controller="Course" asp-action="DeleteCoursePost" method="post">
+                <div class="modal-header" style="background-color:darkred; color:white; border-radius:5px 5px 0 0;" dir="rtl">
+                    <h4 class="modal-title">حذف دوره</h4>
+                </div>
+
+                <div class="modal-body" id="DeleteModalBody">
+
+                </div>
+
+                <div dir="rtl" class="modal-footer" style="text-align:left;">
+                    <button class="btn btn-default" type="button" style="width:80px;" data-dismiss="modal">بازگشت</button>
+                    <button type="submit" class="btn" style="width:80px; color:white; background-color:darkred;">
+                        تایید
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action", Size = BootstrapModel.ModalSize.Large })
+@section PersonelScripts {
+    <script src="~/js/modal/modal.js"></script>
+    <script>
+
+        $(document).ready(function () {
+           var myobj = '@Html.Raw(Json.Serialize(Model))';
+            var dpjson = JSON.parse(myobj);
+            console.log(dpjson)
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: dpjson,
+                    pageSize: dpjson.length,
+                     schema: {
+                        model: {
+                            fields: {
+
+                                creationDate: { type: "date" },
+                                modificationDate: { type: "date" },
+
+                            }
+                        }
+                    }
+                },
+                height: 550,
+                filterable: true,
+                groupable: true,
+                sortable: true,
+                toolbar: ["pdf", "search"],
+
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [
+                {
+                        field: "id",
+                        width: 150,
+                        title: "id"
+                },{
+                    filterable: {
+                        multi: true
+                    },
+                    field: "personelCode",
+                    width: 150,
+                    title: "کد پرسنلی"
+                }, {
+                    field: "firstName",
+                     width: 150,
+                    title: "نام "
+                }, {
+                    field: "lastName",
+                    width: 150,
+                    title: "نام خانوادگی"
+                }, {
+                    field: "madrak",
+                    width: 150,
+                    title: "مدرک دوره"
+                }, {
+                    field: "institueName",
+                    width: 150,
+                    title: "موسسه"
+                }, {
+                    field: "issueDate",
+                    width: 150,
+                    title: "تاریخ صدور"
+                }, {
+                    field: "creator",
+                    width: 150,
+                    title: "ایجاد کننده"
+                }, {
+                    field: "creationDate",
+                    width: 150,
+                    attributes: {
+                        style: "text-align: left;"
+                    },
+                    format: "{0:yyyy-MM-dd}",
+                    template: "#= kendo.toString(creationDate, 'yyyy-MM-dd') #" ,
+
+                    title: "تاریخ ایجاد"
+                }, {
+                    field: "modifier",
+                    width: 150,
+                    title: "اصلاح کننده"
+                }, {
+                    field: "modificationDate",
+                    format: "{0:yyyy-MM-dd}",
+                    template: "#= kendo.toString(modificationDate, 'yyyy-MM-dd') #",
+                    width: 200,
+                    title: "تاریخ اصلاح"
+                },
+
+                    {
+                        width: 150,
+                        command: [
+                            {
+
+                                name: "del",
+                                text: "حذف",
+                                click: function (e) {
+                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                    url = "/PersonelArea/Course/DeleteCourse";
+                                    $.ajax({
+                                        url: url,
+                                        data: { id  : item.id },
+                                        type: 'Get',
+                                        success: function (result) {
+                                            $('#DeleteModalBody').html(result);
+                                            $("#myModaldeletor").modal("show");
+                                        },
+                                        error: function (xhr, status) {
+                                            alert(status);
+                                        }
+                                    });
+                                }
+                            },
+
+                            {
+
+                                name: "edit",
+                                text: "ویرایش",
+                                click: function (e) {
+
+                                    var item = this.dataItem($(e.currentTarget).closest("tr"));
+                                    window.location.href = '@Url.Action("EditCourse", "Course")/' + item.id;
+                                }
+                            },
+
+                        ]
+                    }
+                ]
+
+            });
+            var grid = $("#grid").data("kendoGrid");
+            grid.hideColumn("id");
+        });
+
+
+    </script>
+
+}
+

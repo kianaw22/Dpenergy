@@ -69,7 +69,7 @@
             $("#grid").kendoGrid({
                 dataSource: {
                     data: dpjson,
-                    pageSize: 5
+                    pageSize: dpjson.length
                 },
                 height: 550,
                 filterable: true,
@@ -84,15 +84,27 @@
                 },
                 columns: [{
                     field: "personelCode",
-                    title: "کد پرسنلی"
+                    title: "کد پرسنلی",
+                    filterable: {
+                        multi: true
+                    },
                 }, {
                     field: "firstName",
-                    title: "نام"
+                    title: "نام",
+                    filterable: {
+                       multi: true
+                    },
                 }, {
                     field: "lastName",
-                    title: "نام خانوادگی"
+                    title: "نام خانوادگی",
+                    filterable: {
+                       multi: true
+                    },
                 }, {
-                    field: "department",
+                   field: "department",
+                   filterable: {
+                       multi: true
+                        },
                     title: "دپارتمان"
                 },
 

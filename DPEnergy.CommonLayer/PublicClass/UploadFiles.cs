@@ -18,6 +18,43 @@ namespace DPEnergy.CommonLayer.PublicClass
         {
             _appEnvironment = appEnvironment;
         }
+        public string  UploadAttachmentByPersonelCode(IEnumerable<IFormFile> files, string upload,string personelcode ,  string filename)
+        {
+            var fulluploadpath = Path.Combine(_appEnvironment.WebRootPath, upload, personelcode );
+            if (!Directory.Exists(fulluploadpath))
+            {
+                Directory.CreateDirectory(fulluploadpath);
+            }
+            fulluploadpath = Path.Combine(fulluploadpath, filename);
+            if (File.Exists(fulluploadpath))
+            {
+                return "duplicate";
+            }
+            foreach (var item in files)
+            {
+
+                using (var fs = new FileStream(fulluploadpath, FileMode.Create))
+                {
+                    item.CopyTo(fs);
+                }
+
+            }
+            return Path.Combine(upload,personelcode, filename);
+
+        }
+        public bool DeleteAttachmentByPersonelCode(string uploadPath, string projectcode, string name)
+        {
+            var upload = Path.Combine(_appEnvironment.WebRootPath, uploadPath);
+            var filePath = Path.Combine(upload, projectcode, name);
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                return true;
+            }
+
+            return false;
+        }
         public Tuple<bool, string> UploadNezamvazife(IEnumerable<IFormFile> files, string uploadPath, string name)
         {
             var result = false;
@@ -33,7 +70,7 @@ namespace DPEnergy.CommonLayer.PublicClass
             foreach (var item in files)
             {
 
-                using (var fs = new FileStream(upload, FileMode.Create))
+                using (var fs = new FileStream  (upload, FileMode.Create))
                 {
                     item.CopyTo(fs);
                 }

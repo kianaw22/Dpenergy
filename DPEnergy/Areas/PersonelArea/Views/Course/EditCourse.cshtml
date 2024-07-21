@@ -1,0 +1,342 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.Personel.P_CourseViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "AddCourse";
+    List<P_Personel> ListPersonel = ViewBag.personellist;
+}
+
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a asp-controller="Course" asp-action="index"><i class="icon-person position-left"></i> لیست دوره های گذرانده شده</a></li>
+        <li class="active">ویرایش دوره ها</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="icon-lab"></i>
+            فرم ویرایش دوره 
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+        <form asp-controller="Course" asp-action="EditCourse" method="post">
+            <div class="col-md-8 col-md-offset-2">
+                <!--PersonelCode-->
+                <label asp-for="PersonelCode" class="control-label col-md-3 col-xs-12"></label>
+                <div class="col-md-9 col-xs-12">
+                    <select id="personel-code" asp-for="PersonelCode" asp-items="@(new SelectList(from x in ListPersonel select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="personel-code" data-live-search="true" style="direction: ltr">
+                        <option value="" selected disabled hidden style="direction: ltr">Select Personel</option>
+                    </select>
+                    <div>   </div>
+                </div>
+                <!--FirstName-->
+                <div>
+                    <label asp-for="FirstName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input readonly asp-for="FirstName" type="text" class="form-control custominput" autocomplete="off" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <!--LastName-->
+                <div>
+                    <label asp-for="LastName" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input  readonly asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div>
+                    <!--Madrak-->
+                    <div>
+                        <label asp-for="Madrak" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="Madrak" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="Madrak" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--InstitueName-->
+                    <div>
+                        <label asp-for="InstitueName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="InstitueName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="InstitueName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+
+                    <!--IssueDate-->
+                    <div style="margin-bottom:15px;">
+                        <label asp-for="IssueDate" class="control-label col-md-3 col-xs-12" for="ExpirationDate"></label>
+                        <div class="input-group col-md-9 col-xs-12" style="padding-left:9px; padding-right:9px;">
+                            <div class="input-group-addon"
+                                 style="border:1px solid gray; padding:6px">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </div>
+                            <input asp-for="IssueDate" id="issuedatee"
+                                   value="@(Model.IssueDate.HasValue ? ConvertDateTime.ConvertMiladiToShamsi(Model.IssueDate, "yyyy/MM/dd") : string.Empty)"
+                                   name="issuedatee" type="text" class="form-control custominput datetimepicker">
+
+                        </div>
+                        <span asp-validation-for="IssueDate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
+                    </div>
+
+                    <div class="row">
+                        <label class="control-label col-md-3 col-xs-12"> ضمیمه</label>
+                        <div class="col-md-6 col-xs-12" style="text-align:left">
+                            <input class="form-control" type="file" id="myfile" />
+                            <span dir="ltr" id="spnmessage" style="color:black; font-size:12px;"></span>
+                            <div>
+                                <i class="fa fa-file"></i> <!-- Use an appropriate icon for files, Font Awesome is used here as an example -->
+                                @if (!string.IsNullOrEmpty(Model.Attachment))
+                                {
+                                    <a id="attachmentLink" href="/@Model.Attachment" download="download">@System.IO.Path.GetFileName(Model.Attachment)</a>
+                                }
+                                else
+                                {
+                                    <p>No attachment</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-xs-12" style="text-align:left; color:green;">
+                            <input type="button" value="Upload" id="btnupload" onclick="UploadFile()" class="btn"
+                                   style="height:30px; border-radius:3px; border:1px solid gray; background-color:white; width:100px; font-size:11px ;text-align:center" />
+                            <input type="button" value="Delete" id="btnupload" onclick="DeleteFile()" class="btn"
+                                   style="height:30px; border-radius:3px; border:1px solid red; background-color:white; width:100px; font-size:11px ;text-align:center" />
+                        </div>
+
+                        <input type="hidden" class="form-control" asp-for="Attachment" id="attach" />
+                        <input asp-for="Id" type="hidden" class="form-control custominput" id="modelid" />
+                        <!--Creation Date -->
+                        <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+                        <!--Creator-->
+                        <input asp-for="Creator" type="hidden" class="form-control custominput" />
+
+                        <!--ModificationDate -->
+                        <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+                        <!--Modifier-->
+                        <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+                    </div>
+                    <div class="col-xs-12 form-group" style="margin-top:15px;">
+                        <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                               value="ثبت" class="btn pull-right" />
+                    </div>
+                </div>
+            </div>
+       </form>
+    </div>
+
+</div>
+@section PersonelScripts{
+    <script>
+        var UploadFile = function () {
+            var data = new FormData;
+            var files = $("#myfile").get(0).files;
+            personelcode = $("#personel-code").val();
+            if (personelcode == null)
+            {
+                alert("اول پرسنل کد را انتخاب کنید ");
+            }
+
+            if (files.length == 0) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('لطفا یک فایل انتخاب کنید ');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            var ext = files[0].name.split('.').pop();
+            console.log($("#modelid").val());
+            data.append("personelcode", personelcode);
+            data.append("id", $("#modelid").val());
+            data.append("path", "upload\\Personel\\Course\\");
+            data.append("extension", ext);
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray', files[i]);
+
+            }
+
+
+            if (files[0].size >= 10000000) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('حجم فایل بیش از 10 مگا بایت است');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            $.ajax({
+                    type: "post",
+                    url: '@Url.Action("UploadAttachmentEdit", "Course", new { area = "PersonelArea"})',
+                    data: data,
+                    contentType: false,
+                    processData: false
+
+            }).done(function (result) {
+                console.log(result.status);
+                    if (result.status == "success") {
+
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text(result.filename+ "آپلود فایل موفقیت آمیز بود ");
+                        $("#spnmessage").css("color", "green");
+                        $("#attach").val(result.mypath);
+
+                    }
+
+                    else if (result.status == "duplicate") {
+                        $("#spnmessage").removeClass('hidden');
+                        $("#spnmessage").text(" فایل تکراری است ");
+                        $("#spnmessage").css("color", "red");
+                    }
+
+
+            }).fail(function (result) {
+                    if (result.status != "success") {
+                        $("#spnmessage").css("color", "red");
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text("مشکلی در اپلود فایل به وجود آمد");
+                    }
+            });
+
+
+
+        }
+        var DeleteFile = function () {
+            var data = new FormData;
+            attach = $("#attach").val();
+            personelcode = $("#personel-code").val();
+
+            if (personelcode == null) {
+                alert("اول پرسنل کد را انتخاب کنید ");
+                return false;
+            }
+
+            data.append("path", attach);
+            $("#attach").val(null);
+            data.append("id", $("#modelid").val());
+            $.ajax({
+                    type: "post",
+                    url: '@Url.Action("DeleteAttachment", "Course", new { area = "PersonelArea"})',
+                    data: data,
+                    contentType: false,
+                    processData: false
+
+            }).done(function (result) {
+                    if (result.status == "success") {
+
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text( "فایل حذف شد ");
+                        $("#spnmessage").css("color", "red");
+
+
+                    }
+
+                    else if (result.status == "nofile") {
+                        $("#spnmessage").removeClass('hidden');
+                        $("#spnmessage").text("فایلی برای حذف وجود ندارد");
+                        $("#spnmessage").css("color", "red");
+                    }
+
+
+            }).fail(function (result) {
+                    if (result.status != "success") {
+                        $("#spnmessage").css("color", "red");
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text("مشکلی در حذف فایل به وجود آمد");
+                    }
+            });
+
+
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.datetimepicker').persianDatepicker({
+                "inline": false,
+                "format": "L",
+                "initialValue": false,
+                "minDate": 0,
+                "maxDate": 2000000000000,
+                "autoClose": true,
+
+                "calendar": {
+                    "persian": {
+                        "locale": "fa",
+                        "showHint": true,
+                        "leapYearMode": "algorithmic"
+                    },
+                    "gregorian": {
+                        "locale": "en",
+                        "showHint": true
+                    }
+                },
+                "navigator": {
+                    "enabled": true,
+                    "scroll": {
+                        "enabled": true
+                    },
+                    "text": {
+                        "btnNextText": "<",
+                        "btnPrevText": ">"
+                    }
+                },
+                "toolbox": {
+                    "enabled": true,
+                    "calendarSwitch": {
+                        "enabled": true,
+                        "format": "MMMM"
+                    },
+                    "todayButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "امروز",
+                            "en": "Today"
+                        }
+                    },
+                    "submitButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "تایید",
+                            "en": "Submit"
+                        }
+                    },
+                    "text": {
+                        "btnToday": "امروز"
+                    }
+                },
+
+
+            });
+        });
+    </script>
+    <script>
+        // Attach an event listener to the client number selection field
+        $('#personel-code').change(function () {
+            var personelcode = $(this).val();
+
+            $.ajax({
+                url: "/PersonelArea/Course/GetName",
+                type: 'GET',
+                data: {
+                    personelcode: personelcode
+
+                },
+                success: function (data) {
+
+                    $('#FirstName').val(data.firstname);
+                    $('#LastName').val(data.lastname);
+
+                },
+                error: function () {
+                    console.log('Error retrieving name and family');
+                }
+            });
+        });
+    </script>
+
+}
+
+

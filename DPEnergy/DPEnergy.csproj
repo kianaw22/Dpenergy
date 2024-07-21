@@ -5,22 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\reports\NewFolder\**" />
     <Compile Remove="wwwroot\upload\LetterAttachment\**" />
     <Compile Remove="wwwroot\upload\NewFolder1\**" />
-    <Compile Remove="wwwroot\upload\NewFolder\**" />
-    <Content Remove="wwwroot\reports\NewFolder\**" />
     <Content Remove="wwwroot\upload\LetterAttachment\**" />
     <Content Remove="wwwroot\upload\NewFolder1\**" />
-    <Content Remove="wwwroot\upload\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\reports\NewFolder\**" />
     <EmbeddedResource Remove="wwwroot\upload\LetterAttachment\**" />
     <EmbeddedResource Remove="wwwroot\upload\NewFolder1\**" />
-    <EmbeddedResource Remove="wwwroot\upload\NewFolder\**" />
-    <None Remove="wwwroot\reports\NewFolder\**" />
     <None Remove="wwwroot\upload\LetterAttachment\**" />
     <None Remove="wwwroot\upload\NewFolder1\**" />
-    <None Remove="wwwroot\upload\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,8 +58,13 @@
     <Folder Include="wwwroot\Panel\assets\js\charts\google\other\" />
     <Folder Include="wwwroot\Panel\assets\js\maps\vector\" />
     <Folder Include="wwwroot\Panel\assets\js\plugins\buttons\" />
+    <Folder Include="wwwroot\reports\PersonelArea\" />
     <Folder Include="wwwroot\upload\atachments\Melliscan\" />
     <Folder Include="wwwroot\upload\atachments\Shenasname-scan\" />
+    <Folder Include="wwwroot\upload\attachfile\kiana22\" />
+    <Folder Include="wwwroot\upload\Personel\MadrakTahsili\" />
+    <Folder Include="wwwroot\upload\Personel\NewFolder\" />
+    <Folder Include="wwwroot\upload\Personel\SabegheKar\" />
   </ItemGroup>
 
 </Project>

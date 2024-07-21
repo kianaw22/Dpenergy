@@ -6,12 +6,14 @@ using AutoMapper;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.Admin;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    [Authorize(Roles = "AdminArea")]
     public class AdministrativeFormController : Controller
     {
 

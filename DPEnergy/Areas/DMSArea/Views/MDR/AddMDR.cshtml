@@ -266,8 +266,12 @@
                 <div>
                     <label asp-for="Active" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <input asp-for="Active" type="text" class="form-control custominput" placeholder="Active ..." autocomplete="off" />
-                        <span asp-validation-for="Active" class="text-danger"></span>
+                        <select asp-for="Active" class="form-control selectpicker custominput"  data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl"> select Activation</option>
+                            <option value="1"  >فعال</option>
+                            <option value="0" >غیرفعال</option>
+                        </select>
+                        <div>   </div>
                     </div>
 
                 </div>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DPEnergy.CommonLayer.PublicClass;
+using DPEnergy.DataModelLayer;
 using DPEnergy.DataModelLayer.Entities;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS;
@@ -13,6 +14,7 @@ using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels;
 using DPEnergy.DataModelLayer.ViewModels.DMS;
 using DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,18 +25,22 @@ using Stimulsoft.Report.Mvc;
 namespace DPEnergy.Areas.DMSArea.Controllers
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class MDRController : Controller
     {
         private readonly IUnitOfWork _context;
         private readonly IMapper _mapper;
         private readonly UserManager<A_UserManager> _userManager;
         private readonly IWebHostEnvironment _hosting;
-        public MDRController(IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager, IWebHostEnvironment hosting)
+        private readonly ApplicationDbContext _dbcontext;
+        public MDRController(IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager, IWebHostEnvironment hosting
+            , ApplicationDbContext dbcontext)
         {
             _userManager = userManager;
             _context = uow;
             _mapper = mapper;
             _hosting = hosting;
+            _dbcontext = dbcontext;
 
             var stimulKey = Path.Combine(_hosting.ContentRootPath, "wwwroot\\reports\\license", "license.key");
             if (System.IO.File.Exists(stimulKey))
@@ -42,9 +48,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                 StiLicense.LoadFromFile(stimulKey);
             }
         }
+       
         public IActionResult Index()
         {
-            var model = _context.MDRManagerUW.Get();
+            var userid = _userManager.GetUserId(HttpContext.User);
+            var projects = _context.UserProjectUW.Get().Where(x => x.UserId == userid).ToList();
+            var model = _context.MDRManagerUW.Get().Where(mdr => projects.Any(p => p.ProjectCode == mdr.ProjectCode)); ;
             return View(model);
         }
         [HttpGet]
@@ -70,7 +79,7 @@ namespace DPEnergy.Areas.DMSArea.Controllers
                     ProjectTitle = projtitle,
                     ProjectCode = projcode,
                 };
-                var mapproj = _mapper.Map<D_MDRViewModel>(model);
+            
             return View(model);     
         }
         
@@ -78,8 +87,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddMDR(D_MDRViewModel model)
         {
+            if (_dbcontext.D_MDR.Any(c => c.ClientNumber == model.ClientNumber) )
+            {
+                ModelState.AddModelError("ClientNumber", "Client number already exists.");
 
-         
+            }
+
             if (ModelState.IsValid)
             {
                 JsonHelper.SanitizeStringProperties(model);

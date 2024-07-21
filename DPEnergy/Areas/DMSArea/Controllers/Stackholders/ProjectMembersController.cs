@@ -9,12 +9,14 @@ using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.DMS.Stackholders;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.DMS.Stackholders;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.DMSArea.Controllers.Stackholders
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class ProjectMembersController : Controller
     {
         private readonly IUnitOfWork _context;

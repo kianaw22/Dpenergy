@@ -71,6 +71,11 @@ namespace DPEnergy.Controllers
             await _signInManager.SignOutAsync();
             return Redirect("/Account/Login");
         }
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.DMS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Stimulsoft.Base;
@@ -18,6 +19,7 @@ using Stimulsoft.Report.Mvc;
 namespace DPEnergy.Areas.DMSArea.Controllers
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class ReportTestController : Controller
     {
         private readonly IUnitOfWork _context;

@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_MadrakTahsili
+@{
+    Layout = null;
+}
+
+    <div class="modal-body form-horizontal" dir="rtl">
+        آیا حذف از مدرک تحصیلی
+        <span style="font-weight:bold;">@Model.MadrakTahsili</span>
+        پرسنل
+        <span style="font-weight:bold;">@Model.FirstName @Model.LastName</span>
+        مطمئن هستید؟
+    </div>
+<input type="hidden" asp-for="Id" />

@@ -11,6 +11,7 @@ using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Entities.Reporrts;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.Reports;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +23,8 @@ using Stimulsoft.Report.Mvc;
 namespace DPEnergy.Areas.DMSArea.Controllers
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
+    [Authorize(Roles = "DMSAddReport")]
     public class ReportsController : Controller
     {
         private readonly IUnitOfWork _context;

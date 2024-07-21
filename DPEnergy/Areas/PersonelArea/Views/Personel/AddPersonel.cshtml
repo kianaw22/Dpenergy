@@ -22,7 +22,7 @@
 
     <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
         <span style="font-weight:bold;">
-            <i class="glyphicon glyphicon-plus"></i>
+            <i class="glyphicon glyphicon-picture"></i>
             فرم ایجاد پرسنل جدید
         </span>
     </div>
@@ -79,8 +79,8 @@
                         <!--<input asp-for="Gender" type="text" class="form-control custominput" placeholder="جنسیت ..." autocomplete="off" />-->
                         <select asp-for="Gender" class="form-control selectpicker custominput" id="select-Gender" data-live-search="true" style="direction: rtl">
                             <option value="" selected disabled hidden style="direction: rtl">     جنسیت را انتخاب کنید</option>
-                            <option data-tokens="زن">  زن</option>
-                            <option data-tokens="مرد">  مرد</option>
+                            <option data-tokens="زن">زن</option>
+                            <option data-tokens="مرد">مرد</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="Gender" class="text-danger"></span>
@@ -109,7 +109,7 @@
                         <select asp-for="SodurPlace"
                                 class="form-control selectpicker custominput" asp-items="@(new SelectList(ListCity,"CityName","CityName"))" id="select-SodurPlace" data-live-search="true"
                                 style="direction: rtl; ">
-                            <option value="" selected disabled hidden style="direction: rtl">     محل صدور را انتخاب کنید</option>
+                            <option value="" selected disabled hidden style="direction: rtl">محل صدور را انتخاب کنید</option>
 
                         </select>
                         <div>   </div>
@@ -156,9 +156,10 @@
                     <label asp-for="MaritalStatus" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="MaritalStatus" class="form-control selectpicker custominput" id="select-MaritalStatus" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     وضعیت تاهل را انتخاب کنید</option>
-                            <option data-tokens="مجرد">  مجرد</option>
-                            <option data-tokens="متاهل">  متاهل</option>
+                            <option value="" selected disabled hidden style="direction: rtl">وضعیت تاهل را انتخاب کنید</option>
+                            <option data-tokens="مجرد">مجرد</option>
+                            <option data-tokens="متاهل">متاهل</option>
+                            <option data-tokens="معیل">معیل</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="MaritalStatus" class="text-danger"></span>
@@ -168,8 +169,8 @@
                 <div>
                     <label asp-for="Department" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
-                        <select asp-for="Department" asp-items="@(new SelectList(ListDepartment,"DepartmentName","DepartmentName"))" class="form-control selectpicker custominput" id="select-Department" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     دپارتمان را انتخاب کنید</option>
+                        <select asp-for="Department" asp-items="@(new SelectList(ListDepartment,"DepaertmentPersianName","DepaertmentPersianName"))" class="form-control selectpicker custominput" id="select-Department" data-live-search="true" style="direction: rtl">
+                            <option value="" selected disabled hidden style="direction: rtl">دپارتمان را انتخاب کنید</option>
                         </select>
                         <div>   </div>
                         <span asp-validation-for="Department" class="text-danger"></span>
@@ -193,7 +194,7 @@
                     <label asp-for="ContractType" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="ContractType" class="form-control selectpicker custominput" id="select-ContractType" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     نوع قرارداد را انتخاب کنید</option>
+                            <option value="" selected disabled hidden style="direction: rtl">نوع قرارداد را انتخاب کنید</option>
                             <option data-tokens="پاره وقت" >  پاره وقت</option>
                             <option data-tokens="تمام وقت">  تمام وقت</option>
                             <option data-tokens="کار آموز"> کار آموز</option>
@@ -210,7 +211,7 @@
                     <label asp-for="Company" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="Company" asp-items="@(new SelectList(ListCompany,"CompanyName","CompanyName"))" class="form-control selectpicker custominput" id="select-Company" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     شرکت را انتخاب کنید</option>
+                            <option value="" selected disabled hidden style="direction: rtl">شرکت را انتخاب کنید</option>
 
                         </select>
                         <div>   </div>
@@ -222,7 +223,7 @@
                     <label asp-for="MahalKhedmat" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="MahalKhedmat" asp-items="@(new SelectList(ListMahalKhedmat,"MahalKhedmatName","MahalKhedmatName"))" class="form-control selectpicker custominput" id="select-MahalKhedmat" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     محل خدمت را انتخاب کنید</option>
+                            <option value="" selected disabled hidden style="direction: rtl"> محل خدمت را انتخاب کنید</option>
 
                         </select>
                         <div>   </div>
@@ -234,7 +235,7 @@
                     <label asp-for="VaziatEshteqal" class="control-label col-md-3 col-xs-12"></label>
                     <div class="col-md-9 col-xs-12">
                         <select asp-for="VaziatEshteqal" class="form-control selectpicker custominput" id="select-VaziatEshteqal" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     وضعیت اشتغال را انتخاب کنید</option>
+                            <option value="" selected disabled hidden style="direction: rtl"> وضعیت اشتغال را انتخاب کنید</option>
                             <option data-tokens="بازنشسته">  بازنشسته</option>
                             <option data-tokens="مردسوری">  سوری</option>
                             <option data-tokens="تسویه حساب">  تسویه حساب</option>
@@ -324,18 +325,7 @@
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
                 </div>
-                <!--Post-->
-                <div>
-                    <label asp-for="Post" class="control-label col-md-3 col-xs-12"></label>
-                    <div class="col-md-9 col-xs-12">
-                        <select asp-for="Post" asp-items="@(new SelectList(ListPost,"PostName","PostName"))" class="form-control selectpicker custominput" id="select-Post" data-live-search="true" style="direction: rtl">
-                            <option value="" selected disabled hidden style="direction: rtl">     سمت را انتخاب کنید</option>
-
-                        </select>
-                        <div>   </div>
-                        <span asp-validation-for="Post" class="text-danger"></span>
-                    </div>
-                </div>
+               
                 <!--WorkPlace-->
                 <div>
                     <label asp-for="WorkPlace" class="control-label col-md-3 col-xs-12"></label>
@@ -449,7 +439,7 @@
                                     <i class="icon-file-picture"></i>
                                 </label>
                                 <span id="spnMelliScanpath" style="color:black; font-size:12px;"></span>
-                                <input asp-for="MelliScanPath" type="file" accept=".rar" style="visibility:hidden" />
+                                <input asp-for="MelliScanPath" type="file"  style="visibility:hidden" />
 
                             </div>
                             <div class="col-md-6 col-xs-6">

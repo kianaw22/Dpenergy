@@ -8,6 +8,7 @@ using DPEnergy.DataModelLayer.Entities.DMS;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.DMS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -15,6 +16,7 @@ using Newtonsoft.Json;
 namespace DPEnergy.Areas.DMSArea.Controllers
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class TransmittalController : Controller
     {
         private readonly IUnitOfWork _context;

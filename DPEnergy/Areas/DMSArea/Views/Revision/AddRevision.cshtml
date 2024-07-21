@@ -163,7 +163,7 @@
                                         <input asp-for="Company" type="text" class="form-control" />
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -178,11 +178,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label asp-for="StageName" class="control-label">Stage Name</label>
-                                        <select id="stage" asp-for="StageName" asp-items="@(new SelectList(ListProgress,"Stage","Stage"))" class="form-control selectpicker" data-live-search="true">
+                                        <label asp-for="ProgressId" class="control-label">Stage Name</label>
+                                        <select id="stage" asp-for="ProgressId" asp-items="@(new SelectList(ListProgress,"Id","Stage"))" class="form-control selectpicker" data-live-search="true">
                                             <option value="" selected disabled hidden>Select Stage Name</option>
                                         </select>
-                                        <span asp-validation-for="StageName" class="text-danger"></span>
+                                        <span asp-validation-for="ProgressId" class="text-danger"></span>
 
                                     </div>
                                 </div>
@@ -242,7 +242,7 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="row">
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label asp-for="Consideration" class="control-label">Consideration</label>
@@ -261,7 +261,7 @@
                                     <div class="form-group">
                                         <label asp-for="IncomingTransmittalCheck" class="control-label">Incoming Transmittal Check</label>
                                         <div></div>
-                                        <input asp-for="IncomingTransmittalCheck" class="form-check-input" type="checkbox"  value="false" id="check2"  onchange="ck2(this.value)"/>
+                                        <input asp-for="IncomingTransmittalCheck" class="form-check-input" type="checkbox" value="false" id="check2" onchange="ck2(this.value)" />
                                     </div>
                                 </div>
                             </div>
@@ -423,11 +423,11 @@
                                 </div>
                             </div>
                             <input type="hidden" class="form-control" asp-for="Attachment" id="attach" />
-                          
-                          
 
-                             
-                           
+
+
+
+
                         </div>
 
                     </div>
@@ -438,7 +438,7 @@
                 <!-- <input type="submit" name="buttonId" value="Save and Next Item" id="btn2" class="btn btn-primary btn" /> -->
                 <input type="submit" name="buttonId" value="Cancel" id="btn3" class="btn btn-danger btn" />
             </div>
-
+     
         </form>
     </div>
 </div>
@@ -477,9 +477,9 @@
 
             }
 
-            if (files[0].size >= 10000000) {
+            if (files[0].size >= 500000000) {
                 $("#spnmessage").removeClass('hidden');
-                $("#spnmessage").text('حجم فایل بیش از 10 مگا بایت است');
+                $("#spnmessage").text('حجم فایل بیش از 500 مگا بایت است');
                 $("#spnmessage").css("color", "red");
                 return false;
             }
@@ -590,14 +590,16 @@
     <script>
         // Attach an event listener to the client number selection field
         $('#stage').change(function () {
-            var stage = $(this).val();
+
+            
+            var name = $('#stage option:selected').text();
             var projectcode = $("#pcode").val().trim();
             // Send an AJAX request to the server
             $.ajax({
                 url: "/DMSArea/Revision/GetProgress",
                 type: 'GET',
                 data: {
-                    stage: stage,
+                    stage: name,
                     projectcode: projectcode
                 },
                 success: function (data) {

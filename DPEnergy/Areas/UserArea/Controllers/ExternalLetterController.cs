@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DPEnergy.Areas.UserArea.Controllers
 {
+    [Authorize]
     [Area("UserArea")]
   
     public class ExternalLetterController : Controller

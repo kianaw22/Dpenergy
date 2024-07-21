@@ -70,7 +70,7 @@
             $("#grid").kendoGrid({
                 dataSource: {
                     data: dpjson,
-                    pageSize: 5,
+                    pageSize: dpjson.length,
                      schema: {
                         model: {
                             fields: {
@@ -118,29 +118,17 @@
                     width: 150,
                     title: "شماره منزل"
                 }, {
-                    field: "mobilePhone",
-                    width: 150,
-                    title: "تلفن همراه"
-                }, {
-                        field: "address",
-                    width: 150,
-                    title: "آدرس"
-                }, {
-                     field: "propertyType",
-                    width: 150,
-                    title: "نوع ملک"
-                }, {
                     field: "introducedName",
                     width: 150,
-                    title: "نام معرفی شده"
+                    title: "نام اضطراری"
                 }, {
                     field: "introducedPhone",
                     width: 150,
-                    title: "شماره تلفن معرفی شده"
+                    title: "شماره تلفن اضطراری"
                 }, {
                     field: "introducedAddress",
                     width: 150,
-                    title: "آدرس معرفی شده"
+                    title: "آدرس اضطراری"
                 },  {
                     field: "creator",
                     width: 150,

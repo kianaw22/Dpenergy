@@ -9,6 +9,7 @@ namespace DPEnergy.DataModelLayer.Entities
     {
         [Key]
         public String Id { get; set; }
+        public string PersonelCode { get; set; }
         public String PostName { get; set; }
     }
 }

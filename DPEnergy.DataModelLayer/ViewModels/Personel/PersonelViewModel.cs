@@ -55,6 +55,7 @@ namespace DPEnergy.DataModelLayer.ViewModels
 
         [Display(Name = "تاریخ تولد ")]
         public DateTime? BirthDate { get; set; }
+        public string PBirthDate { get; set; }
 
         [Display(Name = "وضعیت تاهل ")]
         public string MaritalStatus { get; set; }
@@ -63,6 +64,7 @@ namespace DPEnergy.DataModelLayer.ViewModels
         public string Department { get; set; }
         [Display(Name = "تاربخ شروع به کار ")]
         public DateTime? StartWorkDate { get; set; }
+        public string PStartWorkDate { get; set; }
         [Display(Name = "نوع قرارداد")]
         public string ContractType { get; set; }
 
@@ -79,6 +81,7 @@ namespace DPEnergy.DataModelLayer.ViewModels
         public string JobCategory { get; set; }
         [Display(Name = "تاریخ تسویه حساب")]
         public DateTime? TasfieDate { get; set; }
+        public string PTasfieDate { get; set; }
 
         [Display(Name = "علت ترک کار")]
 
@@ -105,7 +108,7 @@ namespace DPEnergy.DataModelLayer.ViewModels
         public string Introduction { get; set; }
         [Display(Name = "گروه خونی")]
         public string BloodType { get; set; }
-        [Display(Name = "دارو های خاص مضرفی")]
+        [Display(Name = "دارو های خاص مصرفی")]
         public string SpecialDrug { get; set; }
         [Display(Name = "بیماری های خاص")]
         public string Sickness { get; set; }

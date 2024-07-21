@@ -65,7 +65,7 @@
             $("#grid").kendoGrid({
                 dataSource: {
                     data: dpjson,
-                    pageSize: 5
+                    pageSize: dpjson.length
                 },
                 height: 550,
                 filterable: true,
@@ -91,6 +91,13 @@
                     title: "Description"
 
                 }, {
+                     field: "projectCode",
+                     width: 150,
+                     filterable: {
+                          multi: true
+                        },
+                      title: "ProjectCode"
+                },{
                     field: "order",
                     width: 150,
                     title: "Order"

@@ -4,28 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DPEnergy.CommonLayer.PublicClass;
+using DPEnergy.DataModelLayer;
 using DPEnergy.DataModelLayer.Entities;
 using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels;
 using DPEnergy.DataModelLayer.ViewModels.DMS.BasicInformation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class ProgressController : Controller
     {
         private readonly IUnitOfWork _context;
         private readonly UserManager<A_UserManager> _userManager;
         private readonly IMapper _mapper;
-        public ProgressController(IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager)
+        private readonly ApplicationDbContext _dbcontext;
+        public ProgressController(IUnitOfWork uow, IMapper mapper, UserManager<A_UserManager> userManager, ApplicationDbContext dbcontext)
         {
             _userManager = userManager;
             _context = uow;
             _mapper = mapper;
+            _dbcontext = dbcontext;
         }
         public IActionResult Index()
         {
@@ -44,6 +49,11 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         public IActionResult AddProgress(D_ProgressViewModel model)
         {
             FillCombo();
+            if (_dbcontext.D_Progress.Any(c => c.Stage == model.Stage && c.ProjectCode == model.ProjectCode))
+            {
+                ModelState.AddModelError("Stage", "stage already exists for this project.");
+
+            }
             model.CreationDate = DateTime.Now;
             model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
@@ -76,10 +86,12 @@ namespace DPEnergy.Areas.DMSArea.Controllers.BasicInformation
         public IActionResult EditProgress(D_ProgressViewModel model)
         {
             FillCombo();
+             
             model.ModificationDate = DateTime.Now;
             model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             if (ModelState.IsValid)
             {
+                JsonHelper.SanitizeStringProperties(model);
                 model.CreationDate = DateTime.Now;
                 var projmapper = _mapper.Map<D_Progress>(model);
                 _context.ProgressManagerUW.Update(projmapper);

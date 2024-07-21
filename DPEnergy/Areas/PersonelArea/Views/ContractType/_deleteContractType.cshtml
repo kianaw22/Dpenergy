@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_ContractType
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+   آیا از حذف نوع قرارداد 
+    <span style="font-weight:bold;">@Model.ContractType</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

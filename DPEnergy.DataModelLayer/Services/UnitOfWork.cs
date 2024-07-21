@@ -71,8 +71,186 @@ namespace DPEnergy.DataModelLayer.Services
         private GenericClass<P_ContactInf>_contactinf;
         private GenericClass<P_VaziatKhedmat> _vaziatkhedmat;
         private GenericClass<P_BankAccountDetails> _bankaccountdetails;
-        //کاربران
-
+        private GenericClass<P_Takafol> _takafol;
+        private GenericClass<P_SabegheKar> _sabeghekar;
+        private GenericClass<P_Bime> _bime;
+        private GenericClass<P_Course> _course;
+        private GenericClass<P_MadrakTahsili> _madrak;
+        private GenericClass<P_LetterRequest> _letterrequest;
+        private GenericClass<P_FieldOfStudy> _fieldofstudy;
+        private GenericClass<P_InstitutionName> _instituionname;
+        public GenericClass<P_InsuranceStatus> _insurancestatus;
+        public GenericClass<P_AccountType> _accounttype;
+        public GenericClass<P_EducationDegree> _educationdegree;
+        public GenericClass<P_DocumentType> _documenttype;
+        public GenericClass<P_PersonelStatus> _personelstatus;
+        public GenericClass<P_MaritalStatus> _maritalstatus;
+        public GenericClass<P_ContractType> _contracttype;
+        public GenericClass<P_DocumentType>DocumentTypeUW
+        {
+            get
+            {
+                if (_documenttype == null)
+                {
+                    _documenttype = new GenericClass<P_DocumentType>(_context);
+                }
+                return _documenttype;
+            }
+        }
+        public GenericClass<P_ContractType> ContractTypeUW
+        {
+            get
+            {
+                if (_contracttype == null)
+                {
+                    _contracttype = new GenericClass<P_ContractType>(_context);
+                }
+                return _contracttype;
+            }
+        }
+        public GenericClass<P_MaritalStatus> MaritalStatusUW
+        {
+            get
+            {
+                if (_maritalstatus == null)
+                {
+                    _maritalstatus = new GenericClass<P_MaritalStatus>(_context);
+                }
+                return _maritalstatus;
+            }
+        }
+        public GenericClass<P_PersonelStatus> PersonelStatusUW
+        {
+            get
+            {
+                if (_personelstatus == null)
+                {
+                    _personelstatus = new GenericClass<P_PersonelStatus>(_context);
+                }
+                return _personelstatus;
+            }
+        }
+        public GenericClass<P_EducationDegree> EducationDegreeUW
+        {
+            get
+            {
+                if (_educationdegree == null)
+                {
+                    _educationdegree = new GenericClass<P_EducationDegree>(_context);
+                }
+                return _educationdegree;
+            }
+        }
+        public GenericClass<P_AccountType> AccountTypeUW
+        {
+            get
+            {
+                if (_accounttype == null)
+                {
+                    _accounttype = new GenericClass<P_AccountType>(_context);
+                }
+                return _accounttype;
+            }
+        }
+        public GenericClass<P_InsuranceStatus> InsuranceStatusUW
+        {
+            get
+            {
+                if (_insurancestatus == null)
+                {
+                    _insurancestatus = new GenericClass<P_InsuranceStatus>(_context);
+                }
+                return _insurancestatus;
+            }
+        }
+        public GenericClass<P_InstitutionName> InstitutionNameUW
+        {
+            get
+            {
+                if (_instituionname == null)
+                {
+                    _instituionname = new GenericClass<P_InstitutionName>(_context);
+                }
+                return _instituionname;
+            }
+        }
+        public GenericClass<P_FieldOfStudy> FieldofStudyUW
+        {
+            get
+            {
+                if (_fieldofstudy == null)
+                {
+                    _fieldofstudy = new GenericClass<P_FieldOfStudy>(_context);
+                }
+                return _fieldofstudy;
+            }
+        }
+        public GenericClass<P_Course> CourseUW
+        {
+            get
+            {
+                if (_course == null)
+                {
+                    _course = new GenericClass<P_Course>(_context);
+                }
+                return _course;
+            }
+        }
+        public GenericClass<P_LetterRequest> LetterRequestUW
+        {
+            get
+            {
+                if (_letterrequest == null)
+                {
+                    _letterrequest = new GenericClass<P_LetterRequest>(_context);
+                }
+                return _letterrequest;
+            }
+        }
+        public GenericClass<P_MadrakTahsili> MadrakTahsiliUW
+        {
+            get
+            {
+                if (_madrak == null)
+                {
+                    _madrak = new GenericClass<P_MadrakTahsili>(_context);
+                }
+                return _madrak;
+            }
+        }
+        public GenericClass<P_Bime> BimeUW
+        {
+            get
+            {
+                if (_bime == null)
+                {
+                    _bime = new GenericClass<P_Bime>(_context);
+                }
+                return _bime;
+            }
+        }
+        public GenericClass<P_SabegheKar> SabegheKarUW
+        {
+            get
+            {
+                if (_sabeghekar == null)
+                {
+                    _sabeghekar = new GenericClass<P_SabegheKar>(_context);
+                }
+                return _sabeghekar;
+            }
+        }
+        public GenericClass<P_Takafol> TakafolUW
+        {
+            get
+            {
+                if (_takafol == null)
+                {
+                    _takafol = new GenericClass<P_Takafol>(_context);
+                }
+                return _takafol;
+            }
+        }
         public GenericClass<P_ContactInf> ContactInfUW
         {
             get

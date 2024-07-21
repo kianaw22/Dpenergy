@@ -14,7 +14,7 @@
     </ul>
     <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
         <span style="font-weight:bold;">
-            <i class="icon-accessibility2"></i>
+            <i class="icon-shield-check"></i>
             فرم ثبت حساب
         </span>
     </div>
@@ -39,7 +39,7 @@
                     <div>
                         <label asp-for="FirstName" class="control-label col-md-3 col-xs-12"></label>
                         <div class="col-md-9 col-xs-12">
-                            <input asp-for="FirstName" type="text" class="form-control custominput" autocomplete="off" />
+                            <input  readonly asp-for="FirstName" type="text" class="form-control custominput" autocomplete="off" />
                             <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     <div>
                         <label asp-for="LastName" class="control-label col-md-3 col-xs-12"></label>
                         <div class="col-md-9 col-xs-12">
-                            <input asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" />
+                            <input  readonly asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" />
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
                     </div>

@@ -5,31 +5,83 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DPEnergy.CommonLayer.PublicClass;
 using DPEnergy.CommonLayer.Services;
+using DPEnergy.DataModelLayer;
 using DPEnergy.DataModelLayer.Entities;
+using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.PersonelArea.Controllers
 {
+    
     [Area("PersonelArea")]
+    [Authorize(Roles = "PersonelArea")]
     public class PersonelController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IUploadFiles _upload;
         private readonly IUnitOfWork _context;
-        public PersonelController(IUploadFiles upload, IUnitOfWork uow,  IMapper mapper)
+        private readonly UserManager<A_UserManager> _userManager;
+        private readonly ApplicationDbContext _dbcontext;
+        public PersonelController(IUploadFiles upload, IUnitOfWork uow, ApplicationDbContext dbcontext,
+            IMapper mapper, UserManager<A_UserManager> userManager)
         {
+            _userManager = userManager;
             _upload = upload;
             _context = uow;
             _mapper = mapper;
+            _dbcontext = dbcontext;
         }
         public IActionResult UploadFile(IEnumerable<IFormFile> filearray, string path)
         {
             string filename = _upload.UploadFileFunc(filearray, path);
             return Json(new { status = "success", imagename = filename });
+        }
+        public void DeleteAttachment(string id)
+        {
+            if (id != null)
+            {
+                var record = _dbcontext.P_Personel.First(x => x.PersonelCode == id);
+                if (!string.IsNullOrEmpty(record.MelliScanPath))
+                {
+                    
+                    var path = "upload\\atachments\\Melliscan\\" + record.MelliScanPath;
+                    var result = _upload.DeleteAttachmentByPersonelCode(path, "", "");
+                    record.MelliScanPath = null;
+
+                }
+                if (!string.IsNullOrEmpty(record.ShenasnameScanPath))
+                {
+                   
+                    var path = "upload\\atachments\\Shenasname-scan\\" + record.ShenasnameScanPath;
+                   var result =  _upload.DeleteAttachmentByPersonelCode(path, "", "");
+                    record.MelliScanPath = null;
+
+                }
+                if (!string.IsNullOrEmpty(record.PersonalImagePath))
+                {
+                    
+                    var path = "upload\\personelimage\\" + record.PersonalImagePath;
+                    var result = _upload.DeleteAttachmentByPersonelCode(path, "", "");
+                    record.PersonalImagePath = null;
+
+                }
+                if (!string.IsNullOrEmpty(record.SignaturePath))
+                {
+                    
+                    var path = "upload\\signatureimage\\" + record.SignaturePath;
+                    var result =  _upload.DeleteAttachmentByPersonelCode(path, "", "");
+                    record.SignaturePath = null;
+
+                }
+                _context.PersonelUW.Update(record);
+                _context.save();
+            }
+
         }
         public IActionResult Index()
         {
@@ -78,10 +130,13 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
                     {
                         model.StartWorkDate = ConvertDateTime.ConvertShamsiToMiladi(startofwork);
                     }
-                    
-                  
+
+                    model.Creator = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
                     model.CreationDate = DateTime.Now;
-                    var personelMapped = (_mapper.Map<P_Personel>(model));
+                    model.PTasfieDate = tasfiehdate;
+                    model.PBirthDate = birthdayDateuser;
+                    model.PStartWorkDate = startofwork;
+                    var personelMapped = (_mapper.Map<P_Personel>(model));  
                     personelMapped.SignaturePath = newSignaturePathName;
                     personelMapped.PersonalImagePath = newImagePathName;
                     personelMapped.MelliScanPath = newMelliPath;
@@ -102,6 +157,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
         [HttpGet]
         public IActionResult EditPersonel(string PersonelCode)
         {
+         
             FillCombo();
             if (PersonelCode == null)
             {
@@ -109,6 +165,8 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
             }
             var personel = _context.PersonelUW.GetById(PersonelCode);
             var mappersonel = _mapper.Map<PersonelViewModel>(personel);
+            var data = _context.PostManagerUW.Get().Where(x => x.PersonelCode == PersonelCode).ToList();
+            ViewBag.posts = string.Join("-", data.Select(x => x.PostName));
             return View(mappersonel);
         }
         [HttpPost]
@@ -118,8 +176,12 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
         {
             FillCombo();
 
-
+          
+            model.PTasfieDate = tasfiehdate;
+            model.PBirthDate = birthdayDateuser;
+            model.PStartWorkDate = startofwork;
             model.ModificationDate = DateTime.Now;
+            model.Modifier = _context.UserManagerUW.GetById(_userManager.GetUserId(HttpContext.User)).ToString();
             var personelMapped = (_mapper.Map<P_Personel>(model));
             personelMapped.SignaturePath = newSignaturePathName;
             personelMapped.PersonalImagePath = newImagePathName;
@@ -173,6 +235,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers
             {
                 return RedirectToAction("ErrorView", "Home");
             }
+            DeleteAttachment(PersonelCode);
             _context.PersonelUW.DeleteById(PersonelCode);
             _context.save();
             return RedirectToAction("Index");

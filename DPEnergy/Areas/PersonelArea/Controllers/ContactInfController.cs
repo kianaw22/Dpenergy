@@ -9,12 +9,15 @@ using DPEnergy.DataModelLayer.Entities.Admin;
 using DPEnergy.DataModelLayer.Entities.Personel;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels.Personel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.PersonelArea.Controllers
 {
+    
     [Area("PersonelArea")]
+    [Authorize(Roles = "PersonelArea")]
     public class ContactInfController : Controller
     {
         private readonly IMapper _mapper;

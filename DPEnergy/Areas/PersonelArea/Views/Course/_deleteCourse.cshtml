@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_Course
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    از حذف مدرک دوره پرسنل
+    <span style="font-weight:bold;">@Model.FirstName @Model.LastName</span>
+    با عنوان
+    <span style="font-weight:bold;">@Model.Madrak</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

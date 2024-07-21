@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_DocumentType
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف نوع مدرک
+    <span style="font-weight:bold;">@Model.DocumentType</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

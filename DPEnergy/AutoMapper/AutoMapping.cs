@@ -70,6 +70,22 @@ namespace DPEnergy.AutoMapper
             CreateMap<P_BankAccountDetails, P_BankAccountDetailsViewModel>().ReverseMap();
             CreateMap<P_ContactInf, P_ContactInfViewModel>().ReverseMap();
             CreateMap<P_VaziatKhedmat, P_VaziatKhedmatViewModel>().ReverseMap();
+            CreateMap<P_Takafol, P_TakafolViewModel>().ReverseMap();
+            CreateMap<P_SabegheKar, P_SabegheKarViewModel>().ReverseMap();
+            CreateMap<P_Bime, P_BimeViewModel>().ReverseMap();
+            CreateMap<P_MadrakTahsili, P_MadrakTahsiliViewModel>().ReverseMap();
+            CreateMap<P_LetterRequest, P_LetterRequestViewModel>().ReverseMap();
+            CreateMap<P_Course, P_CourseViewModel>().ReverseMap();
+            CreateMap<P_FieldOfStudy, P_FieldOfStudyViewModel>().ReverseMap();
+            CreateMap<P_DocumentType, P_DocumentTypeViewModel>().ReverseMap();
+            CreateMap<P_EducationDegree, P_EducationDegreeViewModel>().ReverseMap();
+            CreateMap<P_PersonelStatus, P_PersonelStatus>().ReverseMap();
+            CreateMap<P_ContractType, P_ContractTypeViewModel>().ReverseMap();
+            CreateMap<P_InstitutionName, P_InstitutionNameViewModel>().ReverseMap();
+            CreateMap<P_InsuranceStatus, P_InsuranceStatusViewModel>().ReverseMap();
+            CreateMap<P_MaritalStatus, P_MaritalStatusViewModel>().ReverseMap();
+            CreateMap<P_AccountType, P_AccountTypeViewModel>().ReverseMap();
+
 
         }
     }

@@ -17,7 +17,7 @@ namespace DPEnergy.DataModelLayer.ViewModels.Reports
         public string Description { get; set; }
 
         [Display(Name = "Project Code")]
-        [Required]
+       
         public string ProjectCode { get; set; }
 
         [Display(Name = "Area")]

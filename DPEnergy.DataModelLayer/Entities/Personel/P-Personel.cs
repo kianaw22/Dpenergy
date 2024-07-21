@@ -20,9 +20,11 @@ namespace DPEnergy.DataModelLayer.Entities
         public string Mellicode { get; set; }
         public string BirthPlace { get; set; }
         public DateTime? BirthDate { get; set; }
+        public string PBirthDate { get; set; }
         public string MaritalStatus { get; set; }
         public string Department { get; set; }
         public DateTime? StartWorkDate { get; set; }
+        public string PStartWorkDate { get; set; }
         public string ContractType { get; set; }
         public string Company { get; set; }
         public string WorkPlace { get; set; }
@@ -30,6 +32,7 @@ namespace DPEnergy.DataModelLayer.Entities
         public string VaziatEshteqal { get; set; }
         public string JobCategory { get; set; }
         public DateTime? TasfieDate { get; set; }
+        public string PTasfieDate { get; set; }
         public string ElatTarkKar { get; set; }
         public string Cover { get; set; }
         public string Moaref { get; set; }

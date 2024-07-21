@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_FieldOfStudy
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف رشته
+    <span style="font-weight:bold;">@Model.FieldofStudy</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

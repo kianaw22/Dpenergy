@@ -67,7 +67,7 @@ namespace DPEnergy.DataModelLayer.Entities.DMS
 
         public bool? Consideration { get; set; }
         public string Attachment { get; set; }
-
+        public string ProgressId { get; set; }
 
 
 

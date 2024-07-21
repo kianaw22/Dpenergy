@@ -6,11 +6,14 @@ using AutoMapper;
 using DPEnergy.DataModelLayer.Entities;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.PersonelArea.Controllers.BasicInf
 {
+   
     [Area("PersonelArea")]
+    [Authorize]
     public class PostController : Controller
     {
         private readonly IUnitOfWork _context;
@@ -23,18 +26,21 @@ namespace DPEnergy.Areas.PersonelArea.Controllers.BasicInf
         }
         public IActionResult Index()
         {
+            
             var model = _context.PostManagerUW.Get();
             return View(model);
         }
         [HttpGet]
         public IActionResult AddPost()
         {
+            FillCombo();
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AddPost(P_PostViewModel model)
         {
+            FillCombo();
             if (ModelState.IsValid)
             {
                 _context.PostManagerUW.Create(_mapper.Map<P_Post>(model));
@@ -47,6 +53,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers.BasicInf
         [HttpGet]
         public IActionResult EditPost(String Id)
         {
+            FillCombo();
             if (Id == null)
             {
                 return RedirectToAction("ErrorView", "Home");
@@ -60,6 +67,7 @@ namespace DPEnergy.Areas.PersonelArea.Controllers.BasicInf
         [ValidateAntiForgeryToken]
         public IActionResult EditPost(P_PostViewModel model)
         {
+            FillCombo();
             if (ModelState.IsValid)
             {
                 var postmapper = _mapper.Map<P_Post>(model);
@@ -95,6 +103,12 @@ namespace DPEnergy.Areas.PersonelArea.Controllers.BasicInf
             _context.save();
             return RedirectToAction("Index");
 
+        }
+        public void FillCombo()
+        {
+
+            List<P_Personel> ListPersonel = _context.PersonelUW.Get().ToList();
+            ViewBag.personellist = ListPersonel;
         }
 
     }

@@ -1,0 +1,13 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_LetterRequest
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    از حذف درخواست نامه پرسنل
+    <span style="font-weight:bold;">@Model.FirstName @Model.LastName</span>
+    با عنوان
+    <span style="font-weight:bold;">@Model.Subject</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

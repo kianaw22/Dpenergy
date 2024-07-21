@@ -77,9 +77,11 @@
                     "Keep_selected_style":false
                 },
                 "plugins": ["checkbox"],
+                //not all child nodes checked if parent is checked
                 checkbox: { three_state: false, cascade: "" }
             }).on("loaded.jstree", function () {
-                $.jstree.reference('#jstreeAccessRight').open_all();
+                // all  node will be open on deafualt
+                $.jstree.reference('#jstreeAccessRight').open_node("1");
 
                 var urole = $("#rolelist").val().split(",");
                 $("#jstreeAccessRight").jstree(true).select_node(urole);
@@ -104,7 +106,7 @@
         }).done(function (result) {
             if (result.status == 'noselected') {
                 $("#divmsg").html('هیچ دسترسی انتخاب نشده است.');
-                $("#divmsg").addClass('alert').addClass('alert-danget')
+                $("#divmsg").addClass('alert').addClass('alert-danger')
             }
             if (result.status == 'success') {
                  $("#divmsg").html('دسترسیها با موفقیت ثبت شد');

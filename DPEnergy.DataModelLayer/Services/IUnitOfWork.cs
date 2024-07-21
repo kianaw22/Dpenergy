@@ -66,6 +66,22 @@ namespace DPEnergy.DataModelLayer.Services
         public GenericClass<P_ContactInf> ContactInfUW { get; }
         public GenericClass<P_VaziatKhedmat> VaziatKhedmatUW { get; }
         public GenericClass<P_BankAccountDetails> BankAccountDetailsUW { get; }
+        public GenericClass<P_Takafol> TakafolUW { get; }
+        public GenericClass<P_SabegheKar> SabegheKarUW { get; }
+        public GenericClass<P_Bime> BimeUW { get; }
+        public GenericClass<P_Course> CourseUW { get; }
+        public GenericClass<P_MadrakTahsili> MadrakTahsiliUW { get; }
+        public GenericClass<P_LetterRequest> LetterRequestUW { get; }
+
+        public GenericClass<P_FieldOfStudy> FieldofStudyUW { get; }
+        public GenericClass<P_InstitutionName> InstitutionNameUW { get; }
+        public GenericClass<P_InsuranceStatus> InsuranceStatusUW { get; }
+        public GenericClass<P_AccountType> AccountTypeUW { get; }
+        public GenericClass<P_EducationDegree> EducationDegreeUW { get; }
+        public GenericClass<P_DocumentType> DocumentTypeUW { get; }
+        public GenericClass<P_PersonelStatus> PersonelStatusUW { get; }
+        public GenericClass<P_MaritalStatus> MaritalStatusUW { get; }
+        public GenericClass<P_ContractType> ContractTypeUW { get; }
         void save();
         void Dispose();
     }

@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using DPEnergy.DataModelLayer.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DPEnergy.Areas.AdminArea.Controllers
 {
     [Area("AdminArea")]
+    [Authorize(Roles = "AdminArea")]
     public class SystemPartController : Controller
     {
       

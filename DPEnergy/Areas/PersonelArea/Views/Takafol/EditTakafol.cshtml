@@ -1,0 +1,347 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.Personel.P_TakafolViewModel
+@using DPEnergy.CommonLayer.PublicClass
+@{
+    ViewData["Title"] = "AddTakafol";
+    List<P_Personel> ListPersonel = ViewBag.personellist;
+
+}
+
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a asp-controller="Takafol" asp-action="index"><i class="icon-person position-left"></i> لیست افراد تحت تکفل</a></li>
+        <li class="active">اضافه فرد تحت تکفل</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon-facetime-video"></i>
+            فرم ثبت فرد تحت تکفل
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+        <form asp-controller="Takafol" asp-action="EditTakafol" method="post">
+            <div class="col-md-8 col-md-offset-2">
+
+                <div>
+                    <!--PersonelCode-->
+                    <label asp-for="PersonelCode" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <select asp-for="PersonelCode" asp-items="@(new SelectList(from x in ListPersonel select new { Value = x.PersonelCode ,Text = x.PersonelCode + " " + x.FirstName+ " " + x.LastName}, "Value","Text"))" class="form-control selectpicker custominput" id="personel-code" data-live-search="true" style="direction: ltr">
+                            <option value="" selected disabled hidden style="direction: ltr">Select Personel</option>
+                        </select>
+                        <div>   </div>
+                    </div>
+                    <!--FirstName-->
+                    <div>
+                        <label asp-for="FirstName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input readonly asp-for="FirstName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--LastName-->
+                    <div>
+                        <label asp-for="LastName" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input readonly asp-for="LastName" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!--Name-->
+                    <div>
+                        <label asp-for="Name" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <input asp-for="Name" type="text" class="form-control custominput" autocomplete="off" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--Relation-->
+                    <div>
+                        <label asp-for="Relation" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <select asp-for="Relation" class="form-control selectpicker custominput" id="select-ContractType" data-live-search="true" style="direction: rtl">
+                                <option value="" selected disabled hidden style="direction: rtl"> نسبت را انتخاب کنید</option>
+                                <option data-tokens="همسر" selected="@Html.Raw((Model.Relation == "همسر") ? "selected" : "")">همسر</option>
+                                <option data-tokens="فرزند" selected="@Html.Raw((Model.Relation == "فرزند") ? "selected" : "")">فرزند</option>
+                                <option data-tokens="مادر" selected="@Html.Raw((Model.Relation == "مادر") ? "selected" : "")">مادر</option>
+                                <option data-tokens="پدر" selected="@Html.Raw((Model.Relation == "پدر") ? "selected" : "")">پدر</option>
+                                <option data-tokens="خواهر"  selected="@Html.Raw((Model.Relation == "خواهر") ? "selected" : "")">خواهر</option>
+                                <option data-tokens="برادر"  selected="@Html.Raw((Model.Relation == "برادر") ? "selected" : "")">برادر</option>
+                            </select>
+                            <div>   </div>
+                            <span asp-validation-for="Relation" class="text-danger"></span>
+                        </div>
+                    </div>
+
+
+
+
+                    <!--Birthdate-->
+                    <div style="margin-bottom:15px;">
+                        <label asp-for="Birthdate" class="control-label col-md-3 col-xs-12" for="ExpirationDate"></label>
+                        <div class="input-group col-md-9 col-xs-12" style="padding-left:9px; padding-right:9px;">
+                            <div class="input-group-addon"
+                                 style="border:1px solid gray; padding:6px">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </div>
+                            <input asp-for="Birthdate" id="Birthdatee" value="@(Model.Birthdate.HasValue ? ConvertDateTime.ConvertMiladiToShamsi(Model.Birthdate, "yyyy/MM/dd") : string.Empty)" 
+                                   name="Birthdatee" type="text" class="form-control custominput datetimepicker">
+                          
+                        </div>
+                        <span asp-validation-for="Birthdate" style="margin-top:10px;" class="text-danger col-md-offset-3 col-md-9 col-xs-12"></span>
+                    </div>
+                    <!--Relation-->
+                    <div>
+                        <label asp-for="Active" class="control-label col-md-3 col-xs-12"></label>
+                        <div class="col-md-9 col-xs-12">
+                            <select asp-for="Active" class="form-control selectpicker custominput" data-live-search="true" style="direction: rtl">
+                                <option value="" selected disabled hidden style="direction: rtl"> وضعیت بیمه تکمیلی را انتخاب کنید</option>
+                                <option data-tokens="دارد" selected="@Html.Raw((Model.Relation == "دارد") ? "selected" : "")">دارد</option>
+                                <option data-tokens="ندارد" selected="@Html.Raw((Model.Relation == "ندارد") ? "selected" : "")">ندارد</option>
+
+                            </select>
+                            <div>   </div>
+                            <span asp-validation-for="Active" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!--Creation Date -->
+                    <input asp-for="CreationDate" type="hidden" class="form-control custominput" />
+                    <!--Creator-->
+                    <input asp-for="Creator" type="hidden" class="form-control custominput" />
+
+                    <!--ModificationDate -->
+                    <input asp-for="ModificationDate" type="hidden" class="form-control custominput" />
+                    <!--Modifier-->
+                    <input asp-for="Modifier" type="hidden" class="form-control custominput" />
+
+                    <div class="col-xs-12 form-group" style="margin-top:15px;">
+                        <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                               value="ثبت" class="btn pull-right" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+@section PersonelScripts{
+    <script>
+        var UploadFile = function () {
+            var data = new FormData;
+            var files = $("#myfile").get(0).files;
+            personelcode = $("#personel-code").val();
+            if (personelcode == null)
+            {
+                alert("اول پرسنل کد را انتخاب کنید ");
+            }
+
+            if (files.length == 0) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('لطفا یک فایل انتخاب کنید ');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            var newname = personelcode +"." + files[0].name.split('.').pop();
+            data.append("name", newname);
+            data.append("path", "upload\\Nezamvazife\\");
+            for (var i = 0; i < files.length; i++) {
+                data.append('filearray', files[i]);
+
+            }
+
+
+            if (files[0].size >= 10000000) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text('حجم فایل بیش از 10 مگا بایت است');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            $.ajax({
+                    type: "post",
+                    url: '@Url.Action("UploadNezamAttach", "Takafol", new { area = "PersonelArea"})',
+                    data: data,
+                    contentType: false,
+                    processData: false
+
+            }).done(function (result) {
+                    if (result.status == "success") {
+
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text(newname + "آپلود فایل موفقیت آمیز بود ");
+                        $("#spnmessage").css("color", "green");
+                        $("#attach").val(result.mypath);
+
+                    }
+
+                    else if (result.status == "duplicate") {
+                        $("#spnmessage").removeClass('hidden');
+                        $("#spnmessage").text("نام فایل تکراری است " +newname);
+                        $("#spnmessage").css("color", "red");
+                    }
+
+
+            }).fail(function (result) {
+                    if (result.status != "success") {
+                        $("#spnmessage").css("color", "red");
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text("مشکلی در اپلود فایل به وجود آمد");
+                    }
+            });
+
+
+
+        }
+        var DeleteFile = function () {
+            var data = new FormData;
+            var files = $("#myfile").get(0).files;
+            personelcode = $("#personel-code").val();
+            console.log(" this is delete " , personelcode);
+            if (personelcode == null) {
+                alert("اول پرسنل کد را انتخاب کنید ");
+                return false;
+            }
+
+            if (files.length == 0) {
+                $("#spnmessage").removeClass('hidden');
+                $("#spnmessage").text(' لظفا یک فایل انتخاب کنید');
+                $("#spnmessage").css("color", "red");
+                return false;
+            }
+
+            var newname = personelcode + "." + files[0].name.split('.').pop();
+            data.append("name", newname);
+            data.append("path", "upload\\Nezamvazife\\");
+            $.ajax({
+                    type: "post",
+                    url: '@Url.Action("DeleteNezamAttach", "Takafol", new { area = "PersonelArea"})',
+                    data: data,
+                    contentType: false,
+                    processData: false
+
+            }).done(function (result) {
+                    if (result.status == "success") {
+
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text(newname + "فایل حذف شد ");
+                        $("#spnmessage").css("color", "red");
+
+
+                    }
+
+                    else if (result.status == "nofile") {
+                        $("#spnmessage").removeClass('hidden');
+                        $("#spnmessage").text("فایلی برای حذف وجود ندارد");
+                        $("#spnmessage").css("color", "red");
+                    }
+
+
+            }).fail(function (result) {
+                    if (result.status != "success") {
+                        $("#spnmessage").css("color", "red");
+                        $("#spnmessage").removeClass("hidden");
+                        $("#spnmessage").text("مشکلی در اپلود فایل به وجود آمد");
+                    }
+            });
+
+
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.datetimepicker').persianDatepicker({
+                "inline": false,
+                "format": "L",
+                "initialValue": false,
+                "minDate": 0,
+                "maxDate": 2000000000000,
+                "autoClose": true,
+
+                "calendar": {
+                    "persian": {
+                        "locale": "fa",
+                        "showHint": true,
+                        "leapYearMode": "algorithmic"
+                    },
+                    "gregorian": {
+                        "locale": "en",
+                        "showHint": true
+                    }
+                },
+                "navigator": {
+                    "enabled": true,
+                    "scroll": {
+                        "enabled": true
+                    },
+                    "text": {
+                        "btnNextText": "<",
+                        "btnPrevText": ">"
+                    }
+                },
+                "toolbox": {
+                    "enabled": true,
+                    "calendarSwitch": {
+                        "enabled": true,
+                        "format": "MMMM"
+                    },
+                    "todayButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "امروز",
+                            "en": "Today"
+                        }
+                    },
+                    "submitButton": {
+                        "enabled": true,
+                        "text": {
+                            "fa": "تایید",
+                            "en": "Submit"
+                        }
+                    },
+                    "text": {
+                        "btnToday": "امروز"
+                    }
+                },
+
+
+            });
+        });
+    </script>
+    <script>
+        // Attach an event listener to the client number selection field
+        $('#personel-code').change(function () {
+            var personelcode = $(this).val();
+
+            $.ajax({
+                url: "/PersonelArea/Takafol/GetName",
+                type: 'GET',
+                data: {
+                    personelcode: personelcode
+
+                },
+                success: function (data) {
+
+                    $('#FirstName').val(data.firstname);
+                    $('#LastName').val(data.lastname);
+
+                },
+                error: function () {
+                    console.log('Error retrieving name and family');
+                }
+            });
+        });
+    </script>
+
+}
+
+
+
+

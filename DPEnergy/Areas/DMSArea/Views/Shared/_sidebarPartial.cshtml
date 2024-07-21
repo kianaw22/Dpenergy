@@ -31,7 +31,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview" >
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -40,13 +40,13 @@
                     <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                 </ul>
             </li>
-            <li class="treeview" >
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-info"></i> <span>Basic Information</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li  ><a href="@Url.Action("Index", "Project")"><i class="fa fa-circle-o"></i> Project</a></li>
-                    <li ><a href="@Url.Action("Index", "ProjectType")"><i class="fa fa-circle-o"></i> Project Type</a></li>
+                    <li><a href="@Url.Action("Index", "Project")"><i class="fa fa-circle-o"></i> Project</a></li>
+                    <li><a href="@Url.Action("Index", "ProjectType")"><i class="fa fa-circle-o"></i> Project Type</a></li>
                     <li><a href="@Url.Action("Index", "ProjectParties")"><i class="fa fa-circle-o"></i> Project Parties</a></li>
                     <!--<li><a href="@Url.Action("Index", "ProjectManager")"><i class="fa fa-circle-o"></i> Project Manager</a></li> -->
                     <li><a href="@Url.Action("Index", "Contractor")"><i class="fa fa-circle-o"></i> Contractor</a></li>
@@ -118,6 +118,32 @@
                     <li><a href="@Url.Action("Index", "Position")"><i class="fa fa-circle-o"></i>Position</a></li>
                     <li><a href="@Url.Action("Index", "ProjectMembers")"><i class="fa fa-circle-o"></i>Project Members</a></li>
 
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="icon-forward"></i><span>Sites</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="@Url.Action("Index", "Home",new {Area = "DMSArea" })"><i class="icon-envelop"></i><span>DMS</span></a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Home",new {Area = "DabirArea" })"><i class="icon-notebook"></i><span>دبیرخانه</span></a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Home",new {Area = "PersonelArea" })"><i class="icon-reminder"></i><span>پرسنلی </span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Home",new {Area = "TimeSheetArea" })"><i class="icon-bubble7"></i><span>تایم شیت</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "UserManager",new {Area = "AdminArea" })"><i class="icon-codepen"></i><span>ادمین</span></a>
+                    </li>
                 </ul>
             </li>
             <!--
@@ -220,14 +246,16 @@
     <!-- /.sidebar -->
 </aside>
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- jQuery 2.2.0 -->
+<script type="text/javascript" src="~/Panel/assets/js/core/libraries/jquery.min.js"></script>
 <script>
+
     $(document).ready(function () {
         // Handle click event on treeview items
 
         // Handle click event on treeview menu items
         $('.treeview-menu > li').click(function () {
-           
+
             // Remove 'active' class from all treeview menu items
             $('.treeview-menu > li').removeClass('active');
 
@@ -256,9 +284,5 @@
         // Add 'active' class to the parent treeview item
         activeMenuItem.closest('.treeview').addClass('active');
     });
-
-
-
-
 
 </script>

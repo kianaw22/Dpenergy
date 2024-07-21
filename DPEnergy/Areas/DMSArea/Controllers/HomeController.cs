@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using DPEnergy.DataModelLayer.Entities.DMS.BasicInformation;
 using DPEnergy.DataModelLayer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.DMSArea.Controllers
 {
     [Area("DMSArea")]
+    [Authorize(Roles = "DMSArea")]
     public class HomeController : Controller
     {
         private readonly IUnitOfWork _context;

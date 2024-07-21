@@ -40,7 +40,7 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
 
         public string Revision { get; set; }
         [Display(Name = "Stage")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+  
         public string StageName { get; set; }
         [Display(Name = "Size")]
         public string Size { get; set; }
@@ -146,6 +146,9 @@ namespace DPEnergy.DataModelLayer.ViewModels.DMS
         public bool Consideration { get; set; }
         [Display(Name = "Attachment")]
         public string Attachment { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter {0} ")]
+        public string ProgressId { get; set; }
 
     }
 }

@@ -6,11 +6,14 @@ using AutoMapper;
 using DPEnergy.DataModelLayer.Entities;
 using DPEnergy.DataModelLayer.Services;
 using DPEnergy.DataModelLayer.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPEnergy.Areas.PersonelArea.Controllers.BasicInf
 {
+    
     [Area("PersonelArea")]
+    [Authorize]
     public class WorkPlaceController : Controller
     {
         private readonly IUnitOfWork _context;

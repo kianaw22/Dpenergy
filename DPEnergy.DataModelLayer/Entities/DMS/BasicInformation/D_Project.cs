@@ -48,7 +48,7 @@ namespace DPEnergy.DataModelLayer.Entities.DMS.BasicInformation
         public string Modifier { get; set; }
         public DateTime? ModificationDate { get; set; }
         
-
+        public string Price { get; set; }
 
 
     }

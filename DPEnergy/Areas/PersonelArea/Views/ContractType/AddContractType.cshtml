@@ -1,0 +1,43 @@
+﻿@model DPEnergy.DataModelLayer.ViewModels.Personel.P_ContractTypeViewModel
+@{
+    ViewData["Title"] = "AddContractType";
+}
+<div class="content">
+    <ul class="breadcrumb">
+        <li><a asp-controller="Home" asp-action="index"><i class="icon-home2 position-left"></i> صفحه اصلی</a></li>
+        <li><a href="#"><i class="position-left"></i> اطلاعات اولیه</a></li>
+        <li><a asp-controller="ContractType" asp-action="index"><i class="icon-person position-left"></i> لیست نوع حساب</a></li>
+        <li class="active">اضافه کردن نوع حساب</li>
+    </ul>
+    <div class="panel panel-heading" style="box-shadow:3px 1px 1px 0 gray; border-radius:2px;">
+        <span style="font-weight:bold;">
+            <i class="glyphicon-education"></i>
+            فرم ثبت نوع حساب
+        </span>
+    </div>
+
+
+    <div class="panel panel-body container-fluid" style="border-radius:2px; box-shadow:3px 1px 1px 0 gray;
+                background-color:#e6e2e2;">
+
+        <form asp-controller="ContractType" asp-action="AddContractType" method="post">
+            <div class="col-md-6 col-md-offset-3">
+                <!--ContractType-->
+                <div>
+                    <label asp-for="ContractType" class="control-label col-md-3 col-xs-12"></label>
+                    <div class="col-md-9 col-xs-12">
+                        <input asp-for="ContractType" type="text" class="form-control custominput" placeholder="نوع حساب..." autocomplete="off" />
+                        <span asp-validation-for="ContractType" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 form-group" style="margin-top:15px;">
+                    <input type="submit" style="border:1px solid gray; border-radius:3px;"
+                           value="ثبت نوع حساب" class="btn pull-right" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

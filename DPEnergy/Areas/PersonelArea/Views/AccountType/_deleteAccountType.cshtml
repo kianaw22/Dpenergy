@@ -1,0 +1,11 @@
+﻿@model DPEnergy.DataModelLayer.Entities.Personel.P_AccountType
+@{
+    Layout = null;
+}
+
+<div class="modal-body form-horizontal" dir="rtl">
+    آیا از حذف نوع حساب
+    <span style="font-weight:bold;">@Model.AccountType</span>
+    مطمئن هستید؟
+</div>
+<input type="hidden" asp-for="Id" />

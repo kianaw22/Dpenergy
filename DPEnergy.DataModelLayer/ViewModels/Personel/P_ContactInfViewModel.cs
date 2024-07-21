@@ -21,22 +21,15 @@ namespace DPEnergy.DataModelLayer.ViewModels.Personel
             [Display(Name = "تلفن منزل")]
             public string HomePhone { get; set; }
 
-            [Display(Name = "تلفن همراه")]
-            public string MobilePhone { get; set; }
+           
 
-            [Display(Name = "آدرس")]
-            public string Address { get; set; }
-
-            [Display(Name = "نوع ملک")]
-            public string PropertyType { get; set; }
-
-            [Display(Name = "نام معرفی شده")]
+            [Display(Name = "نام اضطراری")]
             public string IntroducedName { get; set; }
 
-            [Display(Name = "شماره تلفن معرفی شده")]
+            [Display(Name = "شماره تلفن اضطراری")]
             public string IntroducedPhone { get; set; }
 
-            [Display(Name = "آدرس معرفی شده ")]
+            [Display(Name = "آدرس اضطراری ")]
             public string IntroducedAddress { get; set; }
             public DateTime? CreationDate { get; set; }
             public DateTime? ModificationDate { get; set; }
